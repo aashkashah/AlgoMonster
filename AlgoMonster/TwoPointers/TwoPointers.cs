@@ -133,7 +133,7 @@ namespace AlgoMonster.TwoPointers
                 fast = fast.next.next;
             }
 
-            return slow.val;
+            return slow.value;
         }
 
         /// <summary>
