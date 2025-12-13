@@ -1,17 +1,6 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Globalization;
-using System.Linq;
-using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
-using static AlgoMonster.Mocks.Nov2725;
-
-namespace AlgoMonster.Blind75.LinkedList
+﻿namespace AlgoMonster.LinkedList
 {
-    public class EasyLL
+    public static class EasyLL
     {
 
         /// <summary>
@@ -21,7 +10,7 @@ namespace AlgoMonster.Blind75.LinkedList
         /// The new list should be made up of nodes from list1 and list2.
         /// Input: list1 = [1,2,4], list2 = [1,3,5]
         /// </summary>
-        public ListNode MergeTwoSortedLists(ListNode list1, ListNode list2)
+        public static ListNode MergeTwoSortedLists(ListNode list1, ListNode list2)
         {
             // 1 2 4             
             // ^             
@@ -66,7 +55,7 @@ namespace AlgoMonster.Blind75.LinkedList
         /// For bonus points, do this with constant space.
         /// </summary>
         /// <returns></returns>
-        public bool HasCycle(ListNode node)
+        public static bool HasCycle(ListNode node)
         {
             // 0 1 2 3 4
             //         ^
@@ -100,7 +89,7 @@ namespace AlgoMonster.Blind75.LinkedList
         /// </summary>
         /// <param name="node"></param>
         /// <returns></returns>
-        public ListNode ReverseLinkedList(ListNode node)
+        public static ListNode ReverseLinkedList(ListNode node)
         {
             ListNode prev = null;
             ListNode curr = node;

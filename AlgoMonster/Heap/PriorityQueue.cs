@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace AlgoMonster.QueueStack
+namespace AlgoMonster.Heap
 {
     public static  class PriorityQueue
     {
