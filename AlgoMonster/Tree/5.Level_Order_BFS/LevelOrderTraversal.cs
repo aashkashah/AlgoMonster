@@ -29,8 +29,12 @@ namespace AlgoMonster.Tree._5.Level_Order_BFS
             //  append each chil dequeued to list
             // when inner loop ends, add that list to top result
 
+            if (root == null)
+                return new List<List<int>>();
+
             var result = new List<List<int>>();
             var queue = new Queue<TreeNode>();
+            queue.Enqueue(root);
 
             while (queue.Count > 0)
             {
@@ -41,6 +45,15 @@ namespace AlgoMonster.Tree._5.Level_Order_BFS
                 {
                     var node = queue.Dequeue();
                     nodeList.Add(node.val);
+
+                    if (node.left  != null)
+                    {
+                        queue.Enqueue(node.left);
+                    }
+                    if (node.right != null) 
+                    {
+                        queue.Enqueue(node.right);  
+                    }
                 }
                 result.Add(nodeList);
             }

@@ -1,4 +1,6 @@
-﻿using static AlgoMonster.Tree.Base.Tree;
+﻿using System.IO;
+using static AlgoMonster.Mocks.Nov2725;
+using static AlgoMonster.Tree.Base.Tree;
 
 namespace AlgoMonster.Tree._4.LCA_Or_Tree_As_Graph
 {
@@ -12,6 +14,9 @@ namespace AlgoMonster.Tree._4.LCA_Or_Tree_As_Graph
         ///                   7    4 
         /// LCA of (5,3) = 1 LCA of (3,7) = 6
         /// 
+        /// Given a binary tree, find the lowest common ancestor (LCA) of two given nodes p and q.
+        /// The LCA is the lowest node that has both p and q as descendants
+        /// (a node can be a descendant of itself).
         /// </summary>
         public static TreeNode LowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q)
         {
@@ -26,11 +31,11 @@ namespace AlgoMonster.Tree._4.LCA_Or_Tree_As_Graph
             if (root == null)
                 return null;
 
-            if (root.val == p.val || root.val == q.val)
+            if (root == p || root == q)
                 return root;
 
-            var leftLca = LowestCommonAncestor(root.left, p, q);
-            var rightLca = LowestCommonAncestor(root.right, p, q);
+            var leftLca = FindLCA(root.left, p, q);
+            var rightLca = FindLCA(root.right, p, q);
 
             // if leftLca and rightLca both match the values, 
             // it means we have found lca
@@ -42,6 +47,44 @@ namespace AlgoMonster.Tree._4.LCA_Or_Tree_As_Graph
                 return leftLca;
             else
                 return rightLca;
+        }
+
+        /// <summary>
+        ///        3
+        ///       / \
+        ///      5   1
+        ///     / \   \
+        ///    6   2   8
+        ///       / \
+        ///      7   4
+        /// Distance between 5 and 4 = 2
+        /// (5 → 2 → 4)
+        /// 
+        /// Given the root of a binary tree and two nodes p and q,
+        /// return the number of edges in the shortest path between p and q.
+        /// </summary>
+        /// <returns></returns>
+        public static int DistanceBetweenNodes(TreeNode root, TreeNode p, TreeNode q)
+        {
+            var lca = FindLCA(root, p, q);
+            var d1 = DistanceBetweenNodesHelper(lca, p.val);
+            var d2 = DistanceBetweenNodesHelper(lca, q.val);
+            
+            return 0;
+        }
+
+        private static int DistanceBetweenNodesHelper(TreeNode node, int target)
+        {
+            if (node == null) return -1;
+
+            int left = DistanceBetweenNodesHelper(node.left, target);
+            if (left!= -1) return left + 1;
+
+            int right = DistanceBetweenNodesHelper(node.right, target);
+            if(right != -1) return right + 1;
+
+            return -1;
+
         }
     }
 }
