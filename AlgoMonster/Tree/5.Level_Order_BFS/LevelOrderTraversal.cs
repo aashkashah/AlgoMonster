@@ -1,12 +1,12 @@
-﻿using static AlgoMonster.Tree.Trees;
+﻿using static AlgoMonster.Tree.Base.Tree;
 
-namespace AlgoMonster.Tree
+namespace AlgoMonster.Tree._5.Level_Order_BFS
 {
-    public static class TreeTraversal
-    {
-        // level orer traveral
-        // zig zag level order traversal
-        // binary tree right side view
+    // level orer traveral
+    // zig zag level order traversal
+    // binary tree right side view
+    public static class LevelOrderTraversal
+    {   
 
         /// <summary>
         /// Level order traversal
@@ -28,12 +28,12 @@ namespace AlgoMonster.Tree
             //  enqueue children, inner loop count remains same
             //  append each chil dequeued to list
             // when inner loop ends, add that list to top result
-            
+
             var result = new List<List<int>>();
             var queue = new Queue<TreeNode>();
 
             while (queue.Count > 0)
-            {   
+            {
                 var lvlLength = queue.Count;
                 var nodeList = new List<int>();
 
@@ -62,5 +62,6 @@ namespace AlgoMonster.Tree
 
             return null;
         }
+
     }
 }

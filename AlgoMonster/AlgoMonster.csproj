@@ -7,4 +7,10 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Folder Include="Tree\2.Root_To_Leaf\" />
+    <Folder Include="Tree\3.Bottom_Up\" />
+    <Folder Include="Tree\7.Tree_Construction\" />
+  </ItemGroup>
+
 </Project>

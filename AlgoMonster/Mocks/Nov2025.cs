@@ -1,4 +1,4 @@
-﻿using AlgoMonster.Tree;
+﻿using AlgoMonster.Tree.Base;
 using System.Text;
 
 namespace AlgoMonster.Mocks
@@ -70,7 +70,7 @@ namespace AlgoMonster.Mocks
         // 14 since it’s the largest key in the tree that is still smaller than 17.
         /// </summary>
         /// <returns></returns>
-        public int LargestSmallerBST(Trees.TreeNode node, int k)
+        public int LargestSmallerBST(Tree.Base.Tree.TreeNode node, int k)
         {
             // num 17
             //              20
