@@ -105,11 +105,16 @@ https://www.notion.so/Trees-2c83e707d2db807db900f6f96bb111229
 
 	🧠 Focus:
 
-	Return node or null
+		Return node or null
 
-	Early stopping
+		Early stopping
 
-	Sometimes parent pointers / BFS
+		Sometimes parent pointers / BFS
+
+	**Mental hook**
+
+	> “Tree + parent = graph.”
+
 
 📁 Folder 5: Level Order / BFS
 
@@ -131,11 +136,16 @@ https://www.notion.so/Trees-2c83e707d2db807db900f6f96bb111229
 
 	🧠 Focus:
 
-	Queue usage
+		Queue usage
 
-	Loop per level
+		Loop per level
 
-	Level size trick
+		Level size trick
+
+	**Mental hook**
+
+	> “Process one level at a time.”
+	
 
 📁 Folder 6: BST-Specific Logic
 
@@ -157,11 +167,11 @@ https://www.notion.so/Trees-2c83e707d2db807db900f6f96bb111229
 
 	🧠 Focus:
 
-	Inorder = sorted
+		Inorder = sorted
 
-	Left < root < right
+		Left < root < right
 
-	Pruning logic
+		Pruning logic
 
 📁 Folder 7: Tree Construction / Serialization
 
@@ -183,8 +193,8 @@ https://www.notion.so/Trees-2c83e707d2db807db900f6f96bb111229
 
 	🧠 Focus:
 
-	Index boundaries
+		Index boundaries
 
-	Recursive construction
+		Recursive construction
 
-	Preorder positioning
+		Preorder positioning	
