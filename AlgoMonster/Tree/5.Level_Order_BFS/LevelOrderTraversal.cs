@@ -18,7 +18,7 @@ namespace AlgoMonster.Tree._5.Level_Order_BFS
         /// </summary>
         /// <param name="root"></param>
         /// <returns></returns>
-        public static List<List<int>> LevelOrderTraversal(TreeNode root)
+        public static List<List<int>> FindLevelOrderTraversal(TreeNode root)
         {
             // queue
             // level length

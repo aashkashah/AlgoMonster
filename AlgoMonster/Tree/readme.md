@@ -1,11 +1,26 @@
 ﻿
 Trees 
 
-https://www.notion.so/Trees-2c83e707d2db807db900f6f96bb111229
+https://www.notion.so/Trees-2c99497b78098047b254e33218e11bd7
 
 --- Follow this and you're GOLD --- 
 
-📁 Folder 1: DFS Traversal (Visit Every Node)
+🧠 How to Solve Each Easy Question (Same Ritual)
+
+	Before writing code, say out loud:
+
+		What pattern is this?
+
+		What do I return?
+
+		Do I carry state or compute from children?
+
+		Pre / In / Post / Level?
+
+		This is what interviewers actually care about.
+	
+
+📁 Folder 1: DFS Traversal (Visit Every Node) [Tier 2]
 
 	Goal of this folder
 
@@ -25,13 +40,13 @@ https://www.notion.so/Trees-2c83e707d2db807db900f6f96bb111229
 
 	🧠 Focus:
 
-	If the problem says “for every node…” → start here
+		If the problem says “for every node…” → start here
 	
-	Recursive base case
+		Recursive base case
 
-	Where the “work” goes (before / between / after recursion)
+		Where the “work” goes (before / between / after recursion)
 
-📁 Folder 2: Root → Leaf Path Problems
+📁 Folder 2: Root → Leaf Path Problems [Tier 1]
 
 	Goal
 
@@ -51,13 +66,18 @@ https://www.notion.so/Trees-2c83e707d2db807db900f6f96bb111229
 
 	🧠 Focus:
 
-	Pass path / sum
+		Pass path / sum
 
-	Backtracking (remove last)
+		Backtracking (remove last)
 
-	Detect leaf correctly
+		Detect leaf correctly
 
-📁 Folder 3: Bottom-Up / Postorder (Most Important)
+	**Mental hook**
+
+	> “I carry a backpack while walking down.”
+
+
+📁 Folder 3: Bottom-Up / Postorder (Most Important) [Tier 1]
 
 	Goal
 
@@ -77,15 +97,20 @@ https://www.notion.so/Trees-2c83e707d2db807db900f6f96bb111229
 
 	🧠 Focus:
 
-	Return value meaning
+		Return value meaning
 
-	Global vs returned value
+		Global vs returned value
 
-	Postorder traversal
+		Postorder traversal
 
-	👉 If you master this folder, you’re senior-level on trees.
+		👉 If you master this folder, you’re senior-level on trees.
 
-📁 Folder 4: LCA & Tree as Graph
+	**Mental hook**
+
+	> “Children report up to the parent.”
+
+
+📁 Folder 4: LCA & Tree as Graph [Tier 2]
 
 	Goal
 
@@ -116,7 +141,7 @@ https://www.notion.so/Trees-2c83e707d2db807db900f6f96bb111229
 	> “Tree + parent = graph.”
 
 
-📁 Folder 5: Level Order / BFS
+📁 Folder 5: Level Order / BFS [Tier 1]
 
 	Goal
 
@@ -147,7 +172,7 @@ https://www.notion.so/Trees-2c83e707d2db807db900f6f96bb111229
 	> “Process one level at a time.”
 	
 
-📁 Folder 6: BST-Specific Logic
+📁 Folder 6: BST-Specific Logic [Tier 3]
 
 	Goal
 
@@ -173,7 +198,7 @@ https://www.notion.so/Trees-2c83e707d2db807db900f6f96bb111229
 
 		Pruning logic
 
-📁 Folder 7: Tree Construction / Serialization
+📁 Folder 7: Tree Construction / Serialization [Tier 3]
 
 	Goal
 

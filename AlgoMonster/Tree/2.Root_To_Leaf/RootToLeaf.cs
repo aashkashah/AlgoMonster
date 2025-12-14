@@ -1,12 +1,35 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using static AlgoMonster.Tree.Base.Tree;
 
 namespace AlgoMonster.Tree._2.Root_To_Leaf
 {
     public static class RootToLeaf
     {
+        /// <summary>
+        ///            6
+        ///     1            2
+        /// 5       3     0      8
+        ///                   7    4 
+        /// Given a binary tree and a target sum,
+        /// return true if there exists a root-to-leaf path where the sum of node values equals target.
+        /// </summary>
+        /// <returns></returns>
+        public static bool HasPathSum(TreeNode root, int targetSum)
+        {
+            if (root == null) return false;
+            return PathSumHelper(root, targetSum);
+        }
+
+        private static bool PathSumHelper(TreeNode node, int remainingSum)
+        {
+            // exit condition
+            if(node == null) return false;
+
+            remainingSum = remainingSum - node.val;
+
+            if (node.left == null && node.right == null && remainingSum == 0)
+                return true;
+
+            return PathSumHelper(node.left, remainingSum) || PathSumHelper(node.right, remainingSum);
+        }
     }
 }
