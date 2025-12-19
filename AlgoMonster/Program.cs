@@ -2,12 +2,12 @@
 using AlgoMonster.Heap;
 using AlgoMonster.Trie;
 using AlgoMonster.Mocks;
-using AlgoMonster.TwoPointers;
 using AlgoMonster.DynamicProgramming;
-using AlgoMonster.SlidingWindow;
+using AlgoMonster.Arrays.SlidingWindow;
+using AlgoMonster.Search;
 
 
-    Console.WriteLine("Start the beautiful challenege..");
+Console.WriteLine("Start the beautiful challenege..");
 
 //var h = new MinHeap<int>();
 //h.Push(4);
@@ -71,6 +71,7 @@ using AlgoMonster.SlidingWindow;
 
 //var result = DeletionDistance.FindDeletionDistance("dog", "frog");
 
-var result = SlidingWindow.CharacterReplacement("XXYYYXX", 2);
+//var result = SlidingWindow.CharacterReplacement("XXYYYXX", 2);
+var result = BinarySearch.SearchInsert([1, 3, 5, 6, 7, 8], 2);
 
 Console.WriteLine("Challenge accomplished. You rock!");

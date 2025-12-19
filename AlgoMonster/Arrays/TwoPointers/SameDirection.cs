@@ -1,21 +1,12 @@
 ﻿using AlgoMonster.LinkedList;
-using AlgoMonster.Trie;
-using System;
 using System.Collections.Generic;
-using System.Globalization;
-using System.Linq;
-using System.Reflection;
-using System.Runtime.Intrinsics.X86;
-using System.Text;
-using System.Threading.Tasks;
 using System.Xml.Linq;
-using static System.Runtime.InteropServices.JavaScript.JSType;
 
-namespace AlgoMonster.TwoPointers
+namespace AlgoMonster.Arrays.TwoPointers
 {
-   
-    public static class TwoPointers
+    public static class SameDirection
     {
+
         /// <summary>
         /// Two pointers - variable length, same direction
         /// Find the length of longest substring without repeating characters
@@ -34,7 +25,7 @@ namespace AlgoMonster.TwoPointers
             int maxLen = 0;
             var dictLastSeen = new Dictionary<char, int>();
 
-            for(int right = 0; right < charArr.Length; right++)
+            for (int right = 0; right < charArr.Length; right++)
             {
                 char currChar = charArr[right];
 
@@ -47,7 +38,7 @@ namespace AlgoMonster.TwoPointers
                 dictLastSeen[currChar] = right;
 
                 int currLen = right - left + 1;
-                if(currLen > maxLen)
+                if (currLen > maxLen)
                 {
                     maxLen = currLen;
                 }
@@ -95,6 +86,7 @@ namespace AlgoMonster.TwoPointers
             return left + 1;
         }
 
+
         /// <summary>
         /// Two pointers - slow and fast
         /// Find the middle node of a linked list.
@@ -126,8 +118,8 @@ namespace AlgoMonster.TwoPointers
 
             ListNode slow = nums;
             ListNode fast = nums;
-            
-            while(fast != null && fast.next != null)
+
+            while (fast != null && fast.next != null)
             {
                 slow = slow.next;
                 fast = fast.next.next;
@@ -153,9 +145,9 @@ namespace AlgoMonster.TwoPointers
             //           ^
 
             var leftPtr = 0;
-            for(int rightPtr = 1; rightPtr < nums.Length; rightPtr++)
+            for (int rightPtr = 1; rightPtr < nums.Length; rightPtr++)
             {
-                if(leftPtr < rightPtr)
+                if (leftPtr < rightPtr)
                 {
                     while (nums[leftPtr] != 0)
                     {
@@ -168,103 +160,43 @@ namespace AlgoMonster.TwoPointers
                     nums[leftPtr] = nums[rightPtr];
                     nums[rightPtr] = 0;
                 }
-               
+
             }
             return nums;
         }
 
         /// <summary>
-        /// Two pointers, opposite direction
-        /// Two Sum Sorted
-        /// Given an array of integers sorted in ascending order, 
-        /// find two numbers that add up to a given target. 
-        /// Return the indices of the two numbers in ascending order. You can assume elements 
-        /// in the array are unique and there is only one solution. 
-        /// Do this in O(n) time and with constant auxiliary space.
-        /// Input:
-        /// arr: a sorted integer array
-        /// target: the target sum we want to reach
-        /// Sample Input: [2, 3, 4, 5, 8, 11, 18], 9
-        /// Sample Output: 1 3
+        /// https://leetcode.com/problems/remove-element/description/?envType=problem-list-v2&envId=array
+        /// Input: nums = [3,2,2,3], val = 3
+        /// Output: 2, nums = [2, 2, _, _]
+        /// Explanation: Your function should return k = 2, with the first two elements of nums being 2.
+        /// It does not matter what you leave beyond the returned k(hence they are underscores).
+        /// Note that the five elements can be returned in any order.
         /// </summary>
-        public static (int, int) TwoSumSorted(int[] nums, int sum)
-        {
-            // 2 3 5 6 8 11 18
-            //   ^
-            //       ^   
-
-            var left = 0;
-            var right = nums.Length;
-
-            // loop until left < right
-            while (left < right)
-            {
-                // left + right > sum, then right --;
-                // left + right < sum, then left ++;
-
-                var currSum = nums[left] + nums[right];
-
-                if (currSum > sum)
-                {
-                    right--;
-                }
-                else if (currSum < sum)
-                {
-                    left++;
-                }
-                else if (currSum == sum)
-                {
-                    return (left, right);
-                }
-            }
-
-            return (-1, -1);
-        }
-
-
-        /// <summary>
-        /// Two pointers, opposite direction
-        /// Valid Palindrome
-        /// Determine whether a string is a palindrome, 
-        /// ignoring non-alphanumeric characters and case. 
-        /// Examples:
-        /// Input: Do geese see God? Output: True
-        /// Input: Was it a car or a cat I saw? Output: True
-        /// Input: A brown fox jumping over Output: False
-        /// </summary>
+        /// <param name="nums"></param>
+        /// <param name="k"></param>
         /// <returns></returns>
-        public static bool IsValidPalindrome(string str)
+        public static int RemoveElements(int[] nums, int k)
         {
-            // Do geese see God?
-            //    ^
-            //              ^
+            // 3 2 2 3 5 4 3 , Val =3
+            // ^  
+            // ^
+            var reader = 0;
+            var writer = 0;
 
-            // ignore alphanumeric, case agnostic 
-            // until left < right..
-
-            var left = 0;
-            var right = str.Length;
-            var strArray = str.ToCharArray();
-
-            while(left < right)
+            while(reader < nums.Length)
             {
-
-                while (!char.IsLetterOrDigit(strArray[left]) && left < right)
+                if (nums[reader] == k) reader++;
+                else
                 {
-                    left++;
+                    nums[writer] = nums[reader];
+                    reader++;
+                    writer++;
                 }
 
-                while (!char.IsLetterOrDigit(strArray[right]) && left < right)
-                {
-                    right--;
-                }
-
-                if (strArray[left] != strArray[right])
-                {
-                    return false;
-                }
             }
-            return true;
+
+            return writer;
         }
     }
 }

@@ -60,5 +60,40 @@ namespace AlgoMonster.Tree._6.BST_Specific
             return right;
 
         }
+
+        /// <summary>
+        /// https://leetcode.com/problems/verify-preorder-sequence-in-binary-search-tree/?envType=problem-list-v2&envId=stack
+        /// Given an array of unique integers preorder, 
+        /// return true if it is the correct preorder traversal sequence of a binary search tree.
+        /// Input: preorder = [5,2,1,3,6]
+        /// Output: true
+        ///            6
+        ///     3            8
+        /// 1       5     7      10
+        ///                   11    15 
+        ///  [6 3 1 5 8 7 10 11 15]
+        ///  [6 3 1 8 5 7 ...] 
+        ///  
+        /// </summary>
+        /// <param name="preorder"></param>
+        /// <returns></returns>
+        public static bool VerifyPreorder(int[] preorder)
+        {
+            var lowerBound = int.MinValue;
+            var stack = new Stack<int>();
+
+            for(int i = 0; i < preorder.Length; i++)
+            {
+                if (preorder[i] < lowerBound) return false;
+
+                while(stack.Count > 0 && preorder[i] > stack.Peek())
+                {
+                    lowerBound = stack.Pop();
+                }
+                stack.Push(preorder[i]);
+            }
+
+           return true;
+        }
     }
 }

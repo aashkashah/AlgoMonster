@@ -1,4 +1,7 @@
-﻿namespace AlgoMonster.SlidingWindow
+﻿using System.Data;
+using System.Runtime.InteropServices;
+
+namespace AlgoMonster.Arrays.SlidingWindow
 {
     public static class SlidingWindow
     {
@@ -80,7 +83,7 @@
                 }
                 maxf = Math.Max(maxf, count[s[r]]);
 
-                while ((r - l + 1) - maxf > k)
+                while (r - l + 1 - maxf > k)
                 {
                     count[s[l]]--;
                     l++;
@@ -89,6 +92,77 @@
             }
 
             return res;
+        }
+
+        /// <summary>
+        /// Minimum Size Subarray Sum
+        /// Given an array of positive integers nums and a positive integer target, 
+        /// return the minimal length of a subarray whose sum is greater than or equal to target. 
+        /// If there is no such subarray, return 0 instead.
+        /// Input: target = 7, nums = [2,3,1,2,4,3]
+        /// Output: 2
+        /// Explanation: The subarray[4, 3] has the minimal length under the problem constraint.
+        /// </summary>
+        /// <returns></returns>
+        public static int MinimumSizeSubArraySum(int[] nums, int target)
+        {
+            int left = 0;
+            int sum = 0;
+            int best = int.MaxValue;
+
+            for (int right = 0; right < nums.Length; right++)
+            {
+                sum = sum + nums[right];
+                while(sum >= target)
+                {
+                    best = Math.Min(best, right - left + 1);
+                    sum = sum - nums[left];
+                    left++;
+                }
+                
+            }
+            return best;
+        }
+
+        /// <summary>
+        /// Product of Array Except Self
+        /// Given an integer array nums, return an array answer such that answer[i] is equal to 
+        /// the product of all the elements of nums except nums[i].
+        /// The product of any prefix or suffix of nums is guaranteed to fit in a 32-bit integer.
+        /// You must write an algorithm that runs in O(n) time and without using the division operation.
+        /// Input: nums = [1,2,3,4]
+        /// Output: [24, 12, 8, 6]
+        /// </summary>
+        /// <param name="nums"></param>
+        /// <returns></returns>
+        public static int[] ProductExceptSelf(int[] nums)
+        {
+            // i = 0
+            // 1 2 3 4  nums
+            // 1 2 6 24 prefix
+            //    24  12  4  suffix  
+            // 24 12 8 6  result 
+
+            int n = nums.Length;
+            int[] ans = new int[n];
+
+            // 1) Prefix pass: ans[i] = product of nums[0..i-1]
+            int prefix = 1;
+            for (int i = 0; i < n; i++)
+            {
+                ans[i] = prefix;
+                prefix *= nums[i];
+            }
+
+            // 2) Suffix pass: multiply by product of nums[i+1..n-1]
+            int suffix = 1;
+            for (int i = n - 1; i >= 0; i--)
+            {
+                ans[i] *= suffix;
+                suffix *= nums[i];
+            }
+
+            return ans;
         }
     }
 }
