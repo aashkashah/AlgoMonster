@@ -1,4 +1,5 @@
-﻿using static AlgoMonster.Tree.Base.Tree;
+﻿using AlgoMonster.Tree.Base;
+using static AlgoMonster.Tree.Base.Tree;
 
 namespace AlgoMonster.Tree._3.Bottom_Up
 {
@@ -98,6 +99,40 @@ namespace AlgoMonster.Tree._3.Bottom_Up
 
             // what am i returning to parent?
             return 1 + Math.Max(left, right);
+        }
+
+        /// <summary>
+        ///  Maximum Depth of N-ary Tree
+        ///  https://leetcode.com/problems/maximum-depth-of-n-ary-tree/description/?envType=problem-list-v2&envId=tree
+        /// </summary>
+        /// <param name="root"></param>
+        /// <returns></returns>
+        public static int MaxDepthNAryTree(NAryTree root)
+        {
+            return MaxDepthNAryTreeHelper(root);
+        }
+
+        public static int MaxDepthNAryTreeHelper(NAryTree node)
+        {
+            // return condition
+            if (node == null) return 0;
+
+            // recursion
+            var maxChildDepthForThisLevel = 0;
+            for (int i = 0; i < node.children.Count; i++)
+            {
+                var depth = MaxDepthNAryTreeHelper(node.children[i]);
+                if (depth > maxChildDepthForThisLevel)
+                {
+                    maxChildDepthForThisLevel = depth;
+                }
+
+                // refined way to write
+                // foreach(var child in nodechildren) 
+                // maxDepth = Math.Max(maxdepth, MaxDepthNAryTreeHelper(child))
+
+            }
+            return maxChildDepthForThisLevel+1;
         }
     }
 }

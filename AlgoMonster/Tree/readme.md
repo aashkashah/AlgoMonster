@@ -1,9 +1,9 @@
 ﻿
-Trees 
+--- Trees ultimate pattern cheat sheat --- [Aashka + ChatGPT]
 
 https://www.notion.so/Trees-2c99497b78098047b254e33218e11bd7
 
---- Follow this and you're GOLD --- 
+	 ----- Follow this and you're GOLD -----
 
 🧠 How to Solve Each Easy Question (Same Ritual)
 
@@ -18,13 +18,25 @@ https://www.notion.so/Trees-2c99497b78098047b254e33218e11bd7
 		Pre / In / Post / Level?
 
 		This is what interviewers actually care about.
+
+🧠 The real “secret”: Hard trees = Pattern + Return Contract
+
+	When you’re stuck, ask:
+
+		What should my function return to the parent? (one number? tuple? node? bool+height?)
+
+		Is there a separate global answer I must update?
+
+		Do I need to pass state down? (path/backpack)
+
+		If you answer those 3, “hard” becomes routine.
 	
 
 📁 Folder 1: DFS Traversal (Visit Every Node) [Tier 2]
 
 	Goal of this folder
 
-	Get comfortable walking the tree and knowing when to do work.
+		Get comfortable walking the tree and knowing when to do work.
 
 	Questions
 
@@ -45,12 +57,16 @@ https://www.notion.so/Trees-2c99497b78098047b254e33218e11bd7
 		Recursive base case
 
 		Where the “work” goes (before / between / after recursion)
+	
+	Medium/Hard becomes: “traverse + bookkeeping”
+
+	- e.g., **Vertical Order Traversal**, **Boundary of Binary Tree** (still traversal, just grouping rules)
 
 📁 Folder 2: Root → Leaf Path Problems [Tier 1]
 
 	Goal
 
-	Learn to carry state downward + backtrack cleanly.
+		Learn to carry state downward + backtrack cleanly.
 
 	Questions
 
@@ -74,14 +90,18 @@ https://www.notion.so/Trees-2c99497b78098047b254e33218e11bd7
 
 	**Mental hook**
 
-	> “I carry a backpack while walking down.”
+		> “I carry a backpack while walking down.”
+
+	Medium/Hard becomes: “carry more state” or “count paths not necessarily root→leaf”
+
+		- Path Sum III (paths can start anywhere) = prefix-sum + DFS (Path + extra technique)
 
 
 📁 Folder 3: Bottom-Up / Postorder (Most Important) [Tier 1]
 
 	Goal
 
-	Children compute → parent decides.
+		Children compute → parent decides.
 
 	Questions (🔥 must-do)
 
@@ -107,8 +127,14 @@ https://www.notion.so/Trees-2c99497b78098047b254e33218e11bd7
 
 	**Mental hook**
 
-	> “Children report up to the parent.”
+		> “Children report up to the parent.”
+	
+	**This is the engine of most hard questions.**
 
+	Medium/Hard becomes:  “return multiple things” + “update global”
+		- **Max Path Sum** (return best downward path, update best overall)
+		- **Largest BST Subtree** (return isBST, size, min, max)
+		- **Serialize/validate properties** (return structured info)
 
 📁 Folder 4: LCA & Tree as Graph [Tier 2]
 
@@ -138,14 +164,18 @@ https://www.notion.so/Trees-2c99497b78098047b254e33218e11bd7
 
 	**Mental hook**
 
-	> “Tree + parent = graph.”
+		> “Tree + parent = graph.”
+
+	Medium/Hard becomes: “distance + parent links + BFS/DFS”
+		- **Nodes at Distance K** (LCA/graph + BFS)
+		- “Kth ancestor”, “burning tree”, etc.
 
 
 📁 Folder 5: Level Order / BFS [Tier 1]
 
 	Goal
 
-	Think in layers, not recursion.
+		Think in layers, not recursion.
 
 	Questions
 
@@ -169,14 +199,17 @@ https://www.notion.so/Trees-2c99497b78098047b254e33218e11bd7
 
 	**Mental hook**
 
-	> “Process one level at a time.”
+		> “Process one level at a time.”
+	
+	Medium/Hard becomes: “multi-source BFS” or “augment levels”
+		Zigzag, Right view, connect next pointers, min time to spreadstyle problems
 	
 
 📁 Folder 6: BST-Specific Logic [Tier 3]
 
 	Goal
 
-	Exploit ordering — don’t brute force.
+		Exploit ordering — don’t brute force.
 
 	Questions
 
@@ -198,11 +231,14 @@ https://www.notion.so/Trees-2c99497b78098047b254e33218e11bd7
 
 		Pruning logic
 
+	Medium/Hard becomes: “inorder as sorted stream” or “range constraints”
+		Recover BST, BST iterator, kth smallest, two-sum in BST
+
 📁 Folder 7: Tree Construction / Serialization [Tier 3]
 
 	Goal
 
-	Understand how structure is rebuilt.
+		Understand how structure is rebuilt.
 
 	Questions
 
@@ -223,3 +259,6 @@ https://www.notion.so/Trees-2c99497b78098047b254e33218e11bd7
 		Recursive construction
 
 		Preorder positioning	
+
+	Medium/Hard becomes: “careful indexing/encoding”
+		Serialize/Deserialize, build from traversals, flatten, etc.

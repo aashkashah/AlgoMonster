@@ -81,5 +81,38 @@ namespace AlgoMonster.Tree._7.Tree_Construction
             return root;
         }
 
+        /// <summary>
+        /// Convert Sorted Array to Binary Search Tree
+        /// https://leetcode.com/problems/convert-sorted-array-to-binary-search-tree/description/?envType=problem-list-v2&envId=tree
+        /// </summary>
+        /// <param name="nums"></param>
+        /// <returns></returns>
+        public TreeNode SortedArrayToBST(int[] nums)
+        {
+            // -10 -3 0 1 2 5 9
+            //         1
+            //     -3      5  
+            // -10   0   2   9
+            //                 
+            return null;
+        }
+
+        public TreeNode SortedArrayToBSThelper(int[] nums, int left, int right)
+        {
+            // mid point 
+            // left 
+
+            // return condition
+            if (left > right) return null;
+
+            // recursion
+            var mid = (left + right)/2;
+            var root = new TreeNode(mid);
+
+            root.left = SortedArrayToBSThelper(nums, left, mid - 1);
+            root.right = SortedArrayToBSThelper(nums, mid + 1, right);
+            return root;
+        }
+
     }
 }

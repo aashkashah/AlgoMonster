@@ -4,6 +4,7 @@ namespace AlgoMonster.Tree._2.Root_To_Leaf
 {
     public static class RootToLeaf
     {
+        static int _SumRootToLeaf = 0;
         /// <summary>
         ///            6
         ///     1            2
@@ -31,5 +32,39 @@ namespace AlgoMonster.Tree._2.Root_To_Leaf
 
             return PathSumHelper(node.left, remainingSum) || PathSumHelper(node.right, remainingSum);
         }
+
+        /// <summary>
+        /// Sum of Root To Leaf Binary Numbers
+        /// https://leetcode.com/problems/sum-of-root-to-leaf-binary-numbers/description/?envType=problem-list-v2&envId=tree
+        /// </summary>
+        /// <param name="root"></param>
+        /// <returns></returns>
+        public static int SumRootToLeaf(TreeNode root)
+        {
+            _SumRootToLeaf = 0;
+            SumRootToLeafHelper(root, string.Empty);
+            return _SumRootToLeaf;
+        }
+
+        public static void SumRootToLeafHelper(TreeNode node, string sum)
+        { 
+            // exit condition
+            if(node == null) return; 
+
+            // recurse 
+            var path = sum + node.val;
+
+            // leaf node reached
+            if (node.left == null && node.right == null)
+            {
+                _SumRootToLeaf += Convert.ToInt32(path, 2);
+                return;
+            }
+
+            SumRootToLeafHelper(node.left, path);
+            SumRootToLeafHelper(node.right, path);
+        }
+
+
     }
 }
