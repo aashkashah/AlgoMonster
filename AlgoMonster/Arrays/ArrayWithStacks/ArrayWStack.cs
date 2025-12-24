@@ -182,6 +182,49 @@ namespace AlgoMonster.Arrays.ArrayWithStacks
             return current.ToString();
         }
 
+        /// <summary>
+        /// Baseball game
+        /// https://leetcode.com/problems/baseball-game/description/?envType=problem-list-v2&envId=stack
+        /// </summary>
+        /// <param name="operations"></param>
+        /// <returns></returns>
+        public int CalPoints(string[] operations)
+        {
+            var stack = new Stack<int>();
+
+            for(int i = 0; i < operations.Length; i++)
+            {
+                var currOperation = operations[i];
+                if (currOperation == "+")
+                {
+                    var top = stack.Pop();
+                    var newTop = top + stack.Peek();
+                    stack.Push(top);
+                    stack.Push(newTop);
+                }
+                else if (currOperation == "D")
+                {
+                    stack.Push(2 * stack.Peek());    
+                }
+                else if (currOperation == "C")
+                {
+                    stack.Pop();
+                }
+                else
+                {
+                    stack.Push(Convert.ToInt32(currOperation));
+                }
+            }
+
+            int ans = 0;
+            while (stack.Count > 0)
+            {
+                ans += stack.Pop();
+            }
+            return ans;
+        }
+
+
     }
 }
 
