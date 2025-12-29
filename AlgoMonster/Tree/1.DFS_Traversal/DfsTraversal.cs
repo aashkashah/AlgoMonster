@@ -1,9 +1,12 @@
-﻿using static AlgoMonster.Tree.Base.Tree;
+﻿using Microsoft.VisualBasic;
+using System.Collections.Specialized;
+using static AlgoMonster.Tree.Base.Tree;
 
 namespace AlgoMonster.Tree._1.DFS_Traversal
 {
     public static class DfsTraversal
     {
+        static List<TreeNode> nodeValues = new List<TreeNode>();
         /// <summary>
         /// Sum of Left Leaves
         /// https://leetcode.com/problems/sum-of-left-leaves/description/?envType=problem-list-v2&envId=tree
@@ -48,6 +51,43 @@ namespace AlgoMonster.Tree._1.DFS_Traversal
 
             return SumOfLeftLeaves2Helper(node.left, true) + SumOfLeftLeaves2Helper(node.right, false);
         }
+
+        /// <summary>
+        /// Minimum Absolute Difference in BST
+        /// https://leetcode.com/problems/minimum-absolute-difference-in-bst/description/?envType=problem-list-v2&envId=tree
+        /// Input: root = [4,2,6,1,3]
+        /// Output: 1
+        /// </summary>
+        /// <param name="root"></param>
+        /// <returns></returns>
+        public static int GetMinimumDifference(TreeNode root)
+        {
+            GetMinimumDifferenceDfs(root);
+
+            nodeValues.Sort();
+            int minDifference = int.MaxValue;
+
+            for (int i = 0; i < nodeValues.Count; i++) 
+            {
+                minDifference = Math.Max(minDifference, (nodeValues[i].val - nodeValues[i -1].val));
+            }
+            return minDifference;
+        }
+
+        private static void GetMinimumDifferenceDfs(TreeNode node)
+        {
+            if (node == null) return;
+
+            nodeValues.Add(node);
+            GetMinimumDifferenceDfs(node.left);
+            GetMinimumDifferenceDfs(node.right);
+        }
+
+        
+
+        
+
+
 
     }
 }

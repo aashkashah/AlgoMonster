@@ -52,19 +52,17 @@ namespace AlgoMonster.Tree._2.Root_To_Leaf
             if(node == null) return; 
 
             // recurse 
-            var path = sum + node.val;
+            var pathSum = sum + node.val;
 
             // leaf node reached
             if (node.left == null && node.right == null)
             {
-                _SumRootToLeaf += Convert.ToInt32(path, 2);
+                _SumRootToLeaf += Convert.ToInt32(pathSum, 2);
                 return;
             }
 
-            SumRootToLeafHelper(node.left, path);
-            SumRootToLeafHelper(node.right, path);
+            SumRootToLeafHelper(node.left, pathSum);
+            SumRootToLeafHelper(node.right, pathSum);
         }
-
-
     }
 }

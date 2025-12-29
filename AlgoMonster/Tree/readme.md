@@ -123,7 +123,7 @@ https://www.notion.so/Trees-2c99497b78098047b254e33218e11bd7
 
 		Postorder traversal
 
-		👉 If you master this folder, you’re senior-level on trees.
+		👉 If you master this folder, you’re good.
 
 	**Mental hook**
 

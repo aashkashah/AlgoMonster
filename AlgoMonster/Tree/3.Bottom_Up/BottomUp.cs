@@ -1,10 +1,13 @@
 ﻿using AlgoMonster.Tree.Base;
+using static AlgoMonster.Mocks.Nov2725;
 using static AlgoMonster.Tree.Base.Tree;
 
 namespace AlgoMonster.Tree._3.Bottom_Up
 {
     public static class BottomUp
     {
+        static int _MaxPathSum = int.MinValue;
+        static int _MaxUniValuePath = int.MinValue;
         /// <summary>
         ///           6
         ///     1            2
@@ -133,6 +136,68 @@ namespace AlgoMonster.Tree._3.Bottom_Up
 
             }
             return maxChildDepthForThisLevel+1;
+        }
+
+
+        /// <summary>
+        /// Binary Tree Maximum Path Sum
+        /// https://leetcode.com/problems/binary-tree-maximum-path-sum/description/?envType=problem-list-v2&envId=tree
+        /// 
+        /// Definition of a path (from the problem)
+        /// A path is a sequence of nodes where each pair of adjacent nodes has an edge connecting them.
+        /// A node can appear at most once.
+        /// That means:
+        /// A path is linear
+        /// No branching
+        /// No re-using nodes
+        /// 
+        /// Global answer: may fork (once)
+        /// Return value: must be a straight line
+        /// </summary>
+        public static int MaxPathSum(TreeNode root)
+        {
+            var res = MaxPathSumHelper(root);
+            return res;
+        }
+
+        private static int MaxPathSumHelper(TreeNode node)
+        {
+            // return condition
+            if (node == null) return 0;
+
+            // recursion
+            // Max with 0, to remove -ve paths
+            var leftGain = Math.Max(0, MaxPathSumHelper(node.left));
+            var rightGain = Math.Max(0, MaxPathSumHelper(node.right));
+
+            /// Global answer: may fork (once)
+            _MaxPathSum = Math.Max(_MaxPathSum, node.val + leftGain + rightGain);
+
+            /// Return value: must be a straight line, 
+            /// that's why we do left or right Max here
+            return node.val + Math.Max(leftGain, rightGain);
+        }
+
+        /// <summary>
+        /// Longest Univalue Path
+        /// https://leetcode.com/problems/longest-univalue-path/description/?envType=problem-list-v2&envId=tree
+        /// </summary>
+        /// <param name="root"></param>
+        /// <returns></returns>
+        public static int LongestUnivaluePath(TreeNode node)
+        {
+            // this is wrong, child value needs to match with parent.val 
+
+            // return value
+            if (node == null) return 0;
+
+            // recursion
+            var left = LongestUnivaluePath(node.left);
+            var right = LongestUnivaluePath(node.right);
+
+            _MaxUniValuePath = Math.Max(_MaxUniValuePath, left + right);
+
+            return Math.Max(left, right) + 1;
         }
     }
 }

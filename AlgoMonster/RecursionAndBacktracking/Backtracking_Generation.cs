@@ -1,6 +1,6 @@
 ﻿namespace AlgoMonster.RecursionAndBacktracking
 {
-    public static class Backtracking
+    public static class Backtracking_Generation
     {
         /// <summary>
         /// Input: { "Jane", "Marty", "Joe", "Susan" }

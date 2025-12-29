@@ -1,4 +1,6 @@
-﻿🔑 The Unifying Backtracking Skeleton
+﻿Detailed: https://www.notion.so/Backtracking-2d19497b780980858b29df288488e9ad
+
+🔑 The Unifying Backtracking Skeleton
 
 Everything above reduces to one skeleton:
 
@@ -48,3 +50,13 @@ Ask yourself these 5 questions:
     Is there a grid/tree? → DFS backtracking
 
 If you answer these, the code structure writes itself.
+
+
+Include/exclude pattern
+
+| Step                   | Meaning                 |
+| ---------------------- | ----------------------- |
+| `subset.Add(...)`      | choose INCLUDE          |
+| recurse                | explore that choice     |
+| `subset.RemoveAt(...)` | undo choice             |
+| recurse again          | explore path WITHOUT it |

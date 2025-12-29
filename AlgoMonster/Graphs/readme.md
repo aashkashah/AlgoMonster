@@ -109,7 +109,7 @@ Mental model
 
 3️. State-Space BFS (Graph disguised as something else) (Top interview favorite)
 
-This is the #1 “graph disguised as something else” pattern.
+	This is the #1 “graph disguised as something else” pattern.
 	
 Goal: shortest steps where each state includes extra info.
 

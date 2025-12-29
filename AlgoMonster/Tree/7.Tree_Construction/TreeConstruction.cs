@@ -87,17 +87,17 @@ namespace AlgoMonster.Tree._7.Tree_Construction
         /// </summary>
         /// <param name="nums"></param>
         /// <returns></returns>
-        public TreeNode SortedArrayToBST(int[] nums)
+        public static TreeNode SortedArrayToBST(int[] nums)
         {
             // -10 -3 0 1 2 5 9
             //         1
             //     -3      5  
             // -10   0   2   9
             //                 
-            return null;
+            return SortedArrayToBSThelper(nums, 0, nums.Length);
         }
 
-        public TreeNode SortedArrayToBSThelper(int[] nums, int left, int right)
+        public static TreeNode SortedArrayToBSThelper(int[] nums, int left, int right)
         {
             // mid point 
             // left 
@@ -112,6 +112,33 @@ namespace AlgoMonster.Tree._7.Tree_Construction
             root.left = SortedArrayToBSThelper(nums, left, mid - 1);
             root.right = SortedArrayToBSThelper(nums, mid + 1, right);
             return root;
+        }
+
+        /// <summary>
+        /// Subtree of Another Tree
+        /// https://leetcode.com/problems/subtree-of-another-tree/?envType=problem-list-v2&envId=tree
+        /// Input: root = [3,4,5,1,2], subRoot = [4,1,2]
+        /// Output: true
+        /// </summary>
+        /// <param name="root"></param>
+        /// <param name="subRoot"></param>
+        /// <returns></returns>
+        public static bool IsSubtree(TreeNode root, TreeNode subRoot)
+        {
+            // find root of subroot in parent tree
+            // create a traversal array from this node
+            // compare both arrays
+            var a = Serialize(root);
+            var b = Serialize(subRoot);
+
+            return a.Contains(b);
+        }
+
+        private static string Serialize(TreeNode node)
+        {
+            // missed #, found serialize with # idea elsewhere
+            if (node == null) return "#,";
+            return node.val.ToString() + "," + Serialize(node.left) + Serialize(node.right);
         }
 
     }

@@ -164,5 +164,98 @@ namespace AlgoMonster.Arrays.SlidingWindow
 
             return ans;
         }
+
+        /// <summary>
+        ///  Maximum Average Subarray I
+        ///  https://leetcode.com/problems/maximum-average-subarray-i/description/?envType=problem-list-v2&envId=sliding-window
+        /// </summary>
+        public static double FindMaxAverage(int[] nums, int k)
+        {
+            // maxAvg = 12.75
+            // 2 51 42
+            // 1 12 -5 -6 50 3 k = 4
+            //       ^
+            //               ^
+            // loop start l = 2, r = 5  k-1
+            // dp[l] = dp[l-1] - nums[l-1] + nums[r] 
+
+            // init dp
+            var dp = new double[nums.Length - 1]; // todo 
+
+            // prefill dp
+            for (int i = 0; i < k - 1; i++)
+            {
+                dp[0] += nums[i];
+            }
+
+            double avgSum = dp[0];
+            int l = 1, r = k;
+            while (r < nums.Length - 1)
+            {
+                dp[l] = dp[l - 1] - nums[l - 1] + nums[r];
+                Math.Max(avgSum, dp[l] / 4);
+                l++; r++;
+            }
+
+            return avgSum;
+        }
+
+        /// <summary>
+        /// Fixed size sliding window
+        /// Diet plan performance
+        /// https://leetcode.com/problems/diet-plan-performance/description/?envType=problem-list-v2&envId=sliding-window
+        /// </summary>
+        public static int DietPlanPerformance(int[] calories, int k, int lower, int upper)
+        {
+            // lower = 1, upper = 5, k = 2
+            // calPoints = 1
+            // runningSum = 0
+            // 6 5 0 0
+            //     ^
+            //       ^
+            // loop r < calories.len
+            // runningSum = runningSum - calories[l-1] + calories[r]
+
+            if (k > calories.Length) return 0;
+
+            int l = 0, r = k - 1;
+            var runningSum = 0;
+            var calPoints = 0;
+            // initialize
+            for(int i = 0; i <= r; i++) 
+            {
+                runningSum += calories[i];
+            }
+            updateCalories(runningSum);
+
+            // sliding window
+            l = 1; r = r + 1;
+            while (r < calories.Length)
+            {
+                runningSum = runningSum - calories[l - 1] + calories[r];
+                updateCalories(runningSum);
+                l++; r++;
+            }
+
+            // better approach than above sliding window for loop
+            // 6 5 0 0
+            for(int i = k; i < calories.Length; i++) // i = k = cal[2] = 0
+            {
+                // sum = sum - cal[2-2] = 0
+                // l++ l = 3, cal[3] = 0
+                // sum = sum - cal[3-20]
+                runningSum = runningSum - calories[i - k];
+                updateCalories(runningSum);
+            }
+            // approach ends
+
+            void updateCalories(int sum)
+            {
+                if (sum > upper) calPoints++;
+                else if (sum < lower) calPoints--;
+            }
+
+            return calPoints;
+        }
     }
 }

@@ -1,18 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace AlgoMonster.Arrays
+﻿namespace AlgoMonster.Arrays
 {
     public static class ArrayMisc
     {
         /// <summary>
         /// Pascal's Triange
         /// </summary>
-        /// <param name="numRows"></param>
-        /// <returns></returns>
         public static IList<IList<int>> Generate(int numRows)
         {
             var result = new List<IList<int>>();
@@ -34,10 +26,6 @@ namespace AlgoMonster.Arrays
         ///  Missing Ranges
         ///  https://leetcode.com/problems/missing-ranges/description/?envType=problem-list-v2&envId=array
         /// </summary>
-        /// <param name="nums"></param>
-        /// <param name="lower"></param>
-        /// <param name="upper"></param>
-        /// <returns></returns>
         public static List<List<int>> FindMissingRanges(int[] nums, int lower, int upper) 
         {
             var res = new List<List<int>>();
@@ -79,6 +67,46 @@ namespace AlgoMonster.Arrays
             if(upper - nums[right] > 1)
             {
                 res.Add(new List<int>() { nums[right]+1, upper });
+            }
+
+            return res;
+        }
+
+        /// <summary>
+        /// Minimum Absolute Difference
+        /// https://leetcode.com/problems/minimum-absolute-difference/description
+        /// Input: arr = [4,2,1,3]
+        /// Output: [[1, 2],[2, 3],[3, 4]]
+        /// </summary>
+        public static IList<IList<int>> MinimumAbsDifference(int[] arr)
+        {
+            // min diff = 4
+            // -14 -10 -4 3 8 19 23 24 27
+            //                   ^
+            //                    ^
+            // [-14,-10],[9,23],[23,27]
+
+            if (arr.Length == 0) return null;
+            if (arr.Length == 1) return new List<IList<int>>() { new List<int>() { arr[0] } };
+
+            Array.Sort(arr);
+            var res = new List<IList<int>>();
+            var minAbs = int.MaxValue;
+            
+            for (int i = 1; i < arr.Length; i++) 
+            {
+                var diff = arr[i - 1] - arr[i];
+                minAbs = Math.Max(minAbs, diff);
+                if(diff <= minAbs)
+                {
+                    res.Add(new List<int>() { arr[i - 1], arr[i] });
+                }
+            }
+
+            foreach(var elem in res)
+            {
+                var diff = elem[0] - elem[1];
+                if(!(diff <= minAbs)) res.Remove(elem);
             }
 
             return res;

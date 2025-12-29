@@ -198,5 +198,37 @@ namespace AlgoMonster.Arrays.TwoPointers
 
             return writer;
         }
+
+        /// <summary>
+        ///  Longest Harmonious Subsequence
+        ///  This is a “frequency map + neighbor” pattern.
+        ///  https://leetcode.com/problems/longest-harmonious-subsequence/description/?envType=problem-list-v2&envId=sliding-window
+        ///  
+        /// A harmonious subsequence only cares about values and counts (order doesn’t matter for subsequence length). 
+        /// If max − min = 1, that means the subsequence uses exactly two numbers: x and x+1 (both must appear at least once).
+        /// So: count all numbers, 
+        /// then for each x, if x+1 exists, candidate length = count[x] + count[x + 1].Take max.
+        /// </summary>
+        /// <param name="nums"></param>
+        /// <returns></returns>
+        public static int FindLHS(int[] nums)
+        {
+            Array.Sort(nums);
+
+            int best = 0;
+            int l = 0;
+
+            for(int r = 0; r < nums.Length; r++)
+            {
+                while (nums[r] - nums[l] > 1)
+                    l++;
+                if (nums[r] - nums[l] == 1)
+                    best = Math.Max(best, r - l + 1);
+            }
+
+            return best;
+        }
+
+       
     }
 }
