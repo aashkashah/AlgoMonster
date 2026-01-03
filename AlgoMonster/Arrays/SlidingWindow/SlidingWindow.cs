@@ -1,4 +1,5 @@
-﻿using System.Data;
+﻿using AlgoMonster.Arrays.HashSet;
+using System.Data;
 using System.Runtime.InteropServices;
 
 namespace AlgoMonster.Arrays.SlidingWindow
@@ -256,6 +257,29 @@ namespace AlgoMonster.Arrays.SlidingWindow
             }
 
             return calPoints;
+        }
+
+        /// <summary>
+        /// Contains Duplicate II
+        /// https://leetcode.com/problems/contains-duplicate-ii
+        /// 1,2,3,1,2,3, k = 2
+        /// false
+        /// </summary>
+        public static bool ContainsNearbyDuplicate(int[] nums, int k)
+        {
+            var hash = new HashSet<int>();
+
+            for(int i = 0; i < nums.Length; i++)
+            {
+                if (i > k)
+                {
+                    hash.Remove(nums[i - k - 1]);
+                }
+
+                if (!hash.Add(nums[i])) return true;
+            }
+
+            return false;
         }
     }
 }

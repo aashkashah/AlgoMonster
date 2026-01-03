@@ -7,6 +7,7 @@ using AlgoMonster.Arrays.SlidingWindow;
 using AlgoMonster.Search;
 using AlgoMonster.RecursionAndBacktracking;
 using AlgoMonster.Graphs.TopologicalSort;
+using AlgoMonster.Arrays.HashSet;
 
 
 Console.WriteLine("Start the beautiful challenege..");
@@ -81,7 +82,9 @@ Console.WriteLine("Start the beautiful challenege..");
 //var priorityQueueQ = new PriorityQueue_Questions();
 //var res = priorityQueueQ.MinMeetingRooms(new int[][] { [1,10], [2,7], [3,19], [8, 12], [10, 20], [11,30] });
 
-var topoSort = new TopoSort();
-var res = topoSort.FindOrder(4, [[1, 0], [2, 0], [3, 1], [3, 2]]);
+//var topoSort = new TopoSort();
+//var res = topoSort.FindOrder(4, [[1, 0], [2, 0], [3, 1], [3, 2]]);
+
+var res = Array_HastSet.ContainsNearbyDuplicate([1, 2, 3, 1], 3);
 
 Console.WriteLine("Challenge accomplished. You rock!");

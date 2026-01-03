@@ -13,7 +13,6 @@ namespace AlgoMonster.Tree._2.Root_To_Leaf
         /// Given a binary tree and a target sum,
         /// return true if there exists a root-to-leaf path where the sum of node values equals target.
         /// </summary>
-        /// <returns></returns>
         public static bool HasPathSum(TreeNode root, int targetSum)
         {
             if (root == null) return false;
@@ -37,8 +36,6 @@ namespace AlgoMonster.Tree._2.Root_To_Leaf
         /// Sum of Root To Leaf Binary Numbers
         /// https://leetcode.com/problems/sum-of-root-to-leaf-binary-numbers/description/?envType=problem-list-v2&envId=tree
         /// </summary>
-        /// <param name="root"></param>
-        /// <returns></returns>
         public static int SumRootToLeaf(TreeNode root)
         {
             _SumRootToLeaf = 0;

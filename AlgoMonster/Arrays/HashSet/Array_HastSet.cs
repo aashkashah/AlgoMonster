@@ -42,6 +42,52 @@ namespace AlgoMonster.Arrays.HashSet
             return best;
         }
 
+        /// <summary>
+        /// Contains Duplicate II
+        /// https://leetcode.com/problems/contains-duplicate-ii
+        /// 1,2,3,1,2,3, k = 2
+        /// false
+        /// </summary>
+        public static bool ContainsNearbyDuplicate(int[] nums, int k)
+        {
+            // this solution is not optimal
+            // needs to be implemented with sliding window
+            // to do
+
+            // 1 2 3 1 2 3
+            // {1,0}, {2,1},{3,2}, {1,3}, {2,4} {3,5}
+            // {1, {0, 3}} {2, {1,4}}, {3, {2,5}}
+
+            var dict = new Dictionary<int, List<int>>();
+
+            for(int i = 0; i < nums.Length; i++)
+            {
+                if (dict.TryGetValue(nums[i], out var indices))
+                {
+                    indices.Add(i);
+                    dict[nums[i]] = indices;
+                }
+                else
+                {
+                    dict.Add(nums[i], new List<int>() { i });
+                }
+            }
+
+            foreach(var item in dict)
+            {
+               if(item.Value.Count >= 2)
+                {
+                    for (int i = 0; i <= item.Value.Count - 2; i++)
+                    {
+                        if (item.Value[i + 1] - item.Value[i] <= k) return true;
+                    }
+                }
+                
+            }
+
+            return false;
+        }
+
     }
 
 
