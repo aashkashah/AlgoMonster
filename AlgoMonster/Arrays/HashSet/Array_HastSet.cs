@@ -81,6 +81,98 @@ namespace AlgoMonster.Arrays.HashSet
             return false;
         }
 
+        /// <summary>
+        /// Isomorphic strings
+        /// https://leetcode.com/problems/isomorphic-strings/description
+        /// </summary>
+        public bool IsIsomorphic(string s, string t)
+        {
+            // egg
+            // add
+            //   ^
+            // {e,s}, {g,d} 
+            if(s.Length != t.Length) return false;
+
+            var dict = new Dictionary<char, char>();
+            
+            for(int i =0; i <s.Length; i++)
+            {
+                // if same
+                if (s[i] != t[i])
+                {
+                    if (dict.TryGetValue(s[i], out var mapp))
+                    {
+                        if(mapp != t[i]) return false;
+                    }
+                    else
+                    {
+                        dict.Add(s[i], t[i]);
+                    }   
+                }
+
+            }
+
+            return true;
+        }
+
+        /// <summary>
+        /// Majority Element
+        /// https://leetcode.com/problems/majority-element/description
+        /// O(n) space (quesstion asked for O(1))
+        /// O(n) time 
+        /// </summary>
+        public int MajorityElement(int[] nums)
+        {
+            // 2 2 1 1 1 2 2
+            //             ^
+            // {2,4}, {1,3} 
+            // maxNumber = 2
+            // maxCount = 4
+
+            var maxNumber = 0;
+            var maxCount = int.MinValue;
+            var dict = new Dictionary<int, int>();
+
+            foreach (var n in nums)
+            {
+                if(dict.TryGetValue(n, out var num))
+                {
+                    num++;
+                    dict[n] = num;
+
+                    if(num > maxCount)
+                    {
+                        maxCount = num;
+                        maxNumber = n;
+                    }
+                }
+                else
+                {
+                    dict.Add(n, 1);
+
+                    if(1 > maxCount)
+                    {
+                        maxCount = 1;
+                        maxNumber = n;
+                    }
+                }
+            }
+
+            return maxNumber;
+        }
+
+        /// <summary>
+        /// Majority Element
+        /// https://leetcode.com/problems/majority-element/description
+        /// O(1) space
+        /// O(nlogn) time 
+        /// </summary
+        public int MajorityElement2(int[] nums)
+        {
+            Array.Sort(nums);
+            return nums[nums.Length / 2];
+        }
+
 
     }
 }

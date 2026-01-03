@@ -229,6 +229,6 @@ namespace AlgoMonster.Arrays.TwoPointers
             return best;
         }
 
-       
+
     }
 }

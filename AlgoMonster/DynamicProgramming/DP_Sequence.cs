@@ -1,6 +1,6 @@
 ﻿namespace AlgoMonster.DynamicProgramming
 {
-    public static class SequenceDP
+    public static class DP_Sequence
     {
         public static int HouseRobber(List<int> houseStash)
         {
@@ -18,7 +18,7 @@
             dp[0] = houseStash[0];
             dp[1] = Math.Max(houseStash[0], houseStash[1]);
 
-            for(int i =2; i < houseStash.Count; i++)
+            for(int i = 2; i < houseStash.Count; i++)
             {
                 // at every house, check this and use previous dp
                 dp[i] = Math.Max(dp[i - 1], dp[i - 2] + houseStash[i]);

@@ -6,6 +6,7 @@ using AlgoMonster.DynamicProgramming;
 using AlgoMonster.Arrays.SlidingWindow;
 using AlgoMonster.Search;
 using AlgoMonster.RecursionAndBacktracking;
+using AlgoMonster.Graphs.TopologicalSort;
 
 
 Console.WriteLine("Start the beautiful challenege..");
@@ -75,6 +76,12 @@ Console.WriteLine("Start the beautiful challenege..");
 //var result = SlidingWindow.CharacterReplacement("XXYYYXX", 2);
 //var result = BinarySearch.SearchInsert([1, 3, 5, 6, 7, 8], 2);
 
-var res = Backtracking_Subsets.GenerateSubsets([1, 2, 3, 4, 5, 6]);
+//var res = Backtracking_Subsets.GenerateSubsets([1, 2, 3, 4, 5, 6]);
+
+//var priorityQueueQ = new PriorityQueue_Questions();
+//var res = priorityQueueQ.MinMeetingRooms(new int[][] { [1,10], [2,7], [3,19], [8, 12], [10, 20], [11,30] });
+
+var topoSort = new TopoSort();
+var res = topoSort.FindOrder(4, [[1, 0], [2, 0], [3, 1], [3, 2]]);
 
 Console.WriteLine("Challenge accomplished. You rock!");

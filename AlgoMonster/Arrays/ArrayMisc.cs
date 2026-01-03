@@ -112,5 +112,39 @@
             return res;
         }
 
+        /// <summary>
+        /// Sort Colors
+        /// https://leetcode.com/problems/sort-colors
+        /// Input: nums = [2,0,2,1,1,0]
+        /// Output: [0, 0, 1, 1, 2, 2]
+        /// </summary>
+        public static void SortColors(int[] nums)
+        {
+            int zeroCount = 0, oneCount = 0;
+            for (int i = 0; i < nums.Length; i++)
+            {
+                if (nums[i] == 0) { zeroCount++; }
+                else if (nums[i] == 1) { oneCount++; }
+            
+            }
+
+            int index = 0;
+            while (index < zeroCount) 
+            {
+                nums[index] = 0;
+                index++;
+            }
+            while(index < oneCount + zeroCount)
+            {
+                nums[index] = 1;
+                index++;
+            }
+            while(index < nums.Length)
+            {
+                nums[index] = 2;
+                index++;
+            }
+        }
+
     }
 }
