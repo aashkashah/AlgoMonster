@@ -6,7 +6,9 @@ namespace AlgoMonster.Tree._1.DFS_Traversal
 {
     public static class DfsTraversal
     {
-        static List<TreeNode> nodeValues = new List<TreeNode>();
+        static List<int> nodeValues = new List<int>();
+        static int minDiff = int.MaxValue;
+        static int? prev = null;
         /// <summary>
         /// Sum of Left Leaves
         /// https://leetcode.com/problems/sum-of-left-leaves/description/?envType=problem-list-v2&envId=tree
@@ -58,18 +60,19 @@ namespace AlgoMonster.Tree._1.DFS_Traversal
         /// Input: root = [4,2,6,1,3]
         /// Output: 1
         /// </summary>
-        /// <param name="root"></param>
-        /// <returns></returns>
         public static int GetMinimumDifference(TreeNode root)
         {
+            // --- this is sub-optimal ---
+            // it does not use BST property !!!
             GetMinimumDifferenceDfs(root);
 
             nodeValues.Sort();
             int minDifference = int.MaxValue;
 
-            for (int i = 0; i < nodeValues.Count; i++) 
+            if (nodeValues.Count == 1) return -1;
+            for (int i = 1; i < nodeValues.Count; i++) 
             {
-                minDifference = Math.Max(minDifference, (nodeValues[i].val - nodeValues[i -1].val));
+                minDifference = Math.Max(minDifference, (nodeValues[i] - nodeValues[i - 1]));
             }
             return minDifference;
         }
@@ -78,16 +81,37 @@ namespace AlgoMonster.Tree._1.DFS_Traversal
         {
             if (node == null) return;
 
-            nodeValues.Add(node);
+            nodeValues.Add(node.val);
             GetMinimumDifferenceDfs(node.left);
             GetMinimumDifferenceDfs(node.right);
         }
 
-        
+        /// <summary>
+        /// Minimum Absolute Difference in BST
+        /// https://leetcode.com/problems/minimum-absolute-difference-in-bst/description/?envType=problem-list-v2&envId=tree
+        /// Input: root = [4,2,6,1,3]
+        /// Output: 1
+        /// </summary>
+        public static int GetMinimumDifferenceOptimal(TreeNode root)
+        {
+            GetMinimumDifferenceInorder(root);
+            return minDiff;
+        }
 
-        
+        private static void GetMinimumDifferenceInorder(TreeNode node)
+        {
+            if (node == null) return;
 
+            GetMinimumDifferenceInorder(node.left);
 
+            if(prev.HasValue)
+            {
+                minDiff = Math.Min(minDiff, (node.val - prev.Value));
+            }
+            prev = node.val;
+
+            GetMinimumDifferenceInorder(node.right);
+        }
 
     }
 }
