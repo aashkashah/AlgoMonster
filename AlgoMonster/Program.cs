@@ -85,6 +85,8 @@ Console.WriteLine("Start the beautiful challenege..");
 //var topoSort = new TopoSort();
 //var res = topoSort.FindOrder(4, [[1, 0], [2, 0], [3, 1], [3, 2]]);
 
-var res = Array_HastSet.ContainsNearbyDuplicate([1, 2, 3, 1], 3);
+//var res = Array_HastSet.ContainsNearbyDuplicate([1, 2, 3, 1], 3);
+
+var res = Backtracing_Pruning.GenerateParenthesis(3);
 
 Console.WriteLine("Challenge accomplished. You rock!");

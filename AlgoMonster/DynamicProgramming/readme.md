@@ -2,6 +2,22 @@
 
 https://www.notion.so/Dynamic-Programming-2c99497b7809801480bbce6b2ec7dea2
 
+🎯 High-confidence interview picks (do these)
+
+If you want max ROI, practice:
+
+	Climbing Stairs
+
+	Decode Ways
+
+	Unique Paths
+
+	Binary strings w/ constraints
+
+	Word Break
+
+These cover 80% of DP generation patterns.
+
 1. Sequence DP (1D DP)
 ### When to use
 
@@ -81,7 +97,8 @@ These are table DP problems involving two words.
 
 ### When to use
 
-	If the problem asks about **subarrays/substrings** and optimal decisions depend on breaking the interval into smaller intervals.
+	If the problem asks about **subarrays/substrings** and optimal decisions depend on 
+	breaking the interval into smaller intervals.
 
 **Examples:**
 

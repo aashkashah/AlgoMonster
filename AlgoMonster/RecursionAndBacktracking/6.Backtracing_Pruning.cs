@@ -1,7 +1,12 @@
-﻿namespace AlgoMonster.RecursionAndBacktracking
+﻿using System.Text;
+
+namespace AlgoMonster.RecursionAndBacktracking
 {
     public static class Backtracing_Pruning
     {
+
+        private static List<string> _validStrings = new List<string>();
+
         /// <summary>
         /// Combination Sum
         /// https://leetcode.com/problems/combination-sum/description
@@ -126,6 +131,83 @@
                 
         }
 
+        /// <summary>
+        /// Generate Parenthesis
+        /// https://leetcode.com/problems/generate-parentheses/
+        /// </summary>
+        public static IList<string> GenerateParenthesis(int n)
+        {
+            // n = 3
+            // ((())), ()()(), (())(), ()(())
+            // (((
+            var res = new List<string>();
+            GenerateParenthesisHelper(n, 0, 0, res, new StringBuilder());
+            return res;
+        }
+
+       private static void GenerateParenthesisHelper(
+           int n, int openBraceCount, int closeBraceCount, 
+           List<string> res, StringBuilder curr)
+       {
+            // exit condition
+            if(curr.Length == 2*n)
+            {
+                res.Add(curr.ToString());
+                return;
+            }
+
+            // recursion
+
+            // explore '('
+            if(openBraceCount < n)
+            {
+                curr.Append("(");
+                GenerateParenthesisHelper(n, openBraceCount + 1, closeBraceCount, res, curr);
+                curr.Remove(curr.Length - 1, 1);
+            }
+
+            if(openBraceCount > closeBraceCount)
+            {
+                curr.Append(")");
+                GenerateParenthesisHelper(n, openBraceCount, closeBraceCount + 1, res, curr);
+                curr.Remove(curr.Length - 1, 1);
+            }
+        }
+
+        /// <summary>
+        /// Generate Binary strings without adjacent zeros
+        /// https://leetcode.com/problems/generate-binary-strings-without-adjacent-zeros/description/
+        /// Input: n = 3
+        /// Output: ["010", "011", "101", "110", "111"]
+        /// </summary>
+        public static IList<string> ValidStrings(int n)
+        {
+            ValidStringsHelper(new StringBuilder(), n);
+            return _validStrings;
+        }
+
+        private static void ValidStringsHelper(StringBuilder curr, int n)
+        {
+            // exit condition
+            if (curr.Length == n)
+            {
+                _validStrings.Add(curr.ToString());
+                return;
+            }
+
+            // backtracting 
+            // choice 1: 0
+            curr.Append("1");
+            ValidStringsHelper(curr, n);
+            curr.Length--;
+
+            if(curr.Length == 0 || curr[curr.Length -1] != '0')
+            {
+                curr.Append("0");
+                ValidStringsHelper(curr, n);
+                curr.Length--;
+            }
+        }
 
     }
     

@@ -79,5 +79,13 @@ namespace AlgoMonster.DynamicProgramming
             }
 
         }
+
+
+        /// to do -- decode ways
+        /// https://leetcode.com/problems/decode-ways/editorial/
+        public static int NumDecodings(string s)
+        {
+            return 0;
+        }
     }
 }
