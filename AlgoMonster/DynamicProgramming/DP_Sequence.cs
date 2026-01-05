@@ -4,7 +4,7 @@
     {
         public static int HouseRobber(List<int> houseStash)
         {
-            // botton up approach 
+            // bottom up approach 
 
             //return conditions
             if (houseStash.Count == 0) return 0;

@@ -1,8 +1,4 @@
-﻿using AlgoMonster.Arrays.HashSet;
-using System.Data;
-using System.Runtime.InteropServices;
-
-namespace AlgoMonster.Arrays.SlidingWindow
+﻿namespace AlgoMonster.Arrays.SlidingWindow
 {
     public static class SlidingWindow
     {
@@ -55,6 +51,189 @@ namespace AlgoMonster.Arrays.SlidingWindow
             }
 
             return maxSum;
+        }
+
+        /// <summary>
+        /// Length Of Longest Substring
+        /// https://leetcode.com/problems/longest-substring-without-repeating-characters
+        /// </summary>
+        public static int LengthOfLongestSubstring(string s)
+        {
+            var dict = new Dictionary<char, int>();
+            int maxLen = 0;
+            int left = 0;
+
+            for(int right = 0; right < s.Length; right++)
+            {
+                if(dict.ContainsKey(s[right]))
+                {
+                    left = Math.Max(left, dict[s[right]]);
+                }
+
+                maxLen = Math.Max(maxLen, right - left + 1);
+                dict[s[right]] = right + 1;
+            }
+
+            return maxLen;
+
+        }
+
+        /// <summary>
+        /// https://leetcode.com/problems/longest-substring-with-at-most-two-distinct-characters/
+        /// </summary>
+        public static int LengthOfLongestSubstringTwoDistinct(string s)
+        {
+            // ccaabbb
+            //   ^
+            //       ^
+            // atmost2 = 2
+            // {c,1}, {a,3}, {b,6}
+            // maxlen = 5
+
+            if (s.Length == 0) return 0;
+
+            var dict = new Dictionary<char, int>();
+            var left = 0;
+            var maxLen = 0;
+
+            for(int right = 0; right < s.Length; right++)
+            {
+                var currChar = s[right];
+
+                // at most check
+                if(dict.Count < 2)
+                {
+                    if (!dict.ContainsKey(currChar))
+                    {
+                        // add element
+                        dict.Add(currChar, right);
+                    }
+                    else
+                    {
+                        // update index
+                        dict[currChar] = right;
+                    }
+                }
+                else
+                {
+                    // count == 2
+                    if (dict.ContainsKey(currChar))
+                    {
+                        // update index
+                        dict[currChar] = right;
+                    }
+                    else
+                    {
+                        // new char encountered
+                        // updated/move left ptr
+                        // remove that char from dict
+                        char ch = ' ';
+                        int minIndex = int.MaxValue;
+                        foreach(var elem in dict)
+                        {
+                            if(elem.Value < minIndex)
+                            {
+                                ch = elem.Key;  
+                                minIndex = elem.Value;
+                            }
+                        }
+                        left = minIndex + 1;
+                        dict.Remove(ch);
+                        dict.Add(currChar, right);
+                    }
+
+                }
+
+                maxLen = Math.Max(maxLen, right - left + 1);
+
+            }
+
+            return maxLen;
+
+        }
+
+        /// <summary>
+        /// Maximum Erasure Value
+        /// https://leetcode.com/problems/maximum-erasure-value/
+        /// </summary>
+        public static int MaximumUniqueSubarray(int[] nums)
+        {
+            if (nums.Length == 0) return 0;
+            // 5,2,1,2,5,2,1,2,5
+            // ^
+            //       ^
+            //  {5, 0} {2,1} {1,2}
+            var dict = new Dictionary<int, int>();
+            var left = 0;
+            var maxValue = 0;
+            var currSum = 0;
+
+            for(int right = 0; right < nums.Length; right++)
+            {
+                var currNum = nums[right];
+                currSum += currNum;
+                
+                if(!dict.ContainsKey(currNum))
+                {
+                    // if not present in dict
+                    dict.Add(currNum, right);
+                }
+                else
+                {
+                    // if present 
+                    var index = dict[currNum];
+                    while(left <= index)
+                    {
+                        var n = nums[left];
+                        dict.Remove(n);
+                        currSum -= n;
+
+                        left++;
+                    }
+                    dict.Add(currNum, right);
+                }
+
+                maxValue = Math.Max(maxValue, currSum);
+
+            }
+
+            return maxValue;
+
+        }
+
+        /// <summary>
+        /// Longest Nice Subarray
+        /// https://leetcode.com/problems/longest-nice-subarray/
+        /// </summary>
+        public static int LongestNiceSubarray(int[] nums)
+        {
+            if (nums.Length == 0) return 0;
+            if (nums.Length == 1) return 1;
+            // 1,3,8,48,10
+            //   ^
+            //           ^
+            // maxlen 2
+            var maxlen = 0;
+            var left = 0;
+            int usedBits = 0;
+
+            for (int right = 0; right < nums.Length; right++)
+            {
+                while ((usedBits & nums[right]) != 0)
+                {
+                    usedBits = usedBits ^ nums[left];
+                    left++;
+                }
+
+                // add current number to the window
+                usedBits = usedBits | nums[right];
+
+                maxlen = Math.Max(maxlen, right - left + 1);
+
+            }
+
+            return maxlen;
+
         }
 
         /// <summary>
@@ -280,6 +459,72 @@ namespace AlgoMonster.Arrays.SlidingWindow
             }
 
             return false;
+        }
+
+        /// <summary>
+        /// TO DO
+        /// https://leetcode.com/problems/minimum-window-substring/
+        /// Input: s = "ADOBECODEBANC", t = "ABC"
+        /// Output: "BANC"
+        /// Explanation: The minimum window substring "BANC" includes 'A', 'B', and 'C' from string t.
+        /// </summary>
+        public static string MinWindow(string s, string t)
+        {
+            // ABC
+            // ADOBECODEBANC
+            // ^
+            //      ^
+            // {A, 1}, {D,1}, {o,1}, {b,1}, {e,1}
+            var left = 0;
+            var right = 0;
+            var dict = new Dictionary<char, int>();
+            var sArr = s.ToCharArray();
+
+            var hash = new HashSet<char>();
+            foreach(var ch in t)
+            {
+                hash.Add(ch);
+            }
+
+            while(left < right && right < s.Length)
+            {
+                // check if all chars in t are present in dict
+                // if so, we found one option
+                // add that option to semi-result
+                if(AreAllCharsPresentinDictionary())
+                {
+                    // found one combination
+                    // add this to semi result set
+                }
+                
+
+                // char that we want in s
+                if(hash.Contains(sArr[left]))
+                {
+                    if (!dict.ContainsKey(sArr[left]))
+                    {
+                        dict.Add(sArr[left], left);
+                    }
+                    else
+                    {
+                        continue;
+                    }
+                }
+
+                right++;
+            }
+
+
+            bool AreAllCharsPresentinDictionary()
+            {
+                foreach(var c in hash)
+                {
+                    if (!dict.ContainsKey(c)) return false;
+                }
+                return true;
+            }
+
+            return "";
         }
     }
 }

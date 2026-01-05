@@ -8,6 +8,7 @@ using AlgoMonster.Search;
 using AlgoMonster.RecursionAndBacktracking;
 using AlgoMonster.Graphs.TopologicalSort;
 using AlgoMonster.Arrays.HashSet;
+using AlgoMonster.Arrays.TwoPointers;
 
 
 Console.WriteLine("Start the beautiful challenege..");
@@ -87,6 +88,12 @@ Console.WriteLine("Start the beautiful challenege..");
 
 //var res = Array_HastSet.ContainsNearbyDuplicate([1, 2, 3, 1], 3);
 
-var res = Backtracing_Pruning.GenerateParenthesis(3);
+//var res = Backtracing_Pruning.GenerateParenthesis(3);
+
+//var res = SlidingWindow.LengthOfLongestSubstringTwoDistinct("abcabcabc");
+
+//var res = SlidingWindow.MaximumUniqueSubarray([5, 2, 1, 2, 5, 2, 1, 2, 5]);
+
+var res = SameDirection.LongestNiceSubarray([1, 3, 8, 48, 10]);
 
 Console.WriteLine("Challenge accomplished. You rock!");

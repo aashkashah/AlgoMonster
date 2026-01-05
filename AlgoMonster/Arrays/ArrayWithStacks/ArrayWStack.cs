@@ -15,8 +15,6 @@ namespace AlgoMonster.Arrays.ArrayWithStacks
         /// Output: "leetcode"
         /// Explanation: In the first step, either you choose i = 1 or i = 2, both will result "leEeetcode" to be reduced to "leetcode"
         /// </summary>
-        /// <param name="s"></param>
-        /// <returns></returns>
         public string MakeGood(string s)
         {
             // leEeetCode
@@ -50,14 +48,12 @@ namespace AlgoMonster.Arrays.ArrayWithStacks
 
         /// <summary>
         /// Decode String
-        /// https://leetcode.com/problems/decode-string/description/?envType=problem-list-v2&envId=stack
+        /// https://leetcode.com/problems/decode-string/description/
         /// Input: s = "3[a2[c]]"
         /// Output: "accaccacc"
         /// Input: s = "2[abc]3[cd]ef"
         /// Output: "abcabccdcdcdef"
         /// </summary>
-        /// <param name="s"></param>
-        /// <returns></returns>
         public string DecodeString(string s)
         {
             // todo - needs fix
@@ -152,6 +148,7 @@ namespace AlgoMonster.Arrays.ArrayWithStacks
                 if (char.IsDigit(c))
                 {
                     // build multi-digit number
+                    // c - '0' just converts char to int
                     k = k * 10 + (c - '0');
                 }
                 else if (c == '[')
@@ -184,10 +181,8 @@ namespace AlgoMonster.Arrays.ArrayWithStacks
 
         /// <summary>
         /// Baseball game
-        /// https://leetcode.com/problems/baseball-game/description/?envType=problem-list-v2&envId=stack
+        /// https://leetcode.com/problems/baseball-game/description
         /// </summary>
-        /// <param name="operations"></param>
-        /// <returns></returns>
         public int CalPoints(string[] operations)
         {
             var stack = new Stack<int>();
@@ -222,6 +217,41 @@ namespace AlgoMonster.Arrays.ArrayWithStacks
                 ans += stack.Pop();
             }
             return ans;
+        }
+
+        /// <summary>
+        /// Crwaler Log Folder
+        /// https://leetcode.com/problems/crawler-log-folder/
+        /// Input: logs = ["d1/","d2/","../","d21/","./"]
+        /// Output: 2
+        /// </summary>
+        public int MinOperations(string[] logs)
+        {
+            if (logs.Count() == 0) return 0;
+
+            var stack = new Stack<string>();
+
+            for (int i = 0; i < logs.Length; i++)
+            {
+                var currOperation = logs[i];
+
+                if(currOperation == "../")
+                {
+                    if (stack.Count > 0) stack.Pop();
+                }
+                else if (currOperation == "./")
+                {
+                    continue;
+                }
+                else
+                {
+                    // x/ operation -- go onto child folder
+                    stack.Push(currOperation);
+                }
+
+            }
+
+            return stack.Count;
         }
 
 
