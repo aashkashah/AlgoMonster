@@ -166,5 +166,56 @@ namespace AlgoMonster.Tree._5.Level_Order_BFS
             return res;
         }
 
+        /// <summary>
+        /// https://leetcode.com/problems/maximum-level-sum-of-a-binary-tree/
+        /// </summary>
+        public static int MaxLevelSum(TreeNode root)
+        {
+            // Q = {7, -8}
+            // currSum = -1
+            // lvl= 3
+            // maximal = 7
+            // levelOfMax = 2
+
+            if (root == null) return 0;
+            var currLevel = 0;
+            var maximal = int.MinValue;
+            var maximalLvl = 1;
+
+            var queue = new Queue<TreeNode>();
+            queue.Enqueue(root);
+
+            while (queue.Count > 0) // q = {7, -8}
+            {
+                currLevel++;  // 1, 2, 3
+                var lvlNodeCount = queue.Count; // 1, 2
+                var currSum = 0;
+
+                for (int i = 0; i < lvlNodeCount; i++)
+                {
+                    var curr = queue.Dequeue(); // 0
+                    currSum += curr.val; // 7
+
+                    if (curr.left != null)
+                    {
+                        queue.Enqueue(curr.left);
+                    }
+
+                    if (curr.right != null)
+                    {
+                        queue.Enqueue(curr.right);
+                    }
+                }
+
+                if (currSum > maximal)
+                {
+                    maximal = currSum; // 7
+                    maximalLvl = currLevel; // 2
+                }
+            }
+
+            return maximalLvl;
+        }
+
     }
 }

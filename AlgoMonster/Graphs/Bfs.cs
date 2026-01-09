@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.Design.Serialization;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
@@ -91,6 +92,47 @@ namespace AlgoMonster.Grid
 
         private static void BfsSimilarSentences(string source, HashSet<string> abj, string dest)
         {
+
+        }
+
+        public static bool CanVisitAllRooms(List<List<int>> rooms)
+        {
+            //// 
+            //// hash = {}
+            //var keys = new HashSet<int>() { 0 };
+            //var index = 0;
+
+            //foreach (var roomKeys in rooms)
+            //{
+            //    if (!keys.Contains(index))
+            //        return false;
+
+            //    foreach(var key in roomKeys)
+            //    {
+            //        if (!keys.Contains(key)) keys.Add(key);
+            //    }
+            //}
+
+            //return true;
+
+            int n = rooms.Count;
+            var visited = new HashSet<int>();
+            var q = new Queue<int>();
+
+            visited.Add(0);
+            q.Enqueue(0);
+
+            while (q.Count > 0)
+            {
+                int room = q.Dequeue();
+                foreach(int key in rooms[room])
+                {
+                    if (visited.Add(key))   // true only if it was new
+                        q.Enqueue(key);
+                }
+            }
+
+            return visited.Count == n;
 
         }
 

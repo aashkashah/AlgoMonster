@@ -60,7 +60,7 @@ namespace AlgoMonster.Arrays.HashSet
 
             var dict = new Dictionary<int, List<int>>();
 
-            for(int i = 0; i < nums.Length; i++)
+            for (int i = 0; i < nums.Length; i++)
             {
                 if (dict.TryGetValue(nums[i], out var indices))
                 {
@@ -73,16 +73,16 @@ namespace AlgoMonster.Arrays.HashSet
                 }
             }
 
-            foreach(var item in dict)
+            foreach (var item in dict)
             {
-               if(item.Value.Count >= 2)
+                if (item.Value.Count >= 2)
                 {
                     for (int i = 0; i <= item.Value.Count - 2; i++)
                     {
                         if (item.Value[i + 1] - item.Value[i] <= k) return true;
                     }
                 }
-                
+
             }
 
             return false;
@@ -100,17 +100,17 @@ namespace AlgoMonster.Arrays.HashSet
     /// Output
     /// [null, true, true, false, false, false, true]
     /// </summary>
-    public class Logger 
+    public class Logger
     {
         private Dictionary<string, int> log;
         public Logger()
         {
             log = new Dictionary<string, int>();
         }
-        
+
         public bool ShouldPrintMessage(int timestamp, string message)
         {
-            if(!log.ContainsKey(message))
+            if (!log.ContainsKey(message))
             {
                 this.log.Add(message, timestamp);
                 return true;
@@ -118,7 +118,7 @@ namespace AlgoMonster.Arrays.HashSet
 
             log.TryGetValue(message, out int oldTimeStamp);
 
-            if(timestamp - oldTimeStamp >= 10)
+            if (timestamp - oldTimeStamp >= 10)
             {
                 log.Add(message, timestamp);
                 return true;
@@ -137,23 +137,23 @@ namespace AlgoMonster.Arrays.HashSet
             // add
             //   ^
             // {e,s}, {g,d} 
-            if(s.Length != t.Length) return false;
+            if (s.Length != t.Length) return false;
 
             var dict = new Dictionary<char, char>();
-            
-            for(int i =0; i <s.Length; i++)
+
+            for (int i = 0; i < s.Length; i++)
             {
                 // if same
                 if (s[i] != t[i])
                 {
                     if (dict.TryGetValue(s[i], out var mapp))
                     {
-                        if(mapp != t[i]) return false;
+                        if (mapp != t[i]) return false;
                     }
                     else
                     {
                         dict.Add(s[i], t[i]);
-                    }   
+                    }
                 }
 
             }
@@ -181,12 +181,12 @@ namespace AlgoMonster.Arrays.HashSet
 
             foreach (var n in nums)
             {
-                if(dict.TryGetValue(n, out var num))
+                if (dict.TryGetValue(n, out var num))
                 {
                     num++;
                     dict[n] = num;
 
-                    if(num > maxCount)
+                    if (num > maxCount)
                     {
                         maxCount = num;
                         maxNumber = n;
@@ -196,7 +196,7 @@ namespace AlgoMonster.Arrays.HashSet
                 {
                     dict.Add(n, 1);
 
-                    if(1 > maxCount)
+                    if (1 > maxCount)
                     {
                         maxCount = 1;
                         maxNumber = n;
@@ -219,6 +219,100 @@ namespace AlgoMonster.Arrays.HashSet
             return nums[nums.Length / 2];
         }
 
+        public IList<IList<int>> FindDifference(int[] nums1, int[] nums2)
+            {
+                // 1 2 3
+                // {1 3}
+                // 2 4 6
+                // {4 6}
+                var hash1 = new HashSet<int>();
+                var hash2 = new HashSet<int>();
+                var res = new List<IList<int>>();
 
+                foreach (var el in nums1)
+                {
+                    if (!hash1.Contains(el))
+                    {
+                        hash1.Add(el);
+                    }
+                }
+
+                foreach (var el in nums2)
+                {
+                    if (!hash2.Contains(el))
+                    {
+                        hash2.Add(el);
+                    }
+                }
+
+                foreach (var el in nums2)
+                {
+                    if (hash1.Contains(el))
+                    {
+                        hash1.Remove(el);
+                    }
+                }
+
+                foreach (var el in nums1)
+                {
+                    if (hash2.Contains(el))
+                    {
+                        hash2.Remove(el);
+                    }
+                }
+
+                var list = new List<int>();
+                foreach (var el in hash1)
+                {
+                    list.Add(el);
+                }
+                res.Add(list);
+                list.Clear();
+                foreach (var el in hash2)
+                {
+                    list.Add(el);
+                }
+                res.Add(list);
+
+                return res;
+
+            }
+
+        public static int[,] FindPairsWithGivenDifference(int[] arr, int k)
+        {
+            // your code goes here
+            // 0, -1, -2, 2, 1
+            // {-1}, {1}, {2}, {-2}, {-1} 
+
+            var hash = new HashSet<int>();
+            var res = new List<int[]>();
+
+            for (int i = 0; i < arr.Length; i++)
+            {
+                if (!hash.Contains(arr[i]))
+                {
+                    hash.Add(arr[i]);
+                }
+            }
+
+            for (int i = 0; i < arr.Length; i++)
+            {
+                var potentialPair = arr[i] - k;
+                if (hash.Contains(potentialPair))
+                {
+                    res.Add(new int[] { arr[i], potentialPair });
+                }
+            }
+
+            int[,] result = new int[res.Count, 2];
+            for(int i =0; i < res.Count; i++)
+            {
+                result[i, 0] = res[i][0];
+                result[i,1] = res[i][1];
+            }
+
+            return result;
+
+        }
     }
 }

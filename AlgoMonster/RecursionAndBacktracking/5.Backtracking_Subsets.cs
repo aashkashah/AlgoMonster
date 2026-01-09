@@ -5,9 +5,12 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace AlgoMonster.RecursionAndBacktracking
-{
+{    
     public static class Backtracking_Subsets
     {
+        static IList<IList<int>> _subsetsWithDups = new List<IList<int>>();
+
+
         /// <summary>
         /// Input: { "Jane", "Marty", "Joe", "Susan" }
         /// </summary>
@@ -102,27 +105,49 @@ namespace AlgoMonster.RecursionAndBacktracking
             // 2) exclude nums[idx] (just move on without adding)
             GenerateSubsetsHelperForwardIndx(nums, indx + 1, subset, subsets);
         }
+        
 
-        //public static int SubsetXORSum(int[] nums)
-        //{
+        public static IList<IList<int>> SubsetsWithDup(int[] nums)
+        {
+            SubsetsWithDupHelper(0, nums, new List<int>());
+            return _subsetsWithDups;
+        }
 
-        //}
+        private static void SubsetsWithDupHelper(int index, int[] nums, List<int> curr)
+        {
+            // 1 2 2
+            // []
+            // [1]
+            // [1, 2]
+            // [1, 2]
+            // [1, 2, 2]
+            // [2], [2, 2]
+            // [2]
 
-        //private static int SubsetXORSumHelper(int[] nums)
-        //{
-        //    // return condition
+            // exit condition
+            if (index == nums.Length)
+            {
+                if(!_subsetsWithDups.Contains(curr))
+                    _subsetsWithDups.Add(new List<int>(curr));
+                return;
+            }
 
-        //    // backtracking
 
-        //    // choose
+            // recurse
+            // include
+            var elem = nums[index];
+            curr.Add(elem);
 
-        //    // explore
+            // explore
+            SubsetsWithDupHelper(index + 1, nums, curr);
 
-        //    // undo choose
-        //}
+            // exclude = backtrack
+            curr.RemoveAt(curr.Count - 1);
+            if (index != 0 && nums[index] != nums[index -1])
+            SubsetsWithDupHelper(index + 1, nums, curr);
+        }
 
 
     }
-    
 
 }

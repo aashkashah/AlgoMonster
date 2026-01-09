@@ -9,6 +9,7 @@ using AlgoMonster.RecursionAndBacktracking;
 using AlgoMonster.Graphs.TopologicalSort;
 using AlgoMonster.Arrays.HashSet;
 using AlgoMonster.Arrays.TwoPointers;
+using AlgoMonster.LinkedList;
 
 
 Console.WriteLine("Start the beautiful challenege..");
@@ -94,6 +95,15 @@ Console.WriteLine("Start the beautiful challenege..");
 
 //var res = SlidingWindow.MaximumUniqueSubarray([5, 2, 1, 2, 5, 2, 1, 2, 5]);
 
-var res = SameDirection.LongestNiceSubarray([1, 3, 8, 48, 10]);
+//var res = SameDirection.LongestNiceSubarray([1, 3, 8, 48, 10]);
+
+//var res = BinarySearchGreedily.ShipWithinDays([1, 2, 3, 4, 5, 6, 7, 8, 9, 10], 5);
+
+//var res = Backtracking_Subsets.SubsetsWithDup([1, 2, 2]);
+
+var res = Bfs.CanVisitAllRooms(new List<List<int>>() 
+{
+    new List<int>() {1 ,3 }, new List<int>() {3, 0, 1 }, new List<int>() {2 }, new List<int>() {0 }
+});
 
 Console.WriteLine("Challenge accomplished. You rock!");

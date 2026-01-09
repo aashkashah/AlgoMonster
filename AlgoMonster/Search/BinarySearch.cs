@@ -1,15 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics.Metrics;
-using System.Linq;
-using System.Net.NetworkInformation;
-using System.Reflection;
-using System.Security.Cryptography;
-using System.Text;
-using System.Threading.Tasks;
-using static System.Runtime.InteropServices.JavaScript.JSType;
-
-namespace AlgoMonster.Search
+﻿namespace AlgoMonster.Search
 {
     public static class BinarySearch
     {
@@ -107,5 +96,22 @@ namespace AlgoMonster.Search
 
             return left;
         }
+
+
+        /// <summary>
+        /// Find Peak element
+        /// https://leetcode.com/problems/find-peak-elemen
+        /// </summary>
+        public static int FindPeakElement(int[] nums)
+        {
+            // indx = 1
+            // 1,2,1,3,5,6,4
+            //  ^
+            //       ^  
+
+            return 0;
+
+        }
+
     }
 }

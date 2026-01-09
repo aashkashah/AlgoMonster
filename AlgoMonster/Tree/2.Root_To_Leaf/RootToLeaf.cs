@@ -5,6 +5,8 @@ namespace AlgoMonster.Tree._2.Root_To_Leaf
     public static class RootToLeaf
     {
         static int _SumRootToLeaf = 0;
+        static int _goodNodes = 0;
+
         /// <summary>
         ///            6
         ///     1            2
@@ -60,6 +62,32 @@ namespace AlgoMonster.Tree._2.Root_To_Leaf
 
             SumRootToLeafHelper(node.left, pathSum);
             SumRootToLeafHelper(node.right, pathSum);
+        }
+
+        /// <summary>
+        /// Count Good Nodes in Binary Tree
+        /// https://leetcode.com/problems/count-good-nodes-in-binary-tree/description/
+        /// </summary>
+        public static int GoodNodes(TreeNode root)
+        {
+            if (root == null) return _goodNodes;
+            GoodNodesHelper(root, int.MinValue);
+            return _goodNodes;
+        }
+
+        private static void GoodNodesHelper(TreeNode node, int maxSofar) // 5
+        {
+            // return condition
+            if (node == null) return;
+
+            // check
+            if (node.val >= maxSofar)
+            {
+                _goodNodes++; // 4
+                maxSofar = node.val; // 5
+            }
+            GoodNodesHelper(node.left, maxSofar);
+            GoodNodesHelper(node.right, maxSofar);
         }
     }
 }

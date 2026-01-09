@@ -72,5 +72,30 @@
 
             return null;
         }
+
+        public static ListNode OddEvenList(ListNode head)
+        {
+            // 2 1 3 5 6 4 7
+            // 2 3 6 7 1 5 4
+
+            // 2 -> 3 -> 6 -> 7
+            // evenPtr = 1 -> 5 -> 4 
+
+            var even = head.next;
+            var odd = head;
+            var evenHead = even;
+
+            while (odd.next != null)
+            {
+                var temp = odd.next;
+                odd.next = odd.next.next;
+
+                even = temp;
+                even.next = odd.next;
+
+            }
+            odd.next = evenHead;
+            return head;
+        }
     }
 }
