@@ -1,5 +1,8 @@
 ﻿namespace AlgoMonster.Arrays.SlidingWindow
 {
+    /// <summary>
+    /// Sliding window = pointers define the window, not the data structure.
+    /// </summary>
     public static class SlidingWindow
     {
         /// <summary>
@@ -16,30 +19,15 @@
             // max = 3
             // curr sum = 3
             // (c, 5) (b,7) (a,6) (e, 8)
+
             var left = 0;
             var charArr = str.ToCharArray();
-            //var dict = new Dictionary<char, int>();
             var window = new HashSet<char>();
             var maxSum = 0;
-            //var currSum = 0;
 
-            // abccabcabcc
             for (int right = 0; right < charArr.Length; right++)
             {
-                var currChar = charArr[right]; // c , ind = 2
-                //if(!dict.ContainsKey(currChar))
-                //{
-                //    dict.Add(currChar, right); // (a,0), (b,1). (c,3)
-                //    currSum++; // 3
-                //    if (currSum > maxSum) maxSum = currSum; // max = 3
-                //}
-                //else // 
-                //{
-                //    // present then remove from dict and move left ptr to dict inx + 1
-                //    var dictElemIndex = dict[currChar]; 
-                //    left = dictElemIndex + 1; // left 3
-                //    dict[currChar] = right; // (c, 3)
-                //}
+                var currChar = charArr[right]; 
 
                 while (window.Contains(currChar))
                 {
@@ -51,6 +39,35 @@
             }
 
             return maxSum;
+        }
+
+        public static int LengthOfLongestSubstringDictionary(string s)
+        {
+            // abcabcbb
+            // ^
+            //  ^
+            // dict =  (b,6), (c,5)
+            // curr = 2
+            // max = 3
+            var max = 0;
+            var lastseen = new Dictionary<char, int>();
+            int left = 0;
+
+            for(int right =0; right < s.Length; right++)
+            {
+                var ch = s[right];
+
+                if(lastseen.TryGetValue(ch, out int prevIndex) && prevIndex >= left)
+                {
+                    left = prevIndex + 1;
+                }
+
+                // update lastseen index for ch
+                lastseen[ch] = right;
+                max = Math.Max(max, right - left + 1);
+            }
+
+            return max;
         }
 
         /// <summary>
@@ -526,5 +543,161 @@
 
             return "";
         }
+
+        public static int MaxVowels(string s, int k)
+        {
+            // abciiidef
+            //       ^
+            //         ^
+            // dict = {(e,1)}
+            // maxSum = 3
+            // currSum = 1
+
+            if (s.Length < k) return 0;
+
+            var currSum = 0;
+            var dict = new Dictionary<char, int>();
+
+            // init window
+            for (int i = 0; i < k; i++)
+            {
+                if (IsVowel(s[i]))
+                {
+                    if (dict.TryGetValue(s[i], out var count))
+                    {
+                        dict[s[i]]++;
+                    }
+                    else
+                    {
+                        dict.Add(s[i], 1);
+                    }
+                    currSum++;
+                }
+            }
+
+            var maxSum = currSum;
+
+            for (int i = k; i < s.Length; i++)
+            {
+                var currChar = s[i];
+                if (IsVowel(currChar))
+                {
+                    if (dict.ContainsKey(currChar))
+                    {
+                        dict[currChar]++;
+                        
+                    }
+                    else
+                    {
+                        dict.Add(currChar, 1);
+                    }
+                    currSum++;
+                }
+                var prev = s[i - k];
+                if (dict.TryGetValue(prev, out var count))
+                {
+                    if (count == 1) dict.Remove(prev);
+                    else dict[prev]--;
+                    currSum--;
+                }
+
+                maxSum = Math.Max(maxSum, currSum);
+            }
+            return maxSum;
+
+        }
+
+        private static bool IsVowel(char ch)
+        {
+            var c = char.ToLower(ch);
+            if (c == 'a' || c == 'e' || c == 'i' || c == 'o' || c == 'u')
+            {
+                return true;
+            }
+            return false;
+        }
+
+        /// <summary>
+        /// Max Consecutive Ones III
+        /// https://leetcode.com/problems/max-consecutive-ones-iii
+        /// </summary>
+        public static int LongestOnes(int[] nums, int k)
+        {
+            // [0,0,1,1,0,0,1,1,1,0,1,1,0,0,0,1,1,1,1]
+            int left = 0;
+            int zeroSoFar = 0;
+            var lastZeroIndex = -1;
+            var maxlen = 0;
+
+            for (int right = 0; right < nums.Length; right++)
+            {
+                var cur = nums[right];
+
+                // non zero
+                if (cur != 0)
+                {
+                    // continue
+                }
+                else
+                {
+                    // zero
+                    if (zeroSoFar < k)
+                    {
+                        // if zeroSoFar < k
+                        // use zeroSoFar .. continue
+                        zeroSoFar++;
+                        lastZeroIndex = right;
+                    }
+                    else
+                    {
+                        // zeroSoFar == k
+                        // find new left index .. to accomodate new zero
+                        // use lastZeroIndex + 1?
+                        // reset the zero count 
+                        left = lastZeroIndex + 1;
+                        if (nums[left] == 0)
+                            zeroSoFar = 1;
+                        else
+                            zeroSoFar = 0;
+
+                    }
+                }
+
+                maxlen = Math.Max(maxlen, right - left + 1);
+            }
+
+            return maxlen;
+        }
+
+        /// <summary>
+        /// Longest Subarray of 1's After Deleting One Element
+        /// https://leetcode.com/problems/longest-subarray-of-1s-after-deleting-one-element
+        /// </summary>
+        public static int LongestSubarray(int[] nums)
+        {
+            //[0,1,1,1,0,1,1,0,1]
+
+            var zero = 0;
+            int left = 0;
+            int maxlen = 0;
+
+            for (int right = 0; right < nums.Length; right++)
+            {
+                var cur = nums[right];
+                if (cur == 0) zero++;
+
+                while (zero > 1)
+                {
+                    if (nums[left] == 0) zero--;
+                    left++;
+                }
+
+                maxlen = Math.Max(maxlen, right - left);
+            }
+
+            return maxlen;
+
+        }
+
     }
 }

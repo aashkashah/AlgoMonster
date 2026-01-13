@@ -10,6 +10,7 @@ using AlgoMonster.Graphs.TopologicalSort;
 using AlgoMonster.Arrays.HashSet;
 using AlgoMonster.Arrays.TwoPointers;
 using AlgoMonster.LinkedList;
+using AlgoMonster.Arrays.Matrix;
 
 
 Console.WriteLine("Start the beautiful challenege..");
@@ -101,9 +102,23 @@ Console.WriteLine("Start the beautiful challenege..");
 
 //var res = Backtracking_Subsets.SubsetsWithDup([1, 2, 2]);
 
-var res = Bfs.CanVisitAllRooms(new List<List<int>>() 
-{
-    new List<int>() {1 ,3 }, new List<int>() {3, 0, 1 }, new List<int>() {2 }, new List<int>() {0 }
-});
+//var res = Bfs.CanVisitAllRooms(new List<List<int>>() 
+//{
+//    new List<int>() {1 ,3 }, new List<int>() {3, 0, 1 }, new List<int>() {2 }, new List<int>() {0 }
+//});
+
+//var res = Array_Matrix.SpiralOrder([[1, 2, 3], [4, 5, 6], [7, 8, 9]]);
+
+//var res = MediumHeapQuestions.FindKthLargest([3, 2, 3, 1, 2, 4, 5, 5, 6], 4);
+
+//var res = SlidingWindow.MaxVowels("abciiidef", 3);
+
+//var res = DP_Sequence.NumDecodings("1226");
+
+//var res = SlidingWindow.LengthOfLongestSubstringDictionary("pwwkew");
+
+//var res = SlidingWindow.LongestOnes([0, 0, 1, 1, 0, 0, 1, 1, 1, 0, 1, 1, 0, 0, 0, 1, 1, 1, 1], 3);
+
+var res = SlidingWindow.LongestSubarray([0, 1, 1, 1, 0, 1, 1, 0, 1]);
 
 Console.WriteLine("Challenge accomplished. You rock!");

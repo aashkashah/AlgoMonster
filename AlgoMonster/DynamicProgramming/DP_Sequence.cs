@@ -62,5 +62,39 @@
 
             return dp[n];
         }
+
+        public static int NumDecodings(string s)
+        {
+
+            if (string.IsNullOrEmpty(s)) return 0;
+            var memo = new int?[s.Length + 1];
+            return NumDecodingsHelper(s, 0, memo);
+
+        }
+
+        private static int NumDecodingsHelper(string s, int indx, int?[] memo)
+        {
+            // return conditions
+            if (s.Length == indx) return 1;
+            // handle 0 case
+            if (s[indx] == '0') return 0;
+            if (memo[indx].HasValue) return memo[indx].Value;
+
+
+            // backtracking
+            // single digit
+            int ways = NumDecodingsHelper(s, indx + 1, memo);
+
+            // double digits exploration
+            if (indx + 1 < s.Length)
+            {
+                int two = (s[indx] - '0') * 10 + (s[indx + 1] - '0');
+                if (two >= 10 && two <= 26)
+                    ways += NumDecodingsHelper(s, indx + 2, memo);
+            }
+
+            memo[indx] = ways;
+            return ways;
+        }
     }
 }

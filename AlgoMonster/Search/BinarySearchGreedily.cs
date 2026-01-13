@@ -58,7 +58,8 @@ namespace AlgoMonster.Search
                     usedDays++;
                     load = w; // new day load
 
-                    if (usedDays > days) return false;                }
+                    if (usedDays > days) return false;               
+                }
             }
 
             return true;

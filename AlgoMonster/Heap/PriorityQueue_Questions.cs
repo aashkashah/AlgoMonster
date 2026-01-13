@@ -49,5 +49,24 @@
 
             return allocator.Count;
         }
+
+        public static int FindKthLargest(int[] nums, int k)
+        {
+            var heap = new PriorityQueue<int, int>();
+            var hash = new HashSet<int>();
+
+
+            foreach (var elem in nums)
+            {
+                heap.Enqueue(elem, -elem);
+            }
+
+            for (int i = 1; i < k; i++)
+            {
+                heap.Dequeue();
+            }
+
+            return heap.Dequeue();
+        }
     }
 }
