@@ -64,14 +64,10 @@ namespace AlgoMonster.Tree._3.Bottom_Up
             var right = BalancedTreeHelper(node.right);
             if(right == -1) return -1;
 
-            if (Math.Abs(left - right) > 2) return -1;
+            if (Math.Abs(left - right) > 1) return -1;
 
             return 1 + Math.Max(left, right);
         }
-
-        /// <summary>
-        /// Given the root of a binary tree, return the length of the diameter of the tree.
-
 
         /// </summary>
         /// Given the root of a binary tree, return the length of the diameter of the tree.
@@ -106,7 +102,7 @@ namespace AlgoMonster.Tree._3.Bottom_Up
 
         /// <summary>
         ///  Maximum Depth of N-ary Tree
-        ///  https://leetcode.com/problems/maximum-depth-of-n-ary-tree/description/?envType=problem-list-v2&envId=tree
+        ///  https://leetcode.com/problems/maximum-depth-of-n-ary-tree/description
         /// </summary>
         /// <param name="root"></param>
         /// <returns></returns>
@@ -141,7 +137,7 @@ namespace AlgoMonster.Tree._3.Bottom_Up
 
         /// <summary>
         /// Binary Tree Maximum Path Sum
-        /// https://leetcode.com/problems/binary-tree-maximum-path-sum/description/?envType=problem-list-v2&envId=tree
+        /// https://leetcode.com/problems/binary-tree-maximum-path-sum/description
         /// 
         /// Definition of a path (from the problem)
         /// A path is a sequence of nodes where each pair of adjacent nodes has an edge connecting them.
@@ -180,13 +176,20 @@ namespace AlgoMonster.Tree._3.Bottom_Up
 
         /// <summary>
         /// Longest Univalue Path
-        /// https://leetcode.com/problems/longest-univalue-path/description/?envType=problem-list-v2&envId=tree
+        /// https://leetcode.com/problems/longest-univalue-path/description
         /// </summary>
         /// <param name="root"></param>
         /// <returns></returns>
         public static int LongestUnivaluePath(TreeNode node)
         {
-            // this is wrong, child value needs to match with parent.val 
+            // univalue path == children's value == parent value
+            LongestUnivaluePathHelper(node, -1);
+            return _MaxUniValuePath;
+        }
+
+        private static int LongestUnivaluePathHelper(TreeNode node, int parent)
+        {
+            if (node == null) return 0;
 
             // return value
             if (node == null) return 0;
@@ -197,7 +200,8 @@ namespace AlgoMonster.Tree._3.Bottom_Up
 
             _MaxUniValuePath = Math.Max(_MaxUniValuePath, left + right);
 
-            return Math.Max(left, right) + 1;
+            // if value of parent and child same, return that path, otherwise 0
+            return node.val == parent ? Math.Max(left, right) + 1 : 0;
         }
     }
 }

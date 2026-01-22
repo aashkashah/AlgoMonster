@@ -17,9 +17,6 @@
         /// Input: nums = [4,5,6,7,0,1,2], target = 3
         /// Output: -1
         /// </summary>
-        /// <param name="nums"></param>
-        /// <param name="target"></param>
-        /// <returns></returns>
         public static int SiftedSearchArray(int[] nums, int target)
         {
             // 4 5 6 7 8 9 0 1 2 target = 9

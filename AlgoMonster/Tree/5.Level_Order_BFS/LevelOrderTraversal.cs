@@ -24,9 +24,9 @@ namespace AlgoMonster.Tree._5.Level_Order_BFS
             // level length
             // while, queue != null
             // deque current
-            //  level order 
-            //  enqueue children, inner loop count remains same
-            //  append each chil dequeued to list
+            // level order 
+            // enqueue children, inner loop count remains same
+            // append each child dequeued to list
             // when inner loop ends, add that list to top result
 
             if (root == null)

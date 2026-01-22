@@ -7,17 +7,15 @@ namespace AlgoMonster.Tree._7.Tree_Construction
     {
         /// <summary>
         ///  Maximum Binary Tree
-        /// https://leetcode.com/problems/maximum-binary-tree/?envType=problem-list-v2&envId=stack
+        /// https://leetcode.com/problems/maximum-binary-tre
         /// Input: nums = [3,2,1,6,0,5]
         /// Output: [6, 3, 5, null, 2, 0, null, null, 1]
-        ///           6
+        ///            6
         ///     3            8
         /// 1       5     7      10
         ///                   11    15 
         /// Input [6 3 1 5 8 7 10 11 15]
         /// </summary>
-        /// <param name="nums"></param>
-        /// <returns></returns>
         public static TreeNode ConstructMaximumBinaryTree(int[] nums)
         {  
             var rootNode = ConstructMaximumBinaryTreeHelper(nums, 0, nums.Length - 1);
@@ -39,7 +37,6 @@ namespace AlgoMonster.Tree._7.Tree_Construction
                 if (nums[i] > nums[maxIdx])
                     maxIdx = i;
             }
-            
 
            var root = new TreeNode(nums[maxIdx]);
 
@@ -83,10 +80,8 @@ namespace AlgoMonster.Tree._7.Tree_Construction
 
         /// <summary>
         /// Convert Sorted Array to Binary Search Tree
-        /// https://leetcode.com/problems/convert-sorted-array-to-binary-search-tree/description/?envType=problem-list-v2&envId=tree
+        /// https://leetcode.com/problems/convert-sorted-array-to-binary-search-tree
         /// </summary>
-        /// <param name="nums"></param>
-        /// <returns></returns>
         public static TreeNode SortedArrayToBST(int[] nums)
         {
             // -10 -3 0 1 2 5 9
@@ -116,13 +111,10 @@ namespace AlgoMonster.Tree._7.Tree_Construction
 
         /// <summary>
         /// Subtree of Another Tree
-        /// https://leetcode.com/problems/subtree-of-another-tree/?envType=problem-list-v2&envId=tree
+        /// https://leetcode.com/problems/subtree-of-another-tree
         /// Input: root = [3,4,5,1,2], subRoot = [4,1,2]
         /// Output: true
         /// </summary>
-        /// <param name="root"></param>
-        /// <param name="subRoot"></param>
-        /// <returns></returns>
         public static bool IsSubtree(TreeNode root, TreeNode subRoot)
         {
             // find root of subroot in parent tree

@@ -618,6 +618,63 @@
         }
 
         /// <summary>
+        /// Max Consecutive Ones II
+        /// https://leetcode.com/problems/max-consecutive-ones-ii
+        /// </summary>
+
+        public static int FindMaxConsecutiveOnes(int[] nums)
+        {
+            // 1 0 1 1 0
+            //     ^  
+            //         ^ 
+            // zero = 0
+            // max = 4
+            // curr = 3
+            // last seen index = 1
+            // left = 2
+
+            // 1 0 1 1 0 1
+            //     ^ 
+            //           ^
+            // zero = 0
+            // max = 4 
+            // curr = 3 right - left
+            // lastseen = 4
+
+            var left = 0;
+            var zeroused = 0;
+            var lastseen = -1; // todo
+            var max = int.MinValue;
+
+            for (int right = 0; right < nums.Length; right++)
+            {
+                if (nums[right] == 1)
+                {
+                    //right++;
+                }
+                else if (nums[right] == 0)
+                {
+                    if (zeroused == 0)
+                    {
+                        lastseen = right;
+                        zeroused++;
+                        //right++;
+                    }
+                    else
+                    {
+                        left = lastseen + 1;
+                        if (nums[right] != 0) zeroused = 0;
+                        else zeroused = 1;
+                    }
+                }
+
+                max = Math.Max(max, right - left + 1);
+            }
+
+            return max;
+        }
+
+        /// <summary>
         /// Max Consecutive Ones III
         /// https://leetcode.com/problems/max-consecutive-ones-iii
         /// </summary>

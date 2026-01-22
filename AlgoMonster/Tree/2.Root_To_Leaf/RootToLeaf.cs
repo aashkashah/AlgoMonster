@@ -6,6 +6,7 @@ namespace AlgoMonster.Tree._2.Root_To_Leaf
     {
         static int _SumRootToLeaf = 0;
         static int _goodNodes = 0;
+        static int _maxlen = 0;
 
         /// <summary>
         ///            6
@@ -36,7 +37,7 @@ namespace AlgoMonster.Tree._2.Root_To_Leaf
 
         /// <summary>
         /// Sum of Root To Leaf Binary Numbers
-        /// https://leetcode.com/problems/sum-of-root-to-leaf-binary-numbers/description/?envType=problem-list-v2&envId=tree
+        /// https://leetcode.com/problems/sum-of-root-to-leaf-binary-numbers/description
         /// </summary>
         public static int SumRootToLeaf(TreeNode root)
         {
@@ -88,6 +89,42 @@ namespace AlgoMonster.Tree._2.Root_To_Leaf
             }
             GoodNodesHelper(node.left, maxSofar);
             GoodNodesHelper(node.right, maxSofar);
+        }
+
+        /// <summary>
+        /// https://leetcode.com/problems/binary-tree-longest-consecutive-sequence
+        /// </summary>
+        public static int LongestConsecutive(TreeNode root)
+        {
+            LongestConsecutiveHelper(root, null, 0);
+            return _maxlen;
+        }
+
+        private static void LongestConsecutiveHelper(TreeNode p, TreeNode parent, int length)
+        {
+            if (p == null) return;
+            length = (parent != null && p.val == parent.val + 1) ? length + 1 : 1;
+            _maxlen = Math.Max(_maxlen, length);
+
+            LongestConsecutiveHelper(p.left, p, length);
+            LongestConsecutiveHelper(p.right, p, length);
+        }
+
+        /// <summary>
+        /// https://leetcode.com/problems/binary-tree-longest-consecutive-sequence-ii
+        /// </summary>
+        public int LongestConsecutive2(TreeNode root)
+        {
+
+        }
+
+        private static void LongestConsecutive2Helper(TreeNode p, TreeNode parent, int length)
+        {
+            if (p == null) return;
+
+            length 
+
+            LongestConsecutive2Helper(p.left, p, length);
         }
     }
 }

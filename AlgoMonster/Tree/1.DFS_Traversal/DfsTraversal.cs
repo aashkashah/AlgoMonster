@@ -1,6 +1,4 @@
-﻿using Microsoft.VisualBasic;
-using System.Collections.Specialized;
-using static AlgoMonster.Tree.Base.Tree;
+﻿using static AlgoMonster.Tree.Base.Tree;
 
 namespace AlgoMonster.Tree._1.DFS_Traversal
 {
@@ -11,7 +9,7 @@ namespace AlgoMonster.Tree._1.DFS_Traversal
         static int? prev = null;
         /// <summary>
         /// Sum of Left Leaves
-        /// https://leetcode.com/problems/sum-of-left-leaves/description/?envType=problem-list-v2&envId=tree
+        /// https://leetcode.com/problems/sum-of-left-leaves/description
         /// </summary>
         /// <param name="root"></param>
         /// <returns></returns>
@@ -27,8 +25,8 @@ namespace AlgoMonster.Tree._1.DFS_Traversal
                 sum += root.left.val;
             }
 
-            sum += SumOfLeftLeaves(root.left);
-            sum += SumOfLeftLeaves(root.right);
+            SumOfLeftLeaves(root.left);
+            SumOfLeftLeaves(root.right);
 
             return sum;
         }
@@ -56,7 +54,7 @@ namespace AlgoMonster.Tree._1.DFS_Traversal
 
         /// <summary>
         /// Minimum Absolute Difference in BST
-        /// https://leetcode.com/problems/minimum-absolute-difference-in-bst/description/?envType=problem-list-v2&envId=tree
+        /// https://leetcode.com/problems/minimum-absolute-difference-in-bst/description
         /// Input: root = [4,2,6,1,3]
         /// Output: 1
         /// </summary>
@@ -88,7 +86,7 @@ namespace AlgoMonster.Tree._1.DFS_Traversal
 
         /// <summary>
         /// Minimum Absolute Difference in BST
-        /// https://leetcode.com/problems/minimum-absolute-difference-in-bst/description/?envType=problem-list-v2&envId=tree
+        /// https://leetcode.com/problems/minimum-absolute-difference-in-bst/description
         /// Input: root = [4,2,6,1,3]
         /// Output: 1
         /// </summary>

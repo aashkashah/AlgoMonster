@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace AlgoMonster.Grid
 {
-    class Bfs
+    static class Bfs
     {
         public static Dictionary<int, int> BfsParents(Dictionary<int, List<int>> adj, int start)
         {
@@ -47,7 +47,7 @@ namespace AlgoMonster.Grid
         /// <param name="sentence2"></param>
         /// <param name="similarPairs"></param>
         /// <returns></returns>
-        public bool AreSentencesSimilarTwo(string[] sentence1, string[] sentence2, IList<IList<string>> similarPairs)
+        public static bool AreSentencesSimilarTwo(string[] sentence1, string[] sentence2, IList<IList<string>> similarPairs)
         {
             if(sentence1.Length != sentence2.Length) return false;
 
@@ -133,6 +133,68 @@ namespace AlgoMonster.Grid
             }
 
             return visited.Count == n;
+
+        }
+
+        /// <summary>
+        /// https://leetcode.com/problems/number-of-provinces
+        /// </summary>
+        public static int FindCircleNum(int[][] isConnected)
+        {
+
+            // 1 2 3
+            // 1 1 0  1
+            // 1 1 0  2
+            // 0 0 1  3
+
+            // city: 1 - 1, 2 - 1
+
+            // 1 2 3  
+            // 1 0 0 1
+            // 0 1 0 2
+            // 0 0 1 3
+
+            // add, every connection if reverse connection exists
+            // 
+            // adjacency list
+            // 1 -> 2 -> 4
+            // 2 -> 1 -> 5
+            // 3 -> 3
+
+            int n = isConnected.Length;
+            int components = 0;
+            bool[] visit = new bool[n];
+
+            for (int i = 0; i < n; i++)
+            {
+                if (!visit[i])
+                {
+                    components++;
+                    FindCircleNumbfs(i, isConnected, visit);
+                }
+            }
+
+            return components;
+        }
+
+        private static void FindCircleNumbfs(int node, int[][] isConnected, bool[] visit)
+        {
+            var q = new Queue<int>();
+            q.Enqueue(node);
+            visit[node] = true;
+
+            while (q.Count > 0)
+            {
+                node = q.Dequeue();
+                for (int i = 0; i < isConnected.Length; i++)
+                {
+                    if (isConnected[node][i] == 1 && !visit[i])
+                    {
+                        q.Enqueue(i);
+                        visit[i] = true;
+                    }
+                }
+            }
 
         }
 

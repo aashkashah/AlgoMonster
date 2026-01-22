@@ -1,17 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace AlgoMonster.Grid
+﻿namespace AlgoMonster.Grid
 {
     public class NumOfIslands
     {
         public class Coordinate
         {
-            int r;
-            int c;
+            public int r;
+            public int c;
 
             public Coordinate(int r, int c)
             {
@@ -41,6 +35,7 @@ namespace AlgoMonster.Grid
             var colLen = grid[0].Length;
             var visited = new int[rowLen, colLen];
             var queue = new Queue<Coordinate>();
+            var islands = 0;
 
             for(int i = 0; i < rowLen; i++)
             {
@@ -48,24 +43,50 @@ namespace AlgoMonster.Grid
                 {
                     if(grid[i][j] == 1 && visited[i, j] == 0)
                     {
-                        // pop curr elem
-                        var curr = grid[i][j];
-                        
+                        islands++;
                         queue.Enqueue(new Coordinate(i, j));
                         visited[i, j] = 1;
 
-                        // add neighbors - top bottom left right
-                        if (grid[i - 1][j] == 1) // check out of bounds
+                        while (queue.Count > 0)
                         {
-                            queue.Enqueue(new Coordinate(i - 1, j));
+                            var cor = queue.Dequeue();
+                            var r = cor.r;
+                            var c = cor.c;
+                            
+                            // add neighbors - top bottom left right
+                            // top
+                            if (r - 1 >= 0 && grid[r - 1][c] == 1) // check out of bounds
+                            {
+                                queue.Enqueue(new Coordinate(r - 1, c));
+                                visited[r - 1, c] = 1;
+                            }
+
+                            // bottom
+                            if (r + 1 < rowLen && grid[r + 1][c] == 1)
+                            {
+                                queue.Enqueue(new Coordinate(r + 1, c));
+                                visited[r + 1, c] = 1;
+                            }
+
+                            // left
+                            if (c - 1 >= 0 && grid[r][c - 1] == 1)
+                            {
+                                queue.Enqueue(new Coordinate(r, c - 1));
+                                visited[r, c - 1] = 1;
+                            }
+
+                            // right
+                            if (c + 1 < colLen && grid[r][c + 1] == 1)
+                            {
+                                queue.Enqueue(new Coordinate(r, c + 1));
+                                visited[r, c + 1] = 1;
+                            }
                         }
-
-
                     }
                 }
             }
 
-            return -1;
+            return islands;
         }
     }
 }

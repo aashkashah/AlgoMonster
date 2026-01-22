@@ -68,5 +68,43 @@
 
             return heap.Dequeue();
         }
+
+
+        /// <summary>
+        /// Top K Frequent Elements
+        /// https://leetcode.com/problems/top-k-frequent-elements/submissions/1884335693/
+        /// </summary>
+        public IList<int> TopKFrequent(int[] nums, int k)
+        {
+            var freq = new Dictionary<int, int>();
+            var heap = new PriorityQueue<int, int>();
+            var res = new List<int>();
+
+            // build freq map
+            foreach (var num in nums)
+            {
+                if (!freq.ContainsKey(num))
+                {
+                    freq.Add(num, 1);
+                }
+                else
+                {
+                    freq[num]++;
+                }
+            }
+
+            // build max heap
+            foreach (var elem in freq)
+            {
+                heap.Enqueue(elem.Key, -elem.Value);
+            }
+
+            for (int i = 0; i < k; i++)
+            {
+                res.Add(heap.Dequeue());
+            }
+
+            return res.ToArray();
+        }
     }
 }

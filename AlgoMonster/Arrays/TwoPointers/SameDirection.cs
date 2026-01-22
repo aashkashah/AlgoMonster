@@ -229,6 +229,40 @@ namespace AlgoMonster.Arrays.TwoPointers
             return best;
         }
 
+        /// <summary>
+        /// https://leetcode.com/problems/string-compression
+        /// </summary>
+        public static int Compress(char[] chars)
+        {
+
+            char curChar;
+            var res = string.Empty;
+            var l = 0;
+            var r = 0;
+
+            while (r < chars.Count())
+            {
+                curChar = chars[r];
+                var currCount = 0;
+                while (r < chars.Count() && chars[l] == chars[r])
+                {
+                    currCount++;
+                    r++;
+                }
+                l = r;
+                if (currCount == 1)
+                {
+                    res += curChar;
+                }
+                else
+                {
+                    res += curChar + Convert.ToString(currCount);
+                }
+            }
+
+            return res.Length;
+        }
+
 
     }
 }

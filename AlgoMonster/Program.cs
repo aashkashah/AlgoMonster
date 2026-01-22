@@ -11,6 +11,7 @@ using AlgoMonster.Arrays.HashSet;
 using AlgoMonster.Arrays.TwoPointers;
 using AlgoMonster.LinkedList;
 using AlgoMonster.Arrays.Matrix;
+using AlgoMonster.Greedy;
 
 
 Console.WriteLine("Start the beautiful challenege..");
@@ -119,6 +120,17 @@ Console.WriteLine("Start the beautiful challenege..");
 
 //var res = SlidingWindow.LongestOnes([0, 0, 1, 1, 0, 0, 1, 1, 1, 0, 1, 1, 0, 0, 0, 1, 1, 1, 1], 3);
 
-var res = SlidingWindow.LongestSubarray([0, 1, 1, 1, 0, 1, 1, 0, 1]);
+//var res = SlidingWindow.LongestSubarray([0, 1, 1, 1, 0, 1, 1, 0, 1]);
+
+//var res = Greedy_Medium.CanJump([2, 3, 1, 1, 4]);
+
+//var res = JumpGame.JumpGame3([4, 2, 3, 0, 3, 1, 2], 5);
+
+//var res = SameDirection.Compress(['a', 'a', 'b', 'b', 'c', 'c', 'c']);
+
+//var res = Bfs.FindCircleNum([[1, 1, 0], [1, 1, 0], [0, 0, 1]]);
+
+var res = SlidingWindow.FindMaxConsecutiveOnes([1, 0, 1, 1, 0]);
+
 
 Console.WriteLine("Challenge accomplished. You rock!");

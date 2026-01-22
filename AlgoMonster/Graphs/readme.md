@@ -1,49 +1,8 @@
 ﻿https://www.notion.so/Graphs-2d39497b780980be896ce54e8b665337
 
-DFS/BFS are the workhorses (how you move).
-
-DP/backtracking are the intent (optimize/count vs enumerate).
-
-
-Many problems are “graph + one extra layer”:
-
-	Graph + shortest path ⇒ BFS/Dijkstra
-
-	Graph + enumeration ⇒ backtracking DFS
-
-	Graph + counting/optimization on DAG ⇒ DP
-
-	Graph + connectivity merges ⇒ DSU
-
-So don’t club graphs into DP or backtracking; instead:
-
-	Graphs = the world
-
-	Traversal/DP/backtracking/greedy/DSU = the strategy
-
-
-A practical “interview decision tree”
-
-When you see a graph-ish prompt, ask:
-
-	Need minimum steps?
-		→ Unweighted: BFS. Weighted: Dijkstra.
-
-	Need an ordering / prerequisites?
-		→ Topological sort (+ cycle detection).
-
-	Need “all solutions” / “find any valid arrangement”?
-		→ Backtracking DFS (path-level visited).
-
-	Need “how many ways / best score” and looks acyclic or can be made DAG?
-		→ DP on graph (topo or memo DFS).
-
-	Need grouping / merging over time?
-		→ Union-Find.
-
-	Need 2 groups / constraints?
-		→ Bipartite coloring.
-
+Graphs are the structure.
+Traversal (BFS/DFS) is how you move.
+The pattern is decided by the goal.
 
 1️. Graph Traversal / Connected Components
 
@@ -255,3 +214,63 @@ When it shows up
 Mental model
 
 	“Connectivity without walking the graph.”
+
+
+How these patterns relate to other algos
+
+| Pattern          | Uses BFS | Uses DFS | Uses DP | Uses Backtracking |
+| ---------------- | -------- | -------- | ------- | ----------------- |
+| Traversal        | ✅        | ✅        | ❌       | ❌                 |
+| Shortest Path    | ✅        | ❌        | ❌       | ❌                 |
+| State BFS        | ✅        | ❌        | ❌       | ❌                 |
+| Backtracking     | ❌        | ✅        | ❌       | ✅                 |
+| DAG + DP         | ❌        | ✅        | ✅       | ❌                 |
+| Topological Sort | ✅ / ❌   | ✅        | ❌       | ❌                 |
+| Union-Find       | ❌        | ❌        | ❌       | ❌                 |
+
+
+
+--- In reference to DP?backtracking ---
+
+
+DP/backtracking are the intent (optimize/count vs enumerate).
+
+
+Many problems are “graph + one extra layer”:
+
+	Graph + shortest path ⇒ BFS/Dijkstra
+
+	Graph + enumeration ⇒ backtracking DFS
+
+	Graph + counting/optimization on DAG ⇒ DP
+
+	Graph + connectivity merges ⇒ DSU
+
+So don’t club graphs into DP or backtracking; instead:
+
+	Graphs = the world
+
+	Traversal/DP/backtracking/greedy/DSU = the strategy
+
+
+A practical “interview decision tree”
+
+When you see a graph-ish prompt, ask:
+
+	Need minimum steps?
+		→ Unweighted: BFS. Weighted: Dijkstra.
+
+	Need an ordering / prerequisites?
+		→ Topological sort (+ cycle detection).
+
+	Need “all solutions” / “find any valid arrangement”?
+		→ Backtracking DFS (path-level visited).
+
+	Need “how many ways / best score” and looks acyclic or can be made DAG?
+		→ DP on graph (topo or memo DFS).
+
+	Need grouping / merging over time?
+		→ Union-Find.
+
+	Need 2 groups / constraints?
+		→ Bipartite coloring.

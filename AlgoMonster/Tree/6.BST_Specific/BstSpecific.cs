@@ -8,8 +8,6 @@ namespace AlgoMonster.Tree._6.BST_Specific
         /// Valid Binary Search Tree
         /// Given the root of a binary tree, return true if it is a valid binary search tree, otherwise return false.
         /// </summary>
-        /// <param name="root"></param>
-        /// <returns></returns>
         public static bool IsValidBST(TreeNode root)
         {
             // use bfs of dfs
@@ -26,15 +24,21 @@ namespace AlgoMonster.Tree._6.BST_Specific
 
         private static bool IsValidBstHelper(TreeNode root, int minValue, int maxVal)
         {
-            if (root == null) return true;
-            if (!(minValue < root.val && root.val < maxVal)) return false;
-            return (IsValidBstHelper(root.left, minValue, root.val) && IsValidBstHelper(root.right, root.val, maxVal));
+            if (root == null) 
+                return true;
+
+            if (!(minValue < root.val && root.val < maxVal)) 
+                return false;
+            
+            return (
+                IsValidBstHelper(root.left, minValue, root.val) 
+                && IsValidBstHelper(root.right, root.val, maxVal)
+                );
         }
 
         /// <summary>
-        /// https://www.geeksforgeeks.org/dsa/find-k-th-smallest-element-in-bst-order-statistics-in-bst/#
+        /// https://www.geeksforgeeks.org/dsa/find-k-th-smallest-element-in-bst-order-statistics-in-bst/
         /// </summary>
-        /// <returns></returns>
         public static int kthSmallestElement(TreeNode node, int k)
         {
             // in order traversal
@@ -62,7 +66,7 @@ namespace AlgoMonster.Tree._6.BST_Specific
         }
 
         /// <summary>
-        /// https://leetcode.com/problems/verify-preorder-sequence-in-binary-search-tree/?envType=problem-list-v2&envId=stack
+        /// https://leetcode.com/problems/verify-preorder-sequence-in-binary-search-tree
         /// Given an array of unique integers preorder, 
         /// return true if it is the correct preorder traversal sequence of a binary search tree.
         /// Input: preorder = [5,2,1,3,6]
@@ -75,8 +79,6 @@ namespace AlgoMonster.Tree._6.BST_Specific
         ///  [6 3 1 8 5 7 ...] 
         ///  
         /// </summary>
-        /// <param name="preorder"></param>
-        /// <returns></returns>
         public static bool VerifyPreorder(int[] preorder)
         {
             var lowerBound = int.MinValue;
