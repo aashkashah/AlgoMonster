@@ -5,7 +5,7 @@
         /// <summary>
         ///  Longest Harmonious Subsequence
         ///  This is a “frequency map + neighbor” pattern.
-        ///  https://leetcode.com/problems/longest-harmonious-subsequence/description/?envType=problem-list-v2&envId=sliding-window
+        ///  https://leetcode.com/problems/longest-harmonious-subsequence
         ///  
         /// A harmonious subsequence only cares about values and counts (order doesn’t matter for subsequence length). 
         /// If max − min = 1, that means the subsequence uses exactly two numbers: x and x+1 (both must appear at least once).
@@ -86,7 +86,7 @@
 
     /// <summary>
     /// Logger rate limiter
-    /// https://leetcode.com/problems/logger-rate-limiter/description
+    /// https://leetcode.com/problems/logger-rate-limiter
     /// Input
     /// ["Logger", "shouldPrintMessage", "shouldPrintMessage", "shouldPrintMessage", "shouldPrintMessage", "shouldPrintMessage", "shouldPrintMessage"]
     /// [[], [1, "foo"], [2, "bar"], [3, "foo"], [8, "bar"], [10, "foo"], [11, "foo"]]
@@ -202,7 +202,7 @@
 
         /// <summary>
         /// Majority Element
-        /// https://leetcode.com/problems/majority-element/description
+        /// https://leetcode.com/problems/majority-element
         /// O(1) space
         /// O(nlogn) time 
         /// </summary
@@ -306,6 +306,46 @@
 
             return result;
 
+        }
+
+        /// <summary>
+        /// https://leetcode.com/problems/palindrome-permutation/
+        /// Palindrome Permutation
+        /// Solved in 6 mins
+        /// </summary>
+        public static bool CanPermutePalindrome(string s)
+        {
+            // aab
+            // (a,2), (b,1)
+            // if multiple of 2
+            // 1 element as a single digit
+
+            var freq = new Dictionary<int, int>();
+            var issingleused = false;
+
+            for (int i = 0; i < s.Length; i++)
+            {
+                var curr = s[i];
+                if (!freq.ContainsKey(curr))
+                {
+                    freq[curr] = 1;
+                }
+                else
+                {
+                    freq[curr]++;
+                }
+            }
+
+            foreach (var kv in freq)
+            {
+                if (!(kv.Value % 2 == 0))
+                {
+                    if (issingleused) return false;
+                    issingleused = true;
+                }
+            }
+
+            return true;
         }
     }
 }
