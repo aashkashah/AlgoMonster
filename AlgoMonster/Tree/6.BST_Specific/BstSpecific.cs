@@ -4,6 +4,7 @@ namespace AlgoMonster.Tree._6.BST_Specific
 {
     public static class BstSpecific
     {
+        private static int closest = 0;
         /// <summary>
         /// Valid Binary Search Tree
         /// Given the root of a binary tree, return true if it is a valid binary search tree, otherwise return false.
@@ -96,6 +97,42 @@ namespace AlgoMonster.Tree._6.BST_Specific
             }
 
            return true;
+        }
+
+        /// <summary>
+        /// Closest binary seacrh tree value
+        /// https://leetcode.com/problems/closest-binary-search-tree-value
+        /// </summary>
+        public static int ClosestValue(TreeNode root, double target)
+        {
+            if (root.left == null && root.right == null)
+                return root.val;
+            ClosestValueHelper(root, int.MinValue, int.MaxValue, target);
+            return closest;
+        }
+
+        private static void ClosestValueHelper(TreeNode node, int min, int max, double target)
+        {
+            // return condition
+            if (node == null) return;
+
+            if (target <= max && target >= min)
+            {
+                // pick the closest out of min and max and itself
+                // subtraction -- pick lowest
+                double minsub = Math.Abs(target - min);
+                double maxsub = Math.Abs(target - max);
+                double nodesub = Math.Abs(target - node.val);
+
+                if (minsub <= maxsub && minsub <= nodesub) closest = min;
+                else if (maxsub < minsub && maxsub < nodesub) closest = max;
+                else closest = node.val;
+            }
+
+            // recursion
+            ClosestValueHelper(node.left, min, node.val, target);
+            ClosestValueHelper(node.right, node.val, max, target);
+
         }
     }
 }

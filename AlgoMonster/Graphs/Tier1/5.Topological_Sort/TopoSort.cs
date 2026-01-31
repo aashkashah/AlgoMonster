@@ -1,6 +1,10 @@
 ﻿namespace AlgoMonster.Graphs.TopologicalSort
 {
-    public class TopoSort
+
+    /// <summary>
+    /// Kahn's algorithm is only for DAG (directly acyclic graph)
+    /// </summary>
+    public static class TopoSort
     {
         /// <summary>
         /// Course schedule II
@@ -10,8 +14,10 @@
         /// BFS (indegree + Kahn)
         /// Todo: with DFS (white (unvisited), grey(visiting), black(visited)) 
         /// </summary>
-        public int[] FindOrder(int numCourses, int[][] prerequisites)
+        public static int[] FindOrder(int numCourses, int[][] prerequisites)
         {
+            // [[2,3],[1,2],[0,1],[0,4],[4,5],[5,1]]
+
             // create adj list, indegree, topo
             var adjList = new Dictionary<int, List<int>>();
             var indegree = new int[numCourses];
@@ -67,7 +73,7 @@
         /// https://leetcode.com/problems/course-schedule/
         /// BFS (indegree + Kahn)
         /// </summary>
-        public bool CanFinish(int numCourses, int[][] prerequisites)
+        public static bool CanFinish(int numCourses, int[][] prerequisites)
         {  
             var adjList = new Dictionary<int, List<int>>();
             var indegree = new int[numCourses];

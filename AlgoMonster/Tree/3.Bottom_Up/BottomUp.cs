@@ -17,7 +17,6 @@ namespace AlgoMonster.Tree._3.Bottom_Up
         /// The depth of a binary tree is defined as the number of nodes along the longest path from the 
         /// root node down to the farthest leaf node.
         /// </summary>
-        /// <param name="node"></param>
         public static int MaximumDepthOfBinaryTree(TreeNode node)
         {
             var result = MaxDepthHelper(node);
@@ -42,8 +41,6 @@ namespace AlgoMonster.Tree._3.Bottom_Up
         /// the height of the left and the right subtree for each node is either 0 or 1. 
         /// https://leetcode.com/problems/balanced-binary-tree/description/
         /// </summary>
-        /// <param name="node"></param>
-        /// <returns></returns>
         public static bool IsBalancedBinaryTree(TreeNode node)
         {
             var result = BalancedTreeHelper(node);
@@ -104,8 +101,6 @@ namespace AlgoMonster.Tree._3.Bottom_Up
         ///  Maximum Depth of N-ary Tree
         ///  https://leetcode.com/problems/maximum-depth-of-n-ary-tree/description
         /// </summary>
-        /// <param name="root"></param>
-        /// <returns></returns>
         public static int MaxDepthNAryTree(NAryTree root)
         {
             return MaxDepthNAryTreeHelper(root);
@@ -178,8 +173,6 @@ namespace AlgoMonster.Tree._3.Bottom_Up
         /// Longest Univalue Path
         /// https://leetcode.com/problems/longest-univalue-path/description
         /// </summary>
-        /// <param name="root"></param>
-        /// <returns></returns>
         public static int LongestUnivaluePath(TreeNode node)
         {
             // univalue path == children's value == parent value

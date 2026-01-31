@@ -7,4 +7,8 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Folder Include="Graphs\Tier1\3.StateSpace_BFS\" />
+  </ItemGroup>
+
 </Project>

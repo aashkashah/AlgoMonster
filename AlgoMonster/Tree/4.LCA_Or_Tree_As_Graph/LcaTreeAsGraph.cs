@@ -85,5 +85,36 @@ namespace AlgoMonster.Tree._4.LCA_Or_Tree_As_Graph
             return -1;
 
         }
+
+        /// <summary>
+        /// Lowest common ancestor of a binary tree 4
+        /// https://leetcode.com/problems/lowest-common-ancestor-of-a-binary-tree-iv
+        /// solved in 15 mins
+        /// </summary>
+        public static TreeNode LowestCommonAncestor4(TreeNode root, TreeNode[] nodes)
+        {
+            if (nodes == null) return null;
+            if (nodes.Length == 1) return nodes[0];
+
+            var arr = nodes.Select(x => x.val).ToArray();
+            return Lca4Helper(root, arr);
+        }
+
+        private static TreeNode Lca4Helper(TreeNode root, int[] nodes)
+        {
+            // return condition
+            if (root == null) return null;
+            if (nodes.Contains(root.val)) return root;
+
+            // recursion
+            var leftlca = Lca4Helper(root.left, nodes); // 6
+            var rightlca = Lca4Helper(root.right, nodes); // 2
+
+            if (leftlca != null && rightlca != null) return root;
+
+            if (leftlca == null) return rightlca;
+            else return leftlca;
+
+        }
     }
 }

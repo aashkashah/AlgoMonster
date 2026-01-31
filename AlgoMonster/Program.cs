@@ -12,6 +12,7 @@ using AlgoMonster.Arrays.TwoPointers;
 using AlgoMonster.LinkedList;
 using AlgoMonster.Arrays.Matrix;
 using AlgoMonster.Greedy;
+using AlgoMonster.Arrays.ArrayWithStacks;
 
 
 Console.WriteLine("Start the beautiful challenege..");
@@ -130,7 +131,10 @@ Console.WriteLine("Start the beautiful challenege..");
 
 //var res = Bfs.FindCircleNum([[1, 1, 0], [1, 1, 0], [0, 0, 1]]);
 
-var res = SlidingWindow.FindMaxConsecutiveOnes([1, 0, 1, 1, 0]);
+//var res = SlidingWindow.FindMaxConsecutiveOnes([1, 0, 1, 1, 0]);
 
+//var res = TopoSort.FindOrder(6, [[2, 3], [1, 2], [0, 1], [0, 4], [4, 5], [5, 1]]);
+
+var res = ArrayWStack.MinRemoveToMakeValid("lee(t(c)o)de)");
 
 Console.WriteLine("Challenge accomplished. You rock!");

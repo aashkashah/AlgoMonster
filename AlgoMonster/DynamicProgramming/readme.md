@@ -18,6 +18,35 @@ If you want max ROI, practice:
 
 These cover 80% of DP generation patterns.
 
+
+5 Beginner Patterns
+
+Fibonacci Numbers
+	Climbing Stairs
+	House Robber
+	Fibonacci NumbersMaximum Alternating Subsequence Sum
+
+Zero / One Knapsack
+	Partition Equal Subset Sum
+	Target Sum
+
+Unbounded Knapsack
+	Coin Change
+	Coin Change II
+	Minimum Cost for Tickets
+	
+Longest Common Subsequence
+	Longest Common Subsequence
+	Longest Increasing Subsequence
+	Edit Distance
+	Distinct Subsequences
+	
+Palindromes
+	Longest Palindromic Substring
+	Palindromic Substrings
+	Longest Palindromic Subsequence
+
+
 1. Sequence DP (1D DP)
 ### When to use
 
@@ -156,29 +185,3 @@ These are table DP problems involving two words.
 | **7** | **Bitmask DP**           | Hard but mechanical | TSP small version |
 
 
-5 Beginner Patterns
-
-Fibonacci Numbers
-	Climbing Stairs
-	House Robber
-	Fibonacci NumbersMaximum Alternating Subsequence Sum
-
-Zero / One Knapsack
-	Partition Equal Subset Sum
-	Target Sum
-
-Unbounded Knapsack
-	Coin Change
-	Coin Change II
-	Minimum Cost for Tickets
-	
-Longest Common Subsequence
-	Longest Common Subsequence
-	Longest Increasing Subsequence
-	Edit Distance
-	Distinct Subsequences
-	
-Palindromes
-	Longest Palindromic Substring
-	Palindromic Substrings
-	Longest Palindromic Subsequence

@@ -106,5 +106,51 @@
 
             return res.ToArray();
         }
+
+        /// <summary>
+        /// top k max elements
+        /// find_largest([1,5,4,2,3], 3)  # => [3, 4, 5]
+        /// solved in 5 mins
+        /// </summary>
+        public static int[] FindLargest(int[] input, int m)
+        {
+            // constraints
+            // very large data size
+            // M largest number
+            // array or file
+
+            // 1 5 4 2 3
+            // 1 2 m = 3
+
+            if (input.Length < m) return input;
+
+            // duplicates?
+            // min heap or max heap?
+            // first pass -> create, max heap
+            // second pass -> for  0 to m-1
+            // min heap is better
+
+            var pq = new PriorityQueue<int, int>();
+
+            for (int i = 0; i < input.Length; i++)
+            {
+                if (pq.Count == m)
+                {
+                    // peek
+                    if (pq.Peek() < input[i])
+                    {
+                        pq.Dequeue();
+                    }
+                }
+                pq.Enqueue(input[i], input[i]);
+            }
+
+            var res = new int[m];
+            for (int i = 0; i < m; i++)
+            {
+                res[i] = pq.Dequeue();
+            }
+            return res;
+        }
     }
 }

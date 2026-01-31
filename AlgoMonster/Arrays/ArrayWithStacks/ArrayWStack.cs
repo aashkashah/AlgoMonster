@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace AlgoMonster.Arrays.ArrayWithStacks
 {
-    public class ArrayWStack
+    public static class ArrayWStack
     {
         /// <summary>
         /// Make The String Great
@@ -15,7 +15,7 @@ namespace AlgoMonster.Arrays.ArrayWithStacks
         /// Output: "leetcode"
         /// Explanation: In the first step, either you choose i = 1 or i = 2, both will result "leEeetcode" to be reduced to "leetcode"
         /// </summary>
-        public string MakeGood(string s)
+        public static string MakeGood(string s)
         {
             // leEeetCode
             //      ^
@@ -54,7 +54,7 @@ namespace AlgoMonster.Arrays.ArrayWithStacks
         /// Input: s = "2[abc]3[cd]ef"
         /// Output: "abcabccdcdcdef"
         /// </summary>
-        public string DecodeString(string s)
+        public static string DecodeString(string s)
         {
             // todo - needs fix
             // 3 stacks not required, bracket stack is implied 
@@ -133,7 +133,7 @@ namespace AlgoMonster.Arrays.ArrayWithStacks
             return res;
         }
 
-        public string DecodeStringCorrected(string s)
+        public static string DecodeStringCorrected(string s)
         {
             var countStack = new Stack<int>();
             var stringStack = new Stack<StringBuilder>();
@@ -183,7 +183,7 @@ namespace AlgoMonster.Arrays.ArrayWithStacks
         /// Baseball game
         /// https://leetcode.com/problems/baseball-game/description
         /// </summary>
-        public int CalPoints(string[] operations)
+        public static int CalPoints(string[] operations)
         {
             var stack = new Stack<int>();
 
@@ -225,7 +225,7 @@ namespace AlgoMonster.Arrays.ArrayWithStacks
         /// Input: logs = ["d1/","d2/","../","d21/","./"]
         /// Output: 2
         /// </summary>
-        public int MinOperations(string[] logs)
+        public static int MinOperations(string[] logs)
         {
             if (logs.Count() == 0) return 0;
 
@@ -252,6 +252,70 @@ namespace AlgoMonster.Arrays.ArrayWithStacks
             }
 
             return stack.Count;
+        }
+
+        public static string MinRemoveToMakeValid(string s)
+        {
+            // lee(t(c)o)de)
+            //             ^ 
+            // 
+            // stack: ),12
+            // 
+            //    
+            // a)b(c)d
+            //      ^
+            // stack: (,3 
+            // res: ab(c)d
+            // remove a closing brace if no open brace present
+
+            var stack = new Stack<(char, int)>();
+            var map = new HashSet<int>();
+
+            for (int i = 0; i < s.Length; i++)
+            {
+                var cur = s[i];
+                if (cur != '(' && cur != ')') continue;
+
+                if (cur == '(')
+                    stack.Push(('(', i));
+
+                if (cur == ')')
+                {
+                    if(stack.Count > 0)
+                    {
+                        var (pk, idx) = stack.Peek();
+                        if (pk == '(')
+                        {
+                            stack.Pop();
+                            continue;
+                        }
+                    }
+                    stack.Push((')', i));
+                    map.Add(i);
+                }
+            }
+
+            while (stack.Count > 0)
+            {
+                var (pk, idx) = stack.Pop();
+                if (!map.Contains(idx)) map.Add(idx);
+            }
+
+            var res = new StringBuilder();
+            for (int i = 0; i < s.Length; i++)
+            {
+                if (map.Contains(i))
+                {
+                    // remove 
+                    continue;
+                }
+                else
+                {
+                    res.Append(s[i]);
+                }
+            }
+
+            return res.ToString();
         }
 
 

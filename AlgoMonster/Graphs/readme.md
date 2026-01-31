@@ -4,25 +4,75 @@ Graphs are the structure.
 Traversal (BFS/DFS) is how you move.
 The pattern is decided by the goal.
 
+🟢 Tier 1 (Must be automatic)
+
+	BFS / DFS Traversal & Reachability (covers ~65–70% of graph questions)
+
+	Shortest Path (BFS / Dijkstra) (coverage: massive)
+
+	State-Space BFS ⚠️ High ROI (coverage: disproportionately high)
+
+	Cycle Detection
+
+	Topological Sort (~20 - 25%)
+
+🟡 Tier 2 (Recognize & apply)
+
+	Grid-as-Graph (Islands, Flood Fill)
+
+	Union-Find (optional, but nice ~10%)
+
+	Bipartite / Graph Coloring
+
+	Backtracking on Graphs
+
+	DAG + DP
+
+🔵 Tier 3 (Nice-to-have)
+
+	MST
+
+	SCC
+
+
+Here’s the tightest possible plan:
+
+Order	Pattern							Why
+1		BFS / DFS						Foundation
+2		Shortest Path (BFS/Dijkstra)	Very common
+3		State-Space BFS					High failure rate
+4		Topological Sort				Dependency questions
+
+Everything else is optional.
+
+
+----- TIER 1 -----
+
 1️. Graph Traversal / Connected Components
 
-Goal: “Can I reach?”, “How many connected groups?”, “Is there a path?”
+When you see:
 
-	(DFS / BFS + visited)
+	“Can you reach…”
 
-When it shows up
+	“Is there a path…”
 
-	“How many groups/components?”
+	“How many components…”
 
-	“Can we reach?”
+	“Traverse all nodes…”
 
-	“Mark all connected things”
+	Grids, islands, networks
+
+Core idea
+
+	BFS → shortest / level by level
+
+	DFS → explore fully / structure detection
 
 Common examples
 
 	Number of Islands
 
-	Flood Fill
+	Keys and Rooms
 
 	Count Connected Components
 
@@ -31,6 +81,10 @@ Common examples
 Mental model
 
 	“Explore everything once.”
+
+Interview reflex 🧠
+
+	“This is just BFS/DFS + visited”
 
 Key skill
 
@@ -41,15 +95,27 @@ Key skill
 
 2️. Shortest Path (Unweighted → BFS) (This is huge in interviews)
 
-When it shows up
+Sub-patterns
+
+	Unweighted → BFS
+
+	Weighted (positive) → Dijkstra
+
+	Grid + obstacles → BFS
+
+	Multi-source BFS → start from many nodes
+
+When you see:
 
 	“Minimum steps”
 
-	“Shortest path”
+	“Shortest time”
 
-	“Fewest moves / transformations”
+	“Fewest moves”
 
-	Common examples
+	“Minimum cost”
+
+Common examples
 
 	Word Ladder
 
@@ -63,10 +129,14 @@ Mental model
 
 	“Layer by layer → first time you see target is optimal.”
 
+Interview reflex 🧠
+
+	“Edges weighted? If no → BFS. If yes → Dijkstra.”
+
 ⚠️ 80% of the time: plain BFS, not Dijkstra.
 
 
-3️. State-Space BFS (Graph disguised as something else) (Top interview favorite)
+3. State-Space BFS (Graph disguised as something else) (Top interview favorite)
 
 	This is the #1 “graph disguised as something else” pattern.
 	
@@ -80,7 +150,7 @@ When it shows up
 
 	“Same node but different conditions matter”
 
-	Common examples
+Common examples
 
 	Shortest Path with Obstacles Elimination
 
@@ -97,123 +167,193 @@ Mental model
 
 This is where many people fail even though they “know BFS”.
 
+4. Cycle Detection
 
-4️. Backtracking on Graphs (Path Enumeration)
-	
-	(DFS + choose / explore / unchoose)
+Is something invalid or looping forever?
 
-Goal: list all paths, find path with constraints, Hamiltonian-ish, “any path that satisfies…”
+Two flavors
 
-When it shows up
+	Directed graph → DFS + recursion stack
 
-	“List all paths”
+	Undirected graph → DFS + parent tracking
 
-	“Find any valid arrangement”
+When you see:
 
-	“Generate possibilities”
+	“Deadlock”
 
-	Common examples
+	“Circular dependency”
 
-	All Paths From Source to Target (DAG)
+	“Valid schedule?”
 
-	Reconstruct Itinerary
+	“Infinite loop?”
 
-	Word Search (grid = graph)
+Typical problems
 
-Mental model
+	Course Schedule
 
-	“Try → recurse → undo”
+	Detect Cycle in Graph
 
-This is not shortest path — it’s about possibilities.
+Interview reflex 🧠
 
-
-5️. DAG + DP (Count / Optimize)
-
-	(Graphs + DP combined)
-
-When it shows up
-
-	“How many ways?”
-
-	“Longest / max / min path”
-
-	No cycles (or can be topologically sorted)
-
-	Common examples
-
-	Count paths in DAG
-
-	Longest Path in DAG
-
-	Course Schedule II + DP variants
-
-Mental model
-
-	“Same subproblem repeats → cache result.”
-
-If cycles exist → 🚨 stop and rethink.
+	“Cycle? → DFS + extra state”
 
 
-6️. Topological Sort (Dependencies)
+5. Topological Sort (Ordering with Dependencies) VERY high interview frequency
 
-Goal: prerequisites, ordering, “can you finish all courses?”
+VERY high interview frequency
 
-	(Very common, very recognizable)
+When you see:
 
-When it shows up
+	“Must happen before”
 
-	“Prerequisites”
+	“Dependencies”
 
-	“Ordering constraints”
+	“Order of execution”
 
-	“Can you finish?”
+	“Build system / tasks”
 
-	Common examples
+Two ways
 
-	Course Schedule I / II
+	Kahn’s algorithm (BFS + indegree)
 
-	Build order
+	DFS postorder
 
-	Task scheduling
+Typical problems
 
-Mental model
+	Course Schedule II
 
-	“Things that depend on other things.”
+	Alien Dictionary
 
-Mental trigger: 
+	Build Order
 
-	“Dependencies / prerequisites / scheduling.”
+Interview reflex 🧠
 
-Know both:
-
-	BFS (indegree / Kahn)
-
-	DFS (postorder)
+	“Directed + dependency language → topo sort”
 
 
-7️. Union-Find (Connectivity without traversal)
+-----  TIER 2 -----
 
-	(Often easier than DFS/BFS)
 
-When it shows up
+6. Graph as Grid (Islands, Flood Fill)
+
+Feels like graphs, looks like matrices
+
+When you see:
+
+	2D grid
+
+	Adjacent cells
+
+	Up/down/left/right
+
+Typical problems
+
+	Number of Islands
+
+	Flood Fill
+
+	Rotting Oranges
+
+Interview reflex 🧠
+
+	“Grid = graph with implicit edges”
+
+
+7. Union Find (Disjoint Set)
+
+Connectivity without traversal
+
+When you see:
 
 	“Merge groups”
 
 	“Are these connected?”
 
-	“Redundant edge”
+	Dynamic connectivity
 
-	Common examples
+	Redundant connections
+
+Typical problems
+
+	Redundant Connection
 
 	Number of Provinces
 
 	Accounts Merge
 
-	Redundant Connection
+Interview reflex 🧠
+
+	“Repeated connect + query → Union Find”
+
+
+8. Bipartite Graph / Coloring
+
+2-group separation
+
+When you see:
+
+	“Two teams”
+
+	“No adjacent same type”
+
+	“Conflict graph”
+
+Typical problems
+
+	Is Graph Bipartite
+
+	Possible Bipartition
+
+Interview reflex 🧠
+
+	“Two colors, BFS/DFS, conflict check”
+
+
+9. Graph + DP (DAG Optimization / Counting) (common at Google)
+
+When it shows up
+
+	“How many ways…”
+
+	“Max / min / longest path”
+
+	Graph is acyclic or sortable
 
 Mental model
 
-	“Connectivity without walking the graph.”
+	“Graph traversal + memoization”
+	“Topological order OR DFS + cache”
+
+Hard stop rule 🚨
+
+	If cycles exist and no bound → DP invalid
+
+This rule alone saves people from disaster.
+
+
+----- TIER 3 -----
+
+10. Minimum Spanning Tree (MST)
+
+Connect everything cheaply
+
+Algorithms
+
+	Kruskal (Union Find)
+
+	Prim (PQ)
+
+When you see:
+
+	“Connect all nodes”
+
+	“Min cost to connect”
+
+	“Network wiring”
+
+11. Strongly Connected Components (SCC)
+
+Advanced directed graph
 
 
 How these patterns relate to other algos
@@ -230,7 +370,9 @@ How these patterns relate to other algos
 
 
 
---- In reference to DP?backtracking ---
+
+
+--- In reference to DP / backtracking ---
 
 
 DP/backtracking are the intent (optimize/count vs enumerate).

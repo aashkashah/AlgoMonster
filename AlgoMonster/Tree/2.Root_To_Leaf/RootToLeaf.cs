@@ -113,18 +113,18 @@ namespace AlgoMonster.Tree._2.Root_To_Leaf
         /// <summary>
         /// https://leetcode.com/problems/binary-tree-longest-consecutive-sequence-ii
         /// </summary>
-        public int LongestConsecutive2(TreeNode root)
-        {
+        //public int LongestConsecutive2(TreeNode root)
+        //{
 
-        }
+        //}
 
-        private static void LongestConsecutive2Helper(TreeNode p, TreeNode parent, int length)
-        {
-            if (p == null) return;
+        //private static void LongestConsecutive2Helper(TreeNode p, TreeNode parent, int length)
+        //{
+        //    if (p == null) return;
 
-            length 
+           
 
-            LongestConsecutive2Helper(p.left, p, length);
-        }
+        //    LongestConsecutive2Helper(p.left, p, length);
+        //}
     }
 }

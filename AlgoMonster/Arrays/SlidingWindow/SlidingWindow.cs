@@ -5,6 +5,7 @@
     /// </summary>
     public static class SlidingWindow
     {
+
         /// <summary>
         /// Find the length of the longest substring of a given string without repeating characters.
         /// Input: abccabcabcc
@@ -754,6 +755,53 @@
 
             return maxlen;
 
+        }
+
+        /// <summary>
+        /// https://leetcode.com/problems/minimum-size-subarray-sum
+        /// last solve date: 1/24/26
+        /// time taken: ~15 mins
+        /// </summary>
+        public static int MinSubArrayLen(int target, int[] nums)
+        {
+
+            // 2 3 1 2 4 3
+            //         ^
+            //           ^
+            // minlen = 2 
+            // curr = 3
+            // currsum = 9
+            // breaking condition find 7 or >7
+            // loop left >= right && right < nums.Lenght
+
+            if (nums.Length == 0) return 0;
+
+            if (nums.Length == 1)
+            {
+                if (nums[0] >= target) return 1;
+                return 0;
+            }
+
+            var left = 0;
+            var minlen = int.MaxValue;
+            var currSum = 0;
+
+            // 2 3 1 2 4 3
+            // curr = 2
+            for (int right = 0; right < nums.Length; right++)
+            {
+                // left = 0
+                // right = 0
+                currSum += nums[right];
+                while (currSum >= target)
+                {
+                    minlen = Math.Min(minlen, right - left + 1); // 4
+                    currSum -= nums[left]; // currsum = 7
+                    left++; // left = 2
+                }
+            }
+
+            return minlen == int.MaxValue ? 0 : minlen;
         }
 
     }

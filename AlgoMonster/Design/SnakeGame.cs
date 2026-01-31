@@ -13,7 +13,7 @@
 
         public int Move(string direction)
         {
-
+            return 0;
         }
     }
 }
