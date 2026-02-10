@@ -79,7 +79,7 @@
             var indegree = new int[numCourses];
             var topo = new int[numCourses];
 
-            // create agj. list + indegree
+            // create adj. list + indegree
             for(int i = 0; i < numCourses; i++)
             {
                 var dest = prerequisites[i][0];

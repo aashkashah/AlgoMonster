@@ -166,7 +166,7 @@ namespace AlgoMonster.Arrays.TwoPointers
         }
 
         /// <summary>
-        /// https://leetcode.com/problems/remove-element/description/?envType=problem-list-v2&envId=array
+        /// https://leetcode.com/problems/remove-element
         /// Input: nums = [3,2,2,3], val = 3
         /// Output: 2, nums = [2, 2, _, _]
         /// Explanation: Your function should return k = 2, with the first two elements of nums being 2.
@@ -202,7 +202,7 @@ namespace AlgoMonster.Arrays.TwoPointers
         /// <summary>
         ///  Longest Harmonious Subsequence
         ///  This is a “frequency map + neighbor” pattern.
-        ///  https://leetcode.com/problems/longest-harmonious-subsequence/description/?envType=problem-list-v2&envId=sliding-window
+        ///  https://leetcode.com/problems/longest-harmonious-subsequence
         ///  
         /// A harmonious subsequence only cares about values and counts (order doesn’t matter for subsequence length). 
         /// If max − min = 1, that means the subsequence uses exactly two numbers: x and x+1 (both must appear at least once).

@@ -27,7 +27,7 @@ namespace AlgoMonster.RecursionAndBacktracking
 
         /// <summary>
         /// Phone Letter Combinations
-        /// https://leetcode.com/problems/letter-combinations-of-a-phone-numbe
+        /// https://leetcode.com/problems/letter-combinations-of-a-phone-number
         /// </summary>
         public static IList<string> LetterCombinations(string digits)
         {

@@ -12,7 +12,7 @@
 
         /// <summary>
         /// Meeting Rooms II
-        /// https://leetcode.com/problems/meeting-rooms-ii/description
+        /// https://leetcode.com/problems/meeting-rooms-ii
         /// </summary>
         public int MinMeetingRooms(int[][] intervals)
         {
@@ -72,7 +72,7 @@
 
         /// <summary>
         /// Top K Frequent Elements
-        /// https://leetcode.com/problems/top-k-frequent-elements/submissions/1884335693/
+        /// https://leetcode.com/problems/top-k-frequent-elements
         /// </summary>
         public IList<int> TopKFrequent(int[] nums, int k)
         {

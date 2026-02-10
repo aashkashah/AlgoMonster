@@ -260,8 +260,6 @@
         /// Output: 4
         /// Explanation: Either replace the 'X's with 'Y's, or replace the 'Y's with 'X's
         /// </summary>
-        /// <param name="s"></param>
-        /// <param name="k"></param>
         /// <returns></returns>
         public static int CharacterReplacement(string s, int k)
         {
@@ -365,7 +363,7 @@
 
         /// <summary>
         ///  Maximum Average Subarray I
-        ///  https://leetcode.com/problems/maximum-average-subarray-i/description/?envType=problem-list-v2&envId=sliding-window
+        ///  https://leetcode.com/problems/maximum-average-subarray-i
         /// </summary>
         public static double FindMaxAverage(int[] nums, int k)
         {
@@ -401,7 +399,7 @@
         /// <summary>
         /// Fixed size sliding window
         /// Diet plan performance
-        /// https://leetcode.com/problems/diet-plan-performance/description/?envType=problem-list-v2&envId=sliding-window
+        /// https://leetcode.com/problems/diet-plan-performance
         /// </summary>
         public static int DietPlanPerformance(int[] calories, int k, int lower, int upper)
         {
@@ -416,36 +414,25 @@
 
             if (k > calories.Length) return 0;
 
-            int l = 0, r = k - 1;
+            int l = 0;
             var runningSum = 0;
             var calPoints = 0;
             // initialize
-            for(int i = 0; i <= r; i++) 
+            for(int i = 0; i < k; i++) 
             {
                 runningSum += calories[i];
             }
             updateCalories(runningSum);
 
             // sliding window
-            l = 1; r = r + 1;
-            while (r < calories.Length)
-            {
-                runningSum = runningSum - calories[l - 1] + calories[r];
-                updateCalories(runningSum);
-                l++; r++;
-            }
-
-            // better approach than above sliding window for loop
-            // 6 5 0 0
             for(int i = k; i < calories.Length; i++) // i = k = cal[2] = 0
             {
                 // sum = sum - cal[2-2] = 0
                 // l++ l = 3, cal[3] = 0
                 // sum = sum - cal[3-20]
-                runningSum = runningSum - calories[i - k];
+                runningSum = runningSum - calories[i - k] + calories[i];
                 updateCalories(runningSum);
             }
-            // approach ends
 
             void updateCalories(int sum)
             {
@@ -480,7 +467,7 @@
         }
 
         /// <summary>
-        /// TO DO
+        /// TO DO -- HARD difficulty
         /// https://leetcode.com/problems/minimum-window-substring/
         /// Input: s = "ADOBECODEBANC", t = "ABC"
         /// Output: "BANC"
@@ -564,7 +551,7 @@
             {
                 if (IsVowel(s[i]))
                 {
-                    if (dict.TryGetValue(s[i], out var count))
+                    if (dict.ContainsKey(s[i]))
                     {
                         dict[s[i]]++;
                     }
@@ -586,7 +573,6 @@
                     if (dict.ContainsKey(currChar))
                     {
                         dict[currChar]++;
-                        
                     }
                     else
                     {
@@ -622,7 +608,6 @@
         /// Max Consecutive Ones II
         /// https://leetcode.com/problems/max-consecutive-ones-ii
         /// </summary>
-
         public static int FindMaxConsecutiveOnes(int[] nums)
         {
             // 1 0 1 1 0

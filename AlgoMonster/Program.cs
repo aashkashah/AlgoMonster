@@ -13,6 +13,7 @@ using AlgoMonster.LinkedList;
 using AlgoMonster.Arrays.Matrix;
 using AlgoMonster.Greedy;
 using AlgoMonster.Arrays.ArrayWithStacks;
+using AlgoMonster.Arrays;
 
 
 Console.WriteLine("Start the beautiful challenege..");
@@ -79,7 +80,7 @@ Console.WriteLine("Start the beautiful challenege..");
 
 //var result = DeletionDistance.FindDeletionDistance("dog", "frog");
 
-//var result = SlidingWindow.CharacterReplacement("XXYYYXX", 2);
+var result = SlidingWindow.CharacterReplacement("XXYYYXX", 2);
 //var result = BinarySearch.SearchInsert([1, 3, 5, 6, 7, 8], 2);
 
 //var res = Backtracking_Subsets.GenerateSubsets([1, 2, 3, 4, 5, 6]);
@@ -135,6 +136,10 @@ Console.WriteLine("Start the beautiful challenege..");
 
 //var res = TopoSort.FindOrder(6, [[2, 3], [1, 2], [0, 1], [0, 4], [4, 5], [5, 1]]);
 
-var res = ArrayWStack.MinRemoveToMakeValid("lee(t(c)o)de)");
+//var res = ArrayWStack.MinRemoveToMakeValid("lee(t(c)o)de)");
+
+//var res = ArrayMisc.StringShift("yisxjwry", [[1, 8], [1, 4], [1, 3], [1, 6], [0, 6], [1, 4], [0, 2], [0, 1]]);
+
+//var res = SlidingWindow.MaximumUniqueSubarray([5, 2, 1, 2, 5, 2, 1, 2, 5]);
 
 Console.WriteLine("Challenge accomplished. You rock!");

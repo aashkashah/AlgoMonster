@@ -1,16 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Text;
 
 namespace AlgoMonster.Arrays.ArrayWithStacks
 {
+    /// <summary>
+    /// 682. Baseball Game https://leetcode.com/problems/baseball-game/description
+    /// </summary>
     public static class ArrayWStack
     {
         /// <summary>
         /// Make The String Great
-        /// https://leetcode.com/problems/make-the-string-great/?envType=problem-list-v2&envId=stack
+        /// https://leetcode.com/problems/make-the-string-great
         /// Input: s = "leEeetcode"
         /// Output: "leetcode"
         /// Explanation: In the first step, either you choose i = 1 or i = 2, both will result "leEeetcode" to be reduced to "leetcode"
@@ -180,8 +179,7 @@ namespace AlgoMonster.Arrays.ArrayWithStacks
         }
 
         /// <summary>
-        /// Baseball game
-        /// https://leetcode.com/problems/baseball-game/description
+        /// 682. Baseball Game https://leetcode.com/problems/baseball-game/description
         /// </summary>
         public static int CalPoints(string[] operations)
         {

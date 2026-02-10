@@ -62,7 +62,7 @@
         /// You must write an algorithm with O(log n) runtime c
         /// Input: nums = [1,3,5,6], target = 5
         /// Output: 2
-        /// https://leetcode.com/problems/search-insert-position/description/?envType=problem-list-v2&envId=array
+        /// https://leetcode.com/problems/search-insert-position
         /// </summary>
         /// <param name="nums"></param>
         /// <param name="target"></param>
@@ -97,7 +97,7 @@
 
         /// <summary>
         /// Find Peak element
-        /// https://leetcode.com/problems/find-peak-elemen
+        /// https://leetcode.com/problems/find-peak-element
         /// </summary>
         public static int FindPeakElement(int[] nums)
         {

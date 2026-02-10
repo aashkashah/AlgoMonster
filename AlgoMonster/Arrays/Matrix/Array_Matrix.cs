@@ -2,11 +2,15 @@
 
 namespace AlgoMonster.Arrays.Matrix
 {
+    /// <summary> 
+    /// 1380. Lucky Numbers in a Matrix https://leetcode.com/problems/lucky-numbers-in-a-matrix
+    /// 54. Spiral Matrix https://leetcode.com/problems/spiral-matrix
+    /// </summary>
     public static class Array_Matrix
     {
         /// <summary>
-        /// Lucky number in a matrix
-        /// https://leetcode.com/problems/lucky-numbers-in-a-matrix/description
+        /// 1380. Lucky Numbers in a Matrix
+        /// https://leetcode.com/problems/lucky-numbers-in-a-matrix
         /// </summary>
         public static IList<int> LuckyNumbers(int[][] matrix)
         {
@@ -48,8 +52,8 @@ namespace AlgoMonster.Arrays.Matrix
         }
 
         /// <summary>
-        /// Spiral Matrix
-        /// https://leetcode.com/problems/spiral-matrix/description
+        /// 54. Spiral Matrix
+        /// https://leetcode.com/problems/spiral-matrix
         /// </summary>
         public static IList<int> SpiralOrder(int[][] matrix)
         {
@@ -123,7 +127,7 @@ namespace AlgoMonster.Arrays.Matrix
 
         /// <summary>
         /// Spiral Matrix
-        /// https://leetcode.com/problems/spiral-matrix/description
+        /// https://leetcode.com/problems/spiral-matrix
         /// </summary>
         public static IList<int> SpiralOrderCleanerVersion(int[][] matrix)
         {

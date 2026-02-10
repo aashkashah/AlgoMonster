@@ -1,13 +1,20 @@
 ﻿using AlgoMonster.Tree.Base;
-using static AlgoMonster.Mocks.Nov2725;
 using static AlgoMonster.Tree.Base.Tree;
 
 namespace AlgoMonster.Tree._3.Bottom_Up
 {
+    /// <summary>
+    /// 104. Maximum Depth of Binary Tree https://leetcode.com/problems/maximum-depth-of-binary-tree
+    /// 110. Balanced Binary Tree https://leetcode.com/problems/balanced-binary-tree
+    /// 124. Binary Tree Maximum Path Sum https://leetcode.com/problems/binary-tree-maximum-path-sum
+    /// 543. Diameter of Binary Tree https://leetcode.com/problems/diameter-of-binary-tree/description/
+    /// 687. Longest Univalue Path https://leetcode.com/problems/longest-univalue-path
+    /// </summary>
     public static class BottomUp
     {
         static int _MaxPathSum = int.MinValue;
         static int _MaxUniValuePath = int.MinValue;
+
         /// <summary>
         ///           6
         ///     1            2
@@ -16,6 +23,7 @@ namespace AlgoMonster.Tree._3.Bottom_Up
         /// Given the root of a binary tree, return its depth.
         /// The depth of a binary tree is defined as the number of nodes along the longest path from the 
         /// root node down to the farthest leaf node.
+        /// 104. Maximum Depth of Binary Tree https://leetcode.com/problems/maximum-depth-of-binary-tree
         /// </summary>
         public static int MaximumDepthOfBinaryTree(TreeNode node)
         {
@@ -39,7 +47,7 @@ namespace AlgoMonster.Tree._3.Bottom_Up
         /// <summary>
         /// It is a type of binary tree in which the difference between 
         /// the height of the left and the right subtree for each node is either 0 or 1. 
-        /// https://leetcode.com/problems/balanced-binary-tree/description/
+        /// https://leetcode.com/problems/balanced-binary-tree
         /// </summary>
         public static bool IsBalancedBinaryTree(TreeNode node)
         {
@@ -71,7 +79,7 @@ namespace AlgoMonster.Tree._3.Bottom_Up
         /// The diameter of a binary tree is the length of the longest path between any two nodes in a tree.
         /// This path may or may not pass through the root.
         /// The length of a path between two nodes is represented by the number of edges between them.
-        /// https://leetcode.com/problems/diameter-of-binary-tree/
+        /// 543. Diameter of Binary Tree https://leetcode.com/problems/diameter-of-binary-tree/
         /// <param name="node"></param>
         /// <returns></returns>
         public static int DiameterOfBinaryTree(TreeNode node)
@@ -99,7 +107,7 @@ namespace AlgoMonster.Tree._3.Bottom_Up
 
         /// <summary>
         ///  Maximum Depth of N-ary Tree
-        ///  https://leetcode.com/problems/maximum-depth-of-n-ary-tree/description
+        ///  https://leetcode.com/problems/maximum-depth-of-n-ary-tree
         /// </summary>
         public static int MaxDepthNAryTree(NAryTree root)
         {
@@ -131,8 +139,8 @@ namespace AlgoMonster.Tree._3.Bottom_Up
 
 
         /// <summary>
-        /// Binary Tree Maximum Path Sum
-        /// https://leetcode.com/problems/binary-tree-maximum-path-sum/description
+        /// 124. Binary Tree Maximum Path Sum
+        /// https://leetcode.com/problems/binary-tree-maximum-path-sum
         /// 
         /// Definition of a path (from the problem)
         /// A path is a sequence of nodes where each pair of adjacent nodes has an edge connecting them.
@@ -171,7 +179,7 @@ namespace AlgoMonster.Tree._3.Bottom_Up
 
         /// <summary>
         /// Longest Univalue Path
-        /// https://leetcode.com/problems/longest-univalue-path/description
+        /// https://leetcode.com/problems/longest-univalue-path
         /// </summary>
         public static int LongestUnivaluePath(TreeNode node)
         {
@@ -182,8 +190,6 @@ namespace AlgoMonster.Tree._3.Bottom_Up
 
         private static int LongestUnivaluePathHelper(TreeNode node, int parent)
         {
-            if (node == null) return 0;
-
             // return value
             if (node == null) return 0;
 

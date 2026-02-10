@@ -1,59 +1,61 @@
-﻿namespace AlgoMonster.Arrays
+﻿using System.Text;
+
+namespace AlgoMonster.Arrays
 {
+    /// <summary>
+    /// 163. Missing Ranges https://leetcode.com/problems/missing-ranges
+    /// 1200. Minimum Absolute Difference https://leetcode.com/problems/minimum-absolute-difference
+    /// </summary>
     public static class ArrayMisc
     {
         /// <summary>
-        ///  Missing Ranges
-        ///  https://leetcode.com/problems/missing-ranges/description/?envType=problem-list-v2&envId=array
+        /// 163. Missing Ranges https://leetcode.com/problems/missing-ranges
         /// </summary>
-        public static List<List<int>> FindMissingRanges(int[] nums, int lower, int upper) 
+        public static IList<IList<int>> FindMissingRanges(int[] nums, int lower, int upper)
         {
-            var res = new List<List<int>>();
-            // 0 1 3 50 75
-            //        ^ ^ 
 
-            // -1 lw = -2 up 50
-            //   -2 -2 , 0 50
+            var res = new List<IList<int>>();
+
+            if (nums.Count() == 0)
+            {
+                res.Add(new List<int>() { lower, upper });
+                return res;
+            }
 
             // single element
             if (nums.Count() == 1)
             {
-                if (lower - nums[0] > 1)
-                {
-                    res.Add(new List<int>() { lower, lower });
-                }
-                if(upper - nums[0] > 1)
-                {
-                    res.Add(new List<int>() {upper, upper });
-                }
+                if (lower - nums[0] > 1) res.Add(new List<int>() { lower, upper });
+
+                if (upper - nums[0] > 1) res.Add(new List<int>() { upper, upper });
+
                 return res;
             }
 
-            var left = 0;
-            var right = 1;
+            var len = nums.Length;
 
-            while(right < nums.Length -1)
+            // first element 
+            if (lower - nums[0] > 1) res.Add(new List<int> { lower, nums[0] - 1 });
+
+            for (int i = 1; i < len; i++)
             {
                 // check right - left
-                if (nums[right] - nums[left] > 1)
+                if (nums[i] - nums[i - 1] > 1)
                 {
-                    // missing num found
-                    var elem = new List<int>() { nums[left]+1, nums[right]-1 };
-                    res.Add(elem);
+                    var el = new List<int> { nums[i - 1] + 1, nums[i] - 1 };
+                    res.Add(el);
                 }
-                left++;
-                right++;
             }
-            if(upper - nums[right] > 1)
+            if (upper - nums[len - 1] > 1)
             {
-                res.Add(new List<int>() { nums[right]+1, upper });
+                res.Add(new List<int>() { nums[len - 1] + 1, upper });
             }
 
             return res;
         }
 
         /// <summary>
-        /// Minimum Absolute Difference
+        /// 1200 Minimum Absolute Difference
         /// https://leetcode.com/problems/minimum-absolute-difference/description
         /// Input: arr = [4,2,1,3]
         /// Output: [[1, 2],[2, 3],[3, 4]]
@@ -124,6 +126,77 @@
                 nums[index] = 2;
                 index++;
             }
+        }
+
+
+        public static string StringShift(string s, int[][] shift)
+        {
+            // abc
+            // bca
+            // [[1,1],[1,1],[0,2],[1,3]]
+            // l = 2
+            // r = 5
+            // r =  3
+            // abcdefg
+            //  left = 3
+            // defgabc
+            // right = 3
+            // efgabcd
+
+            var l = 0;
+            var r = 0;
+            var shiftLeft = false;
+
+            for (int i = 0; i < shift.Length; i++)
+            {
+                if (shift[i][0] == 0)
+                {
+                    // left
+                    l += shift[i][1];
+                }
+                else
+                {
+                    r += shift[i][1];
+                }
+            }
+
+            var len = s.Length;
+            if (l > r)
+            {
+                // shifting left
+                l = (l - r) % len;
+                shiftLeft = true;
+            }
+            else
+            {
+                r = (r - l) % len;
+            }
+
+            var res = new StringBuilder();
+            if (shiftLeft)
+            {
+                for (int i = l; i < s.Length; i++)
+                {
+                    res.Append(s[i]);
+                }
+                for (int i = 0; i < l; i++)
+                {
+                    res.Append(s[i]);
+                }
+            }
+            else
+            {
+                for (int i = s.Length - r; i < s.Length; i++)
+                {
+                    res.Append(s[i]);
+                }
+                for (int i = 0; i < s.Length - r; i++)
+                {
+                    res.Append(s[i]);
+                }
+            }
+
+            return res.ToString();
         }
 
     }
