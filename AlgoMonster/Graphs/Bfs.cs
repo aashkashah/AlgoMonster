@@ -40,46 +40,71 @@
             if(sentence1.Length != sentence2.Length) return false;
 
             // create graph using each pair of similarPairs
-            Dictionary<string, HashSet<string>> adj = new Dictionary<string, HashSet<string>>();
+            var adj = new Dictionary<string, HashSet<string>>();
 
-
+            
             foreach (var pair in similarPairs)
             {
-                if (!adj.TryGetValue(pair[0], out var set1))
-                {
-                    set1 = new HashSet<string>();
-                    adj[pair[0]] = set1;
-                }
-                set1.Add(pair[1]);
+                var a = pair[0];
+                var b = pair[1];
 
-                if (!adj.TryGetValue(pair[1], out var set2))
+                if(!adj.TryGetValue(a, out var setA))
                 {
-                    set2 = new HashSet<string>();
-                    adj[pair[1]] = set2;
+                    setA = new HashSet<string>();
+                    adj[a] = setA;
                 }
-                set2.Add(pair[0]);
+
+                if(!adj.TryGetValue(b, out var setB))
+                {
+                    setB = new HashSet<string>();
+                    adj[b] = setB;
+                }
+
+                setA.Add(b);
+                setB.Add(a);
             }
 
             for (int i = 0; i < sentence1.Length; i++)
             {
-                if (sentence1[i].Equals(sentence2[i]))
-                {
-                    continue;
-                }
-                //if (adj.ContainsKey(sentence1[i]) && adj.ContainsKey(sentence2[i]) &&
-                //        BfsSimilarSentences(sentence1[i], adj, sentence2[i]))
-                //{
-                //    continue;
-                //}
-                return false;
+                var w1 = sentence1[i];
+                var w2 = sentence2[i];
+
+                if(w1 == w2) continue;
+
+                if(!adj.ContainsKey(w1)) return false;
+
+                var visited = new HashSet<string>();
+
+                if (!DfsSimilarSentences(w1, adj, visited, w2)) return false;
             }
 
-            return false;
+            return true;
 
         }
 
-        private static void BfsSimilarSentences(string source, HashSet<string> abj, string dest)
+        private static bool DfsSimilarSentences
+        (
+            string source, 
+            Dictionary<string, HashSet<string>> adj,
+            HashSet<string> visited,
+            string dest
+        )
         {
+            if (source == dest) return true;
+
+            // already visited, we exhausted search
+            if (!visited.Add(source)) return false;
+
+            // no mapping exist
+            if(!adj.TryGetValue(source, out var neighbors)) return false;
+
+            foreach(var n in neighbors)
+            {
+                if (!visited.Contains(n) && DfsSimilarSentences(n, adj, visited, dest))
+                    return true;
+            }
+
+            return false;
 
         }
 

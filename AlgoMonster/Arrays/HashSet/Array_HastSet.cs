@@ -347,5 +347,48 @@
 
             return true;
         }
+
+        public static string CustomSortString(string order, string s)
+        {
+
+            var map = new Dictionary<char, int>();
+
+            for (int i = 0; i < order.Length; i++)
+            {
+                if (!map.ContainsKey(order[i]))
+                    map.Add(order[i], i);  // b c a f g 
+            }
+
+            var hash = new HashSet<int>();
+            for (int i = 0; i < s.Length; i++)
+            {
+                if (!hash.Contains(s[i]))
+                {
+                    hash.Add(s[i]); // a b c d
+                }
+            }
+
+            foreach (var elem in map)
+            {
+                // remove -- not common
+                if (!hash.Contains(elem.Key)) // b c a   
+                {
+                    map.Remove(elem.Key);
+                }
+                else
+                {
+                    // remove from hash..
+                    // dictionary already has this character
+                    hash.Remove(elem.Key);  // d
+                }
+            }
+
+            var sortedMap = map.OrderBy(x => x.Value).ToDictionary(); // b c a
+            var str = string.Join("", sortedMap.Keys.ToString()); // bca
+
+            str += string.Join("", hash.ToString()); //bcad
+
+            return str;
+        }
     }
 }

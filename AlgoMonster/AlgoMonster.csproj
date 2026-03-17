@@ -9,6 +9,7 @@
 
   <ItemGroup>
     <Folder Include="Graphs\Tier1\3.StateSpace_BFS\" />
+    <Folder Include="C#ToPython\" />
   </ItemGroup>
 
 </Project>

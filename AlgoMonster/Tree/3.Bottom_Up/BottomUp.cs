@@ -9,11 +9,13 @@ namespace AlgoMonster.Tree._3.Bottom_Up
     /// 124. Binary Tree Maximum Path Sum https://leetcode.com/problems/binary-tree-maximum-path-sum
     /// 543. Diameter of Binary Tree https://leetcode.com/problems/diameter-of-binary-tree/description/
     /// 687. Longest Univalue Path https://leetcode.com/problems/longest-univalue-path
+    /// 2265. Count Nodes Equal to Average of Subtree https://leetcode.com/problems/count-nodes-equal-to-average-of-subtree
     /// </summary>
     public static class BottomUp
     {
         static int _MaxPathSum = int.MinValue;
         static int _MaxUniValuePath = int.MinValue;
+        static int _countNodes = 0;
 
         /// <summary>
         ///           6
@@ -201,6 +203,35 @@ namespace AlgoMonster.Tree._3.Bottom_Up
 
             // if value of parent and child same, return that path, otherwise 0
             return node.val == parent ? Math.Max(left, right) + 1 : 0;
+        }
+
+
+        /// <summary>
+        /// 2265. https://leetcode.com/problems/count-nodes-equal-to-average-of-subtree
+        /// </summary>
+        public static int AverageOfSubtree(TreeNode root)
+        {
+            helper(root);
+            return _countNodes;
+        }
+
+        private static (int cursum, int count) helper(TreeNode node)
+        {
+            // return condition
+            if (node == null) return (0, 0);
+
+            // computation
+            var left = helper(node.left);
+            var right = helper(node.right);
+
+            var nodeSum = left.Item1 + right.Item1 + node.val;
+            var nodeCount = left.Item2 + right.Item2 + 1;
+
+            if ((nodeSum / nodeCount) == node.val) _countNodes++;
+
+            // recursion
+            return (nodeSum, nodeCount);
+
         }
     }
 }

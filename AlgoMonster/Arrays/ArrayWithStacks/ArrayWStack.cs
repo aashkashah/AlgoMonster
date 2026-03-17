@@ -218,7 +218,7 @@ namespace AlgoMonster.Arrays.ArrayWithStacks
         }
 
         /// <summary>
-        /// Crwaler Log Folder
+        /// Crawler Log Folder
         /// https://leetcode.com/problems/crawler-log-folder/
         /// Input: logs = ["d1/","d2/","../","d21/","./"]
         /// Output: 2

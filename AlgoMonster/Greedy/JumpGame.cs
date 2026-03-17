@@ -14,12 +14,12 @@ namespace AlgoMonster.Greedy
         {
             int maxreach = 0;
 
-            for(int i =0; i < nums.Length; i++)
+            for(int i = 0; i < nums.Length; i++)
             {
                 if (i > maxreach)
                     return false;
 
-                maxreach = Math.Max(maxreach, i+ nums[i]);
+                maxreach = Math.Max(maxreach, i + nums[i]);
             }
 
             return true;

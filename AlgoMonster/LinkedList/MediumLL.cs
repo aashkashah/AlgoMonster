@@ -1,5 +1,8 @@
 ﻿namespace AlgoMonster.LinkedList
 {
+    /// <summary>
+    /// 143. Reorder List https://leetcode.com/problems/reorder-list/
+    /// </summary>
     public static class MediumLL
     {
         /// <summary>
@@ -7,7 +10,7 @@
         /// input [0, 1, 2, 3, 4, 5, 6]
         /// output [0, 6, 1, 5, 2, 4, 3]
         /// [0, n-1, 1, n-2, 2, n-3, ...]
-        /// https://leetcode.com/problems/reorder-list/description/?envType=problem-list-v2&envId=stack
+        /// https://leetcode.com/problems/reorder-list
         /// </summary>
         /// <param name="head"></param>
         public static void ReorderList(ListNode head)

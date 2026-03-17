@@ -1,11 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace AlgoMonster.Arrays.PrefixSum
+﻿namespace AlgoMonster.Arrays.PrefixSum
 {
+    /// <summary>
+    /// 238. Product of Array Except Self https://leetcode.com/problems/product-of-array-except-self/description/
+    /// </summary>
     public static class PrefixSumQ
     {
         /// <summary>
@@ -26,5 +23,40 @@ namespace AlgoMonster.Arrays.PrefixSum
 
             return -1;
         }
+        /// <summary>
+        /// 238. Product of Array Except Self
+        /// https://leetcode.com/problems/product-of-array-except-self/description/
+        /// </summary>>
+        /// <returns></returns>
+        public static int[] ProductExceptSelf(int[] nums)
+        {
+            // i = 0
+            // 1 2 3 4  nums
+            // 1 2 6 24 prefix
+            //    24  12  4  suffix  
+            // 24 12 8 6  result 
+
+            int n = nums.Length;
+            int[] ans = new int[n];
+
+            // 1) Prefix pass: ans[i] = product of nums[0..i-1]
+            int prefix = 1;
+            for (int i = 0; i < n; i++)
+            {
+                ans[i] = prefix;
+                prefix *= nums[i];
+            }
+
+            // 2) Suffix pass: multiply by product of nums[i+1..n-1]
+            int suffix = 1;
+            for (int i = n - 1; i >= 0; i--)
+            {
+                ans[i] *= suffix;
+                suffix *= nums[i];
+            }
+
+            return ans;
+        }
+
     }
 }

@@ -2,9 +2,12 @@
 
 namespace AlgoMonster.Tree._5.Level_Order_BFS
 {
-    // level orer traveral
-    // zig zag level order traversal
-    // binary tree right side view
+    /// <summary>
+    /// 199. Binary Tree Right Side View https://leetcode.com/problems/binary-tree-right-side-view/
+    /// 637. Average of Levels in Binary Tree https://leetcode.com/problems/average-of-levels-in-binary-tree/
+    /// 103. Binary Tree Zigzag Level Order Traversal https://leetcode.com/problems/binary-tree-zigzag-level-order-traversal
+    /// 314. Binary Tree Vertical Order Traversal https://leetcode.com/problems/binary-tree-vertical-order-traversal/description/
+    /// </summary>
     public static class LevelOrderTraversal
     {   
 
@@ -63,7 +66,7 @@ namespace AlgoMonster.Tree._5.Level_Order_BFS
 
         /// <summary>
         /// Binary Tree Zigzag Level Order Traversal
-        /// https://leetcode.com/problems/binary-tree-zigzag-level-order-traversal/description/
+        /// https://leetcode.com/problems/binary-tree-zigzag-level-order-traversal
         ///            6
         ///     1             2
         /// 5       3     0      8
@@ -104,7 +107,7 @@ namespace AlgoMonster.Tree._5.Level_Order_BFS
         }
 
         /// <summary>
-        /// Binary Tree Right Side View
+        /// 199. Binary Tree Right Side View
         /// https://leetcode.com/problems/binary-tree-right-side-view/
         /// </summary>
         public static IList<int> RightSideView(TreeNode root)
@@ -121,12 +124,12 @@ namespace AlgoMonster.Tree._5.Level_Order_BFS
 
                 for(int i = 0; i < levelCount; i++)
                 {
-                    if(i == levelCount - 1)
-                    {
-                        res.Add(queue.Peek().val);  
-                    }
-
                     var curr = queue.Dequeue();
+
+                    if (i == levelCount - 1)
+                    {
+                        res.Add(curr.val);  
+                    }
 
                     if(curr.left != null) queue.Enqueue(curr.left);
                     if(curr.right != null) queue.Enqueue(curr.right);
@@ -215,6 +218,50 @@ namespace AlgoMonster.Tree._5.Level_Order_BFS
             }
 
             return maximalLvl;
+        }
+
+        /// <summary>
+        /// 314. Binary Tree Vertical Order Traversal
+        /// https://leetcode.com/problems/binary-tree-vertical-order-traversal/description/
+        /// </summary>
+        public static IList<IList<int>> VerticalOrder(TreeNode root)
+        {
+            // travrese with BFs, tracking (node, col)
+            // storve values into Dictionary(int, List<int>>()) colTovalues
+            // track mincol, maxcol
+            // output columns from mincol and maxcol
+
+            var res = new List<IList<int>>();
+            if (root == null) return res;
+
+            var map = new Dictionary<int, List<int>>();
+            var q = new Queue<(TreeNode node, int col)>();
+            q.Enqueue((root, 0));
+
+            int mincol = 0, maxcol = 0;
+
+            while (q.Count > 0)
+            {
+                var (node, col) = q.Dequeue();
+
+                if (!map.ContainsKey(col)) map[col] = new List<int>();
+                map[col].Add(node.val);
+
+                if (node.left != null) q.Enqueue((node.left, col - 1));
+                if (node.right != null) q.Enqueue((node.right, col + 1));
+
+                if (col < mincol) mincol = col;
+                if (col > maxcol) maxcol = col;
+
+            }
+
+            for (int c = mincol; c <= maxcol; c++)
+            {
+                res.Add(map[c]);
+            }
+
+            return res;
+
         }
 
     }

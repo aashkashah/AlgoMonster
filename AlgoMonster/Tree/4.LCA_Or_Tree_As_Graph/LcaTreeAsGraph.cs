@@ -3,6 +3,10 @@ using static AlgoMonster.Tree.Base.Tree;
 
 namespace AlgoMonster.Tree._4.LCA_Or_Tree_As_Graph
 {
+    /// <summary>
+    /// 236. Lowest Common Ancestor of a Binary Tree https://leetcode.com/problems/lowest-common-ancestor-of-a-binary-tree
+    /// 1676. Lowest Common Ancestor of a Binary Tree IV https://leetcode.com/problems/lowest-common-ancestor-of-a-binary-tree-iv
+    /// </summary>
     public static class LcaTreeAsGraph
     {
         /// <summary>

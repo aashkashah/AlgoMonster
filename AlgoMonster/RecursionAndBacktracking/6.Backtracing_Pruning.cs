@@ -81,13 +81,15 @@ namespace AlgoMonster.RecursionAndBacktracking
 
             for (int i = index; i < nums.Length && remain >= nums[i]; i++)
             {
+                // skip duplicates
+                if (i > index && nums[i] == nums[i - 1]) continue;
+                
                 //choose
-                var elem = nums[i];
                 currList.Add(nums[i]);
 
                 CombinationSum2Helper(nums, i + 1, remain - nums[i], currList, ref res);
 
-                currList.Remove(elem);
+                currList.RemoveAt(currList.Count - 1);
             }
         }
 

@@ -6,11 +6,14 @@ using System.Threading.Tasks;
 
 namespace AlgoMonster.Search
 {
+    /// <summary>
+    /// 1011. Capacity To Ship Packages Within D Days https://leetcode.com/problems/capacity-to-ship-packages-within-d-days/
+    /// </summary>
     public static class BinarySearchGreedily
     {
 
         /// <summary>
-        /// Capacity To Ship Packages Within D Days 
+        /// 1011. Capacity To Ship Packages Within D Days 
         /// https://leetcode.com/problems/capacity-to-ship-packages-within-d-days
         /// </summary>
         public static int ShipWithinDays(int[] weights, int days)

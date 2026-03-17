@@ -164,30 +164,38 @@ namespace AlgoMonster.Basic
 
 
         /// <summary>
-        /// Contains Duplicate II 
+        /// Contains Duplicate II https://leetcode.com/problems/contains-duplicate-ii/
         /// Goal: return true if there exist i != j with nums[i] == nums[j] and |i - j| <= k.
         /// {1,2,3,1}, k = 3 // true
         /// {1,2,3,1,2,3}, k = 2 // false
         /// </summary>
-        /// <param name="nums"></param>
-        /// <param name="k"></param>
-        /// <returns></returns>
         public static bool ContainsNearbyDuplicate(int[] nums, int k)
         {
-            var hash = new HashSet<int>();
-            for(int i = 0; i < k;  i++)
+            var map = new Dictionary<int, List<int>>();
+
+            for(int i = 0; i < nums.Length; i++)
             {
-                if (!hash.Contains(nums[i]))
-                    hash.Add(nums[i]);
-                else if (hash.Contains(nums[i]))
-                    return false;
-            }
-            for(int right = k; right < nums.Count(); right++)
-            {
-                int left = right - k;
-                hash.Remove(nums[left]);
+                if (map.TryGetValue(nums[i], out var indices))
+                {
+                    indices.Add(i);
+                    map[nums[i]] = indices;
+                }
+                else
+                {
+                    map.Add(nums[i], new List<int>() { i });
+                }
             }
 
+            foreach(var item in map)
+            {
+                if(item.Value.Count > 2)
+                {
+                    for(int i = 0; i < item.Value.Count - 1; i++)
+                    {
+                        if (item.Value[i + 1] - item.Value[i] <= k) return true;
+                    }
+                }
+            }
 
             return false;
         }
