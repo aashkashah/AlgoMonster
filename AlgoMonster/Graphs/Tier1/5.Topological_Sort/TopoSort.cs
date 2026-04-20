@@ -46,7 +46,7 @@
                     q.Enqueue(course);
             }
 
-            // itterate queue to try decouple dependencies 
+            // iterate queue to try decouple dependencies 
             int idx = 0;
             while (q.Count > 0)
             {

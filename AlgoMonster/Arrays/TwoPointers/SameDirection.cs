@@ -56,8 +56,6 @@ namespace AlgoMonster.Arrays.TwoPointers
         /// Your function should modify the list in place so that the first three elements become 0, 1, 2.
         /// Return 3 because the new length is 3.
         /// </summary>
-        /// <param name="s"></param>
-        /// <returns></returns>
         public static int RemoveDuplicates(int[] nums)
         {
             // 0, 0, 1, 1, 1, 2, 2
@@ -66,7 +64,7 @@ namespace AlgoMonster.Arrays.TwoPointers
             // left and right pointer
             // left stays at index that needs to be updated
             // right ptr keeps going until different char is found
-            // if diff found, move left and update left tp this new char
+            // if diff found, move left and update left to this new char
             // right reaches end of nums
             // nullify remaining, return length
 
@@ -173,9 +171,6 @@ namespace AlgoMonster.Arrays.TwoPointers
         /// It does not matter what you leave beyond the returned k(hence they are underscores).
         /// Note that the five elements can be returned in any order.
         /// </summary>
-        /// <param name="nums"></param>
-        /// <param name="k"></param>
-        /// <returns></returns>
         public static int RemoveElements(int[] nums, int k)
         {
             // 3 2 2 3 5 4 3 , Val =3
@@ -209,8 +204,6 @@ namespace AlgoMonster.Arrays.TwoPointers
         /// So: count all numbers, 
         /// then for each x, if x+1 exists, candidate length = count[x] + count[x + 1].Take max.
         /// </summary>
-        /// <param name="nums"></param>
-        /// <returns></returns>
         public static int FindLHS(int[] nums)
         {
             Array.Sort(nums);

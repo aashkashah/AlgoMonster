@@ -134,5 +134,64 @@ namespace AlgoMonster.Tree._6.BST_Specific
             ClosestValueHelper(node.right, node.val, max, target);
 
         }
+
+        /// <summary>
+        /// 450. Delete Node in a BST
+        /// https://leetcode.com/problems/delete-node-in-a-bst
+        /// </summary>
+        public static TreeNode DeleteNode(TreeNode root, int key)
+        {
+
+            if (root == null) return null;
+
+            if(key > root.val)
+            {
+                root.right = DeleteNode(root.right, key);
+            }
+            else if (key < root.val)
+            {
+                root.left = DeleteNode(root.left, key);
+            }
+            else
+            {
+                // node is leaf node
+                if (root.left == null && root.right == null) return null;
+
+                // node has right subtree
+                else if(root.right != null)
+                {
+                    root.val = FindSuccessor(root);
+                    root.right = DeleteNode(root.right, root.val);
+                }
+
+                // node has left subtree
+                else
+                {
+                    root.val = FindPredecessor(root);
+                    root.left = DeleteNode(root.left, root.val);
+                }
+            }
+
+            return root;
+        }
+
+        private static int FindPredecessor(TreeNode node)
+        {
+            if (node == null || node.left == null) return -1;
+            // go one left, then all the way right
+            var cur = node.left;
+            while (cur.right != null) cur = cur.right;
+            return cur.val;
+        }
+
+        private static int FindSuccessor(TreeNode node)
+        {
+            // go one right then all the way left
+            if (node == null || node.right == null) return -1;
+            var cur = node.right;
+            while(cur.left != null) cur = cur.left;
+            return cur.val;
+        }
+            
     }
 }

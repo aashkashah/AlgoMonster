@@ -10,9 +10,6 @@ namespace AlgoMonster.Graphs.Tier1._1.Graph_Traversal
         /// </summary>
         public static bool HasPath(int[][] maze, int[] start, int[] destination)
         {
-
-
-
             return false;
         }
 

@@ -133,5 +133,37 @@ namespace AlgoMonster.Tree._7.Tree_Construction
             return node.val.ToString() + "," + Serialize(node.left) + Serialize(node.right);
         }
 
+        /// <summary>
+        /// 114. Flatten Binary Tree to Linked List
+        /// https://leetcode.com/problems/flatten-binary-tree-to-linked-list
+        /// </summary>
+        public static void Flatten(TreeNode root)
+        {
+
+            while (root != null)
+            {
+                if (root.left != null)
+                {
+
+                    // step 1. find the rightmost node in the left subtree
+                    TreeNode rightmost = root.left;
+                    while (rightmost.right != null)
+                    {
+                        rightmost = rightmost.right;
+                    }
+
+                    // step 2. connect rightmost -> root's orginal right child
+                    rightmost.right = root.right;
+
+                    // step 3. move left subtree to right
+                    root.right = root.left;
+                    root.left = null;
+                }
+
+                // step 4. advance - the left is now null, move right
+                root = root.right;
+            }
+        }
+
     }
 }

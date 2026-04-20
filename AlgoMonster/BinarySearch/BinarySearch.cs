@@ -64,9 +64,6 @@
         /// Output: 2
         /// https://leetcode.com/problems/search-insert-position
         /// </summary>
-        /// <param name="nums"></param>
-        /// <param name="target"></param>
-        /// <returns></returns>
         public static int SearchInsert(int[] nums, int target)
         {
             // | | |      

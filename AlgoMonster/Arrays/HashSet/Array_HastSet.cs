@@ -212,64 +212,42 @@
             return nums[nums.Length / 2];
         }
 
-        public IList<IList<int>> FindDifference(int[] nums1, int[] nums2)
+        public List<int> FindIntersection(int[] nums1, int[] nums2)
+        {
+            var hash1 = new HashSet<int>();
+            var res = new List<int>();
+
+            foreach (var el in nums1)
             {
-                // 1 2 3
-                // {1 3}
-                // 2 4 6
-                // {4 6}
-                var hash1 = new HashSet<int>();
-                var hash2 = new HashSet<int>();
-                var res = new List<IList<int>>();
-
-                foreach (var el in nums1)
-                {
-                    if (!hash1.Contains(el))
-                    {
-                        hash1.Add(el);
-                    }
-                }
-
-                foreach (var el in nums2)
-                {
-                    if (!hash2.Contains(el))
-                    {
-                        hash2.Add(el);
-                    }
-                }
-
-                foreach (var el in nums2)
-                {
-                    if (hash1.Contains(el))
-                    {
-                        hash1.Remove(el);
-                    }
-                }
-
-                foreach (var el in nums1)
-                {
-                    if (hash2.Contains(el))
-                    {
-                        hash2.Remove(el);
-                    }
-                }
-
-                var list = new List<int>();
-                foreach (var el in hash1)
-                {
-                    list.Add(el);
-                }
-                res.Add(list);
-                list.Clear();
-                foreach (var el in hash2)
-                {
-                    list.Add(el);
-                }
-                res.Add(list);
-
-                return res;
-
+                hash1.Add(el);
             }
+
+            foreach(var el in nums2)
+            {
+                if (hash1.Contains(el)) res.Add(el);
+            }
+
+            return res;
+        }
+
+        public List<int> FindDifference(int[] nums1, int[] nums2)
+        {
+            var hash1 = new HashSet<int>();
+            var res = new List<int>();
+
+            foreach (var el in nums1)
+            {
+                hash1.Add(el);
+            }
+
+            foreach(var el in nums2)
+            {
+                if (!hash1.Contains(el)) res.Add(el);
+            }
+
+            return res;
+
+        }
 
         public static int[,] FindPairsWithGivenDifference(int[] arr, int k)
         {

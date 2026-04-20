@@ -54,7 +54,7 @@
             var lastseen = new Dictionary<char, int>();
             int left = 0;
 
-            for(int right =0; right < s.Length; right++)
+            for(int right = 0; right < s.Length; right++)
             {
                 var ch = s[right];
 

@@ -66,7 +66,6 @@ namespace AlgoMonster.Tree._4.LCA_Or_Tree_As_Graph
         /// Given the root of a binary tree and two nodes p and q,
         /// return the number of edges in the shortest path between p and q.
         /// </summary>
-        /// <returns></returns>
         public static int DistanceBetweenNodes(TreeNode root, TreeNode p, TreeNode q)
         {
             var lca = FindLCA(root, p, q);
@@ -119,6 +118,38 @@ namespace AlgoMonster.Tree._4.LCA_Or_Tree_As_Graph
             if (leftlca == null) return rightlca;
             else return leftlca;
 
+        }
+
+        /// <summary>
+        /// 865. Smallest Subtree with all the Deepest Nodes
+        /// https://leetcode.com/problems/smallest-subtree-with-all-the-deepest-nodes
+        /// </summary>
+        public static TreeNode SubtreeWithAllDeepest(TreeNode root)
+        {
+            // bottom up approach, just as LCA
+            return DFS(root).node;
+        }
+
+        private static (TreeNode node, int depth) DFS(TreeNode node)
+        {
+            // base case: null contributes depth 0, no candidate
+            if (node == null) return (null, 0);
+
+            // recurse into both children
+            var (leftNode, leftdepth) = DFS(node.left);
+            var (rightNode, rightdepth) = DFS(node.right);
+
+            // left side deeper -> all deepest are on the left subtree
+            if (leftdepth > rightdepth)
+                return (leftNode, leftdepth + 1); // + 1 for the current level
+
+            // right side deeper
+            if (rightdepth > leftdepth)
+                return (rightNode, rightdepth + 1);
+
+            // equal depth -> deepest nodes span both sides,
+            // so current node is their LCA
+            return (node, leftdepth + 1);
         }
     }
 }

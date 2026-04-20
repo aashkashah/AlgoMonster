@@ -1,21 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace AlgoMonster.Design
+﻿namespace AlgoMonster.Design
 {
     /// <summary>
     /// Least Recently used cache
     /// https://leetcode.com/problems/lru-cache
-    /// 
-    /// Input
-    /// ["LRUCache", "put", "put", "get", "put", "get", "put", "get", "get", "get"]
-    /// [[2], [1, 1], [2, 2], [1], [3, 3], [2], [4, 4], [1], [3], [4]]
-    /// Output
-    /// [null, null, null, 1, null, -1, null, -1, 3, 4]
     /// </summary>
     public class LRUCache
     {
@@ -23,8 +10,6 @@ namespace AlgoMonster.Design
         {
             public int key;
             public int val;
-            public Node prev;
-            public Node next;
 
             public Node(int Key, int Val)
             {
@@ -34,86 +19,53 @@ namespace AlgoMonster.Design
         }
         
         private int _capacity = 0;
-        private Dictionary<int, Node> _map;
-        
-        private Node _head;
-        private Node _tail;
+
+        private Dictionary<int, LinkedListNode<Node>> _map;
+        private LinkedList<Node> _lru;
 
         public LRUCache(int capacity)
         {
             _capacity = capacity;
-            _map = new Dictionary<int, Node>(capacity);
-
-            _head = new Node(0, 0);
-            _tail = new Node(0, 0);
-            _head.next = _tail;
-            _tail.prev = _head;
+            _map = new Dictionary<int, LinkedListNode<Node>>(capacity);
         }
 
         public int Get(int key)
         {
-            if (!_map.TryGetValue(key, out var node)) return -1;
+            LinkedListNode<Node> node;
 
-            // mark recently used
-            Remove(node);
-            AddToFront(node);
-
-            return node.val;
+            if (_map.TryGetValue(key, out node))
+            {
+                var val = node.Value.val;
+                _lru.Remove(node);
+                _map[key] = new LinkedListNode<Node>(new Node(key, val));
+                _lru.AddFirst(_map[key]);
+                return val;
+            }
+            else
+            {
+                return -1;
+            }
         }
 
         public void Put(int key, int value)
         {
-            if (_capacity == 0) return;
-           
-            if(_map.TryGetValue(key,out var node))
+            if(_map.ContainsKey(key))
             {
-                // update existing + mark as most recent
-                node.val = value;
-                Remove(node);
-                AddToFront(node);
-                return;
+                // remove
+                _lru.Remove(_map[key]);
+                _map.Remove(key);
             }
 
-            // insert new
-            var newNode = new Node(key, value);
-            _map[key] = newNode;
-            AddToFront(newNode);
+            _map[key] = new LinkedListNode<Node>(new Node(key, value));
+            _lru.AddFirst(_map[key]);
 
-            // if over capacity, evict LRU
-            if(_map.Count > -_capacity)
+            if(_map.Count > _capacity)
             {
-                var lru = _tail.prev;
-                Remove(lru);
-                _map.Remove(lru.key);
+                var lastkey = _lru.Last.Value.key;
+                _lru.RemoveLast();
+                _map.Remove(lastkey);
             }
         }
-
-        private void Remove(Node node)
-        {
-            // to understand
-
-            // Before:
-            // A <-> B <-> C
-            // After:
-            // A <-> C
-
-            // it's simply
-            // node.Prev = A
-            // node.Next = C
-            // A.next = C
-            // C.Prev = A
-
-            node.prev.next = node.next;
-            node.next.prev = node.prev;
-        }
-
-        private void AddToFront(Node node)
-        {
-            node.next = _head.next;
-            node.prev = _head;
-
-            _head.next.prev = node;
-            _head.next = node;
-        }
+       
     }
 }

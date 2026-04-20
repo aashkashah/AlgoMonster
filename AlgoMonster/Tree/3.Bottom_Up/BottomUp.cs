@@ -233,5 +233,37 @@ namespace AlgoMonster.Tree._3.Bottom_Up
             return (nodeSum, nodeCount);
 
         }
+
+        public static int LongestConsecutive(TreeNode root)
+        {
+            int result = 1;
+
+            Helper(root);
+            return result;
+
+            (int inc, int dec) Helper(TreeNode node)
+            {
+                if(node == null) return (0, 0); 
+
+                int inc = 1, dec = 1;
+
+                if(node.left != null)
+                {
+                    var left = Helper(node.left);
+                    if(node.left.val == node.val + 1) inc = Math.Max(inc, left.inc + 1);
+                    else if(node.left.val == node.val - 1) dec = Math.Max(dec, left.dec + 1);
+                }
+                if(node.right != null)
+                {
+                    var right = Helper(node.right);
+                    if (node.right.val == node.val + 1) inc = Math.Max(inc, right.inc + 1);
+                    else if (node.right.val == node.val - 1) dec = Math.Max(dec, right.dec + 1);
+                }
+
+                result = Math.Max(result, inc + dec - 1);
+
+                return (inc, dec);
+            }
+        }   
     }
 }

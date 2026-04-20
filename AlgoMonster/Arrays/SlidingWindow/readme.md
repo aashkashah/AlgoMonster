@@ -1,4 +1,4 @@
-﻿
+﻿These cover all 4 patterns.
 
 1 Longest substring without repeating characters
 2 Longest repeating character replacement
@@ -6,7 +6,10 @@
 4️ Subarray product < K
 5️ Subarrays with K distinct integers
 
-These cover all 4 patterns.
+Template 1: Fixed Window
+Template 2: Longest Valid Window
+Template 3: Count Valid Windows
+Template 4: Minimum Window
 
 
 1. Fixed Window Size
@@ -145,3 +148,5 @@ Sliding window doesn't work for arrays that contains negatives, zeros in additio
 e.g.
 560. Subarray Sum Equals K
 https://leetcode.com/problems/subarray-sum-equals-k/description
+
+

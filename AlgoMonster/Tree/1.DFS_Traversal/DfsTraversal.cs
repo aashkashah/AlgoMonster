@@ -38,8 +38,6 @@ namespace AlgoMonster.Tree._1.DFS_Traversal
         /// <summary>
         /// Same as SumOfLeftLeaves above, but via a flag
         /// </summary>
-        /// <param name="root"></param>
-        /// <returns></returns>
         public static int SumOfLeftLeaves2(TreeNode root)
         {
             return SumOfLeftLeaves2Helper(root, false);

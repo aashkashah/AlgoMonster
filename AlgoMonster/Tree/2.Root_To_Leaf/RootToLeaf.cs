@@ -37,7 +37,7 @@ namespace AlgoMonster.Tree._2.Root_To_Leaf
 
         /// <summary>
         /// Sum of Root To Leaf Binary Numbers
-        /// https://leetcode.com/problems/sum-of-root-to-leaf-binary-numbers/description
+        /// https://leetcode.com/problems/sum-of-root-to-leaf-binary-numbers
         /// </summary>
         public static int SumRootToLeaf(TreeNode root)
         {
@@ -67,7 +67,7 @@ namespace AlgoMonster.Tree._2.Root_To_Leaf
 
         /// <summary>
         /// Count Good Nodes in Binary Tree
-        /// https://leetcode.com/problems/count-good-nodes-in-binary-tree/description/
+        /// https://leetcode.com/problems/count-good-nodes-in-binary-tree
         /// </summary>
         public static int GoodNodes(TreeNode root)
         {

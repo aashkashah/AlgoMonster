@@ -6,7 +6,7 @@ namespace AlgoMonster.Tree._5.Level_Order_BFS
     /// 199. Binary Tree Right Side View https://leetcode.com/problems/binary-tree-right-side-view/
     /// 637. Average of Levels in Binary Tree https://leetcode.com/problems/average-of-levels-in-binary-tree/
     /// 103. Binary Tree Zigzag Level Order Traversal https://leetcode.com/problems/binary-tree-zigzag-level-order-traversal
-    /// 314. Binary Tree Vertical Order Traversal https://leetcode.com/problems/binary-tree-vertical-order-traversal/description/
+    /// 314. Binary Tree Vertical Order Traversal https://leetcode.com/problems/binary-tree-vertical-order-traversal
     /// </summary>
     public static class LevelOrderTraversal
     {   
@@ -222,7 +222,7 @@ namespace AlgoMonster.Tree._5.Level_Order_BFS
 
         /// <summary>
         /// 314. Binary Tree Vertical Order Traversal
-        /// https://leetcode.com/problems/binary-tree-vertical-order-traversal/description/
+        /// https://leetcode.com/problems/binary-tree-vertical-order-traversal
         /// </summary>
         public static IList<IList<int>> VerticalOrder(TreeNode root)
         {

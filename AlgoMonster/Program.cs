@@ -1,22 +1,4 @@
-﻿using AlgoMonster.Grid;
-using AlgoMonster.Heap;
-using AlgoMonster.Trie;
-using AlgoMonster.Mocks;
-using AlgoMonster.DynamicProgramming;
-using AlgoMonster.Arrays.SlidingWindow;
-using AlgoMonster.Search;
-using AlgoMonster.RecursionAndBacktracking;
-using AlgoMonster.Graphs.TopologicalSort;
-using AlgoMonster.Arrays.HashSet;
-using AlgoMonster.Arrays.TwoPointers;
-using AlgoMonster.LinkedList;
-using AlgoMonster.Arrays.Matrix;
-using AlgoMonster.Greedy;
-using AlgoMonster.Arrays.ArrayWithStacks;
-using AlgoMonster.Arrays;
-
-
-Console.WriteLine("Start the beautiful challenege..");
+﻿Console.WriteLine("Start the challenge..");
 
 //var h = new MinHeap<int>();
 //h.Push(4);
@@ -147,4 +129,7 @@ Console.WriteLine("Start the beautiful challenege..");
 //var res = Bfs.AreSentencesSimilarTwo(["I", "love", "leetcode"], ["I", "love", "onepiece"]
 //, [["manga", "hunterXhunter"], ["platform", "anime"], ["leetcode", "platform"], ["anime", "manga"]]);
 
-Console.WriteLine("Challenge accomplished. You rock!");
+ 
+Console.WriteLine("Well done, keep going, you rock!");
+
+Console.ReadLine();

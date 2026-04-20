@@ -1,6 +1,4 @@
-﻿using static AlgoMonster.Mocks.Nov2725;
-
-namespace AlgoMonster.Tree.Base
+﻿namespace AlgoMonster.Tree.Base
 {
     public class Tree
     {

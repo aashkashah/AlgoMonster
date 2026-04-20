@@ -1,33 +1,11 @@
 ﻿namespace AlgoMonster.Arrays.PrefixSum
-{
-    /// <summary>
-    /// 238. Product of Array Except Self https://leetcode.com/problems/product-of-array-except-self/description/
-    /// </summary>
+{   
     public static class PrefixSumQ
-    {
-        /// <summary>
-        /// Given an array of integers arr and a target value, 
-        /// find a subarray that sums to the target. Return the start and end indices of the subarray.
-        /// Input: arr = [1, -20, -3, 30, 5, 4], target = 7
-        /// Output: [1, 4]
-        /// Explanation: The subarray [-20, -3, 30] from index 1 (inclusive) to 4 (exclusive) sums to 7.
-        /// </summary>
-        /// <returns></returns>
-        public static int FindPrefixSum()
-        {
-            // 10 1 -20 -3 30 5 4  target= 7
-            // ^   
-            //           ^
-            //           
-
-
-            return -1;
-        }
+    {   
         /// <summary>
         /// 238. Product of Array Except Self
-        /// https://leetcode.com/problems/product-of-array-except-self/description/
+        /// https://leetcode.com/problems/product-of-array-except-self
         /// </summary>>
-        /// <returns></returns>
         public static int[] ProductExceptSelf(int[] nums)
         {
             // i = 0
@@ -56,6 +34,78 @@
             }
 
             return ans;
+        }
+
+        /// <summary>
+        /// 560. Subarray Sum Equals K
+        /// https://leetcode.com/problems/subarray-sum-equals-k
+        /// </summary>
+        public static int SubarraySum(int[] nums, int k)
+        {
+
+            var sum = 0;
+            var count = 0;
+
+            // prefix sum -> how many times it's been seen
+            var map = new Dictionary<int, int>();
+
+            for (int i = 0; i < nums.Length; i++)
+            {
+                // prefix
+                sum += nums[i];
+
+                if (sum == k) count++;
+
+                // if (sum - k) exists as a past prefix sum,
+                // those are valid subarrays ending here
+                if (map.TryGetValue((sum - k), out var val))
+                {
+                    count += val;
+                }
+
+                // record current prefix sum
+                if (!map.ContainsKey(sum)) map[sum] = 1;
+                else
+                    map[sum]++;
+            }
+
+            return count;
+        }
+
+        /// <summary>
+        /// 523. Continuous Subarray Sum
+        /// https://leetcode.com/problems/continuous-subarray-sum/
+        /// </summary>
+
+        public static bool CheckSubarraySum(int[] nums, int k)
+        {
+            // 0  23, 2, 4,  6,  7 
+            // 0  23  25 29  35  42
+            // 0  5   1  5   5 
+
+            // prefix sum + dictionary
+
+            var seen = new Dictionary<int, int>();
+            seen[0] = 0;
+
+            int sum = 0;
+
+            for (int i = 1; i <= nums.Length; i++)
+            {
+                sum += nums[i - 1];
+                int rem = sum % k;
+
+                if (seen.ContainsKey(rem))
+                {
+                    if (i - seen[rem] >= 2) return true;
+                }
+                else
+                {
+                    seen[rem] = i;
+                }
+            }
+
+            return false;
         }
 
     }
