@@ -1,5 +1,6 @@
 ﻿
 
+using System.Collections;
 using static AlgoMonster.Tree.Base.Tree;
 
 namespace AlgoMonster.ReferAgain
@@ -142,6 +143,41 @@ namespace AlgoMonster.ReferAgain
                 res.Add(colList);
             }
             return res;
+        }
+
+        public static TreeNode TreeToDoublyList(TreeNode node)
+        {
+            if(node == null) return null;
+
+            TreeNode prev = null;
+            TreeNode first = null;
+
+            Inorder(node);
+
+            first.left = prev;
+            prev.right = first;
+            return first;
+            
+            void Inorder(TreeNode node)
+            {
+                if(node == null) return;
+
+                Inorder(node.left);
+
+                if(prev != null)
+                {
+                    prev.right = node;
+                    node.left = prev;
+                }
+                else
+                {
+                    first = node;
+                }
+
+                prev = node;
+                
+                Inorder(node.right);
+            }
         }
 
     }

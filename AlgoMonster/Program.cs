@@ -126,8 +126,8 @@
 
 //var res = _2132026.Test("the cattle was rattled by the battery", ["cat", "bat", "rat"]);
 
-//var res = Bfs.AreSentencesSimilarTwo(["I", "love", "leetcode"], ["I", "love", "onepiece"]
-//, [["manga", "hunterXhunter"], ["platform", "anime"], ["leetcode", "platform"], ["anime", "manga"]]);
+var res = AlgoMonster.Grid.Bfs.AreSentencesSimilarTwo(["I", "love", "leetcode"], ["I", "love", "onepiece"]
+, [["manga", "hunterXhunter"], ["platform", "anime"], ["leetcode", "platform"], ["anime", "manga"]]);
 
  
 Console.WriteLine("Well done, keep going, you rock!");

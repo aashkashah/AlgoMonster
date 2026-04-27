@@ -151,5 +151,33 @@ namespace AlgoMonster.Tree._4.LCA_Or_Tree_As_Graph
             // so current node is their LCA
             return (node, leftdepth + 1);
         }
+
+        /// <summary>
+        /// 1123. Lowest Common Ancestor of Deepest Leaves
+        /// https://leetcode.com/problems/lowest-common-ancestor-of-deepest-leaves/description/
+        /// </summary>
+        public static TreeNode LcaDeepestLeaves(TreeNode root)
+        {
+            return LCA(root, 0).lca;
+
+            (int depth, TreeNode lca) LCA(TreeNode node, int level)
+            {
+                if(node == null) 
+                    return (level -1, null);
+                
+                var left = LCA(node.left, level + 1);
+                var right = LCA(node.right, level + 1);
+
+                if(left.depth > right.depth)
+                    return (left.depth, left.lca);
+                else if(right.depth > left.depth)
+                    return (right.depth, right.lca);
+                
+                // equal depths -- i am lca
+                return (left.depth, node);
+            }
+        }
+
+
     }
 }
