@@ -29,22 +29,38 @@
             _map = new Dictionary<int, LinkedListNode<Node>>(capacity);
         }
 
+        //public int Get(int key)
+        //{
+        //    LinkedListNode<Node> node;
+
+        //    if (_map.TryGetValue(key, out node))
+        //    {
+        //        var val = node.Value.val;
+        //        _lru.Remove(node);
+        //        _map[key] = new LinkedListNode<Node>(new Node(key, val));
+        //        _lru.AddFirst(_map[key]);
+        //        return val;
+        //    }
+        //    else
+        //    {
+        //        return -1;
+        //    }
+        //}
+
         public int Get(int key)
         {
-            LinkedListNode<Node> node;
-
-            if (_map.TryGetValue(key, out node))
-            {
-                var val = node.Value.val;
-                _lru.Remove(node);
-                _map[key] = new LinkedListNode<Node>(new Node(key, val));
-                _lru.AddFirst(_map[key]);
-                return val;
-            }
-            else
+            if(!_map.TryGetValue(key, out var node))
             {
                 return -1;
             }
+
+            // remove from dictionary, add to front
+            _lru.Remove(node);
+
+            var n = new Node(key, node.Value.val);
+            _map[key] = new LinkedListNode<Node>(n);
+            _lru.AddFirst(n);
+            return n.val;
         }
 
         public void Put(int key, int value)
@@ -66,6 +82,5 @@
                 _map.Remove(lastkey);
             }
         }
-       
     }
 }
