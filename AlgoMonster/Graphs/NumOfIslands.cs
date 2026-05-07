@@ -1,41 +1,20 @@
 ﻿namespace AlgoMonster.Grid
 {
     public class NumOfIslands
-    {
-        public class Coordinate
+    {   public int FindNumOfIslands(int[][] grid)
         {
-            public int r;
-            public int c;
-
-            public Coordinate(int r, int c)
-            {
-                this.r = r;
-                this.c = c;
-            }
-        }
-        /// <summary>
-        /// Find the Number of Islands
-
-        /// </summary>
-        /// <returns></returns>
-        public int FindNumOfIslands(int[][] grid)
-        {
-
-            // visited grid
-            // fllood fill, bfs
-            // queue.
-            // loop the grid
-            
-            //  breaking loop until reach end of grid
-            //  curr elem to queue if unvisited and == 1, pop, add unvisited neigbors to queue only if == 1
-            //      start another loop until this queue is empty
-            // increment island count 
+            // fllood fill
+            // visited bfs (queue layers) + visited
             
             var rowLen = grid.Length;
             var colLen = grid[0].Length;
+
             var visited = new int[rowLen, colLen];
-            var queue = new Queue<Coordinate>();
+            var queue = new Queue<(int, int)>();
             var islands = 0;
+
+            var dirR = new int[] { -1, 1, 0, 0 };
+            var dirC = new int[] { 0, 0, -1, 1 };
 
             for(int i = 0; i < rowLen; i++)
             {
@@ -44,42 +23,25 @@
                     if(grid[i][j] == 1 && visited[i, j] == 0)
                     {
                         islands++;
-                        queue.Enqueue(new Coordinate(i, j));
+                        queue.Enqueue((i, j));
                         visited[i, j] = 1;
 
                         while (queue.Count > 0)
                         {
-                            var cor = queue.Dequeue();
-                            var r = cor.r;
-                            var c = cor.c;
-                            
-                            // add neighbors - top bottom left right
-                            // top
-                            if (r - 1 >= 0 && grid[r - 1][c] == 1) // check out of bounds
-                            {
-                                queue.Enqueue(new Coordinate(r - 1, c));
-                                visited[r - 1, c] = 1;
-                            }
+                            var (r, c) = queue.Dequeue();
 
-                            // bottom
-                            if (r + 1 < rowLen && grid[r + 1][c] == 1)
+                            for(int k = 0; k < 4; k++)
                             {
-                                queue.Enqueue(new Coordinate(r + 1, c));
-                                visited[r + 1, c] = 1;
-                            }
+                                var kr = dirR[k] + r;
+                                var kc = dirC[k] + c;
 
-                            // left
-                            if (c - 1 >= 0 && grid[r][c - 1] == 1)
-                            {
-                                queue.Enqueue(new Coordinate(r, c - 1));
-                                visited[r, c - 1] = 1;
-                            }
+                                if(kr < 0 || kc < 0 || kr >= rowLen || kc >= colLen)
+                                    continue;
 
-                            // right
-                            if (c + 1 < colLen && grid[r][c + 1] == 1)
-                            {
-                                queue.Enqueue(new Coordinate(r, c + 1));
-                                visited[r, c + 1] = 1;
+                                if(visited[kr, kc] == 1) continue;
+
+                                queue.Enqueue((kr, kc));
+                                visited[kr, kc] = 1;
                             }
                         }
                     }

@@ -52,7 +52,6 @@
                     .Select(x => x.tweetId)
                     .ToList();
 
-
             return res;
         }
 
@@ -65,6 +64,7 @@
             followees.Add(followeeId);
             _followees[followerId] = followees;
         }
+
         public void UnFollow(int followerId, int followeeId)
         {
             if(_followees.TryGetValue(followeeId, out var followees))

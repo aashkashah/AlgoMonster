@@ -32,7 +32,6 @@
 
             Array.Sort(intervals, (a, b) => a[0].CompareTo(b[0]));
 
-
             var allocator = new PriorityQueue<int, int>();
 
             allocator.Enqueue(intervals[0][1], intervals[0][1]);
@@ -83,14 +82,8 @@
             // build freq map
             foreach (var num in nums)
             {
-                if (!freq.ContainsKey(num))
-                {
-                    freq.Add(num, 1);
-                }
-                else
-                {
-                    freq[num]++;
-                }
+                freq.TryAdd(num, 0);
+                freq[num]++;
             }
 
             // build max heap
@@ -123,12 +116,6 @@
             // 1 2 m = 3
 
             if (input.Length < m) return input;
-
-            // duplicates?
-            // min heap or max heap?
-            // first pass -> create, max heap
-            // second pass -> for  0 to m-1
-            // min heap is better
 
             var pq = new PriorityQueue<int, int>();
 

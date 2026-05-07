@@ -1,17 +1,15 @@
 ﻿namespace AlgoMonster.Arrays.SlidingWindow
 {
     /// <summary>
-    /// Sliding window = pointers define the window, not the data structure.
+    /// Sliding window = pointers define the window, 
+    /// not the data structure.
     /// </summary>
     public static class SW_Fixed
     {
 
         /// <summary>
-        /// Find the length of the longest substring of a given string without repeating characters.
-        /// Input: abccabcabcc
-        /// Output: 3
-        /// Input: aaaabaaa
-        /// Output: 2
+        /// 3. Longest Substring Without Repeating Characters
+        ///https://leetcode.com/problems/longest-substring-without-repeating-characters
         /// </summary>
         public static int LongestSubstringWithoutRepeatingChars(string str)
         {
@@ -263,7 +261,7 @@
         /// <returns></returns>
         public static int CharacterReplacement(string s, int k)
         {
-            Dictionary<char, int> count = new Dictionary<char, int>();
+            var count = new Dictionary<char, int>();
             int res = 0;
 
             int l = 0, maxf = 0;
@@ -384,11 +382,8 @@
             updateCalories(runningSum);
 
             // sliding window
-            for(int i = k; i < calories.Length; i++) // i = k = cal[2] = 0
+            for(int i = k; i < calories.Length; i++) 
             {
-                // sum = sum - cal[2-2] = 0
-                // l++ l = 3, cal[3] = 0
-                // sum = sum - cal[3-20]
                 runningSum = runningSum - calories[i - k] + calories[i];
                 updateCalories(runningSum);
             }

@@ -5,13 +5,14 @@ namespace AlgoMonster.Greedy
 {
     public static class JumpGame
     {
-
         /// <summary>
         /// Jump Game
         /// https://leetcode.com/problems/jump-game/
         /// </summary>
         public static bool CanJump(int[] nums)
         {
+            //  nums = [2,3,1,1,4]
+            
             int maxreach = 0;
 
             for(int i = 0; i < nums.Length; i++)

@@ -3,7 +3,7 @@
 
     /// <summary>
     /// Rotting Oranges — Multi-Source BFS
-    //Goal
+    // Goal
     //In a grid, 0=empty, 1=fresh, 2=rotten.
     //Each minute, every fresh orange adjacent(up/down/left/right) to a rotten one becomes rotten.
     //Compute minutes until all fresh rot, or report -1 if impossible.
@@ -18,21 +18,23 @@
     /// </summary>
     internal class RottingOranges
     {
-        // add all fresh oranges to a hashset
-        // loop through the grid to visit all organges and add one by one to a queue
-        // for each orange in the queue, check all 4 directions
-
-        // if any of the 4 directions has a fresh orange, rot it and add it to the queue
-
-        // keep track of the minutes it takes to rot all oranges
+        /*
+            add all fresh oranges to a hashset
+            loop through the grid to visit all organges. add to queue
+            for each traverse 4 directions, 
+            if any has a fresh orange, rot them
+        */
 
         public int OrangesRotting(int[][] grid)
         {
             if (grid == null || grid.Length == 0) return -1;
+
             int rows = grid.Length;
             int cols = grid[0].Length;
-            Queue<(int row, int col)> queue = new Queue<(int row, int col)>();
-            HashSet<(int row, int col)> freshOranges = new HashSet<(int row, int col)>();
+
+            var queue = new Queue<(int row, int col)>();
+            var freshOranges = new HashSet<(int row, int col)>();
+
             // Step 1: Initialize the queue with all rotten oranges and track fresh oranges
             for (int r = 0; r < rows; r++)
             {
@@ -48,36 +50,38 @@
                     }
                 }
             }
+
             // If there are no fresh oranges, return 0
             if (freshOranges.Count == 0) return 0;
+
             int minutes = 0;
-            int[][] directions = new int[][]
-            {
-                new int[] { -1, 0 }, // up
-                new int[] { 1, 0 },  // down
-                new int[] { 0, -1 }, // left
-                new int[] { 0, 1 }   // right
-            };
+
+            var dirR = new int[] { -1, 1, 0, 0 };
+            var dirC = new int[] { 0, 0, -1, 1 };
+
             // Step 2: Perform BFS
             while (queue.Count > 0)
             {
                 int size = queue.Count;
                 bool rottedThisMinute = false;
+
                 for (int i = 0; i < size; i++)
                 {
-                    var (row, col) = queue.Dequeue();
-                    foreach (var dir in directions)
+                    var (r, c) = queue.Dequeue();
+
+                    for(int k = 0; k < 4; k++)
                     {
-                        int newRow = row + dir[0];
-                        int newCol = col + dir[1];
-                        if (newRow >= 0 && newRow < rows && newCol >= 0 && newCol < cols && grid[newRow][newCol] == 1)
-                        {
-                            // Rot the fresh orange
-                            grid[newRow][newCol] = 2;
-                            freshOranges.Remove((newRow, newCol));
-                            queue.Enqueue((newRow, newCol));
-                            rottedThisMinute = true;
-                        }
+                        var kr = dirR[k] + r;
+                        var kc = dirC[k] + c;
+
+                        if(kr < 0 || kc < 0 || kr >= rows || kc >= cols)
+                            continue;
+                        if(grid[kr][kc] != 1) continue;
+
+                        grid[kr][kc] = 2;
+                        freshOranges.Remove((kr, kc));
+                        queue.Enqueue((kr, kc));
+                        rottedThisMinute = true;
                     }
                 }
                 if (rottedThisMinute)
@@ -91,6 +95,7 @@
                     return minutes;
                 }
             }
+            
             return -1; // Not all fresh oranges could rot
         }
 

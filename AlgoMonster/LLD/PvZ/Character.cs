@@ -12,6 +12,6 @@
 
     public class Character
     {
-        public CharacterType Type;
+           public CharacterType Type;
     }
 }

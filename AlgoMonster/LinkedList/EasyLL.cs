@@ -35,11 +35,11 @@
                 node = node.next;
             }
 
-            if(list1 !=null)
+            if(list1 != null)
             {
                 node.next = list1;
             }
-            else
+            else if(list2 != null)
             {
                 node.next = list2;
             }
