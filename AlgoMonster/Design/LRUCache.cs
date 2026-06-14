@@ -5,82 +5,46 @@
     /// https://leetcode.com/problems/lru-cache
     /// </summary>
     public class LRUCache
-    {
-        private class Node
-        {
-            public int key;
-            public int val;
-
-            public Node(int Key, int Val)
-            {
-                key = Key;
-                val = Val;
-            }
-        }
-        
+    {   
         private int _capacity = 0;
 
-        private Dictionary<int, LinkedListNode<Node>> _map;
-        private LinkedList<Node> _lru;
+        private Dictionary<int, LinkedListNode<(int key, int value)>> map;
+        private LinkedList<(int key, int value)> list;
 
         public LRUCache(int capacity)
         {
             _capacity = capacity;
-            _map = new Dictionary<int, LinkedListNode<Node>>(capacity);
+            list = new();
+            map = new();
         }
-
-        //public int Get(int key)
-        //{
-        //    LinkedListNode<Node> node;
-
-        //    if (_map.TryGetValue(key, out node))
-        //    {
-        //        var val = node.Value.val;
-        //        _lru.Remove(node);
-        //        _map[key] = new LinkedListNode<Node>(new Node(key, val));
-        //        _lru.AddFirst(_map[key]);
-        //        return val;
-        //    }
-        //    else
-        //    {
-        //        return -1;
-        //    }
-        //}
 
         public int Get(int key)
         {
-            if(!_map.TryGetValue(key, out var node))
-            {
-                return -1;
-            }
+            if (!map.ContainsKey(key)) return -1;
 
-            // remove from dictionary, add to front
-            _lru.Remove(node);
-
-            var n = new Node(key, node.Value.val);
-            _map[key] = new LinkedListNode<Node>(n);
-            _lru.AddFirst(n);
-            return n.val;
+            var node = map[key];
+            list.Remove(node);
+            list.AddFirst(node);
+            return node.Value.value;
         }
 
         public void Put(int key, int value)
         {
-            if(_map.ContainsKey(key))
+            if (map.ContainsKey(key))
             {
-                // remove
-                _lru.Remove(_map[key]);
-                _map.Remove(key);
+                list.Remove(map[key]);
+                map.Remove(key);
             }
 
-            _map[key] = new LinkedListNode<Node>(new Node(key, value));
-            _lru.AddFirst(_map[key]);
-
-            if(_map.Count > _capacity)
+            if(list.Count == _capacity)
             {
-                var lastkey = _lru.Last.Value.key;
-                _lru.RemoveLast();
-                _map.Remove(lastkey);
+                var lru = list.Last;
+                map.Remove(lru.Value.key);
+                list.RemoveLast();
             }
+
+            var newNode = list.AddFirst((key, value));
+            map[key] = newNode;
         }
     }
 }

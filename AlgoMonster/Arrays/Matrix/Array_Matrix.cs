@@ -1,4 +1,5 @@
 ﻿using System.Data;
+using AlgoMonster.Heap;
 
 namespace AlgoMonster.Arrays.Matrix
 {
@@ -8,6 +9,67 @@ namespace AlgoMonster.Arrays.Matrix
     /// </summary>
     public static class Array_Matrix
     {
+
+        /// <summary>
+        /// https://leetcode.com/problems/flood-fill/
+        /// </summary>
+        /// <returns></returns>
+        public static int[][] FloodFill(int[][] image, int sr, int sc, int color) 
+        {
+            /*
+                bfs + queue -> 4 direction
+                add every elem 4 dir (update if matches original color)
+                
+                O(n) time
+                O(n) space
+            */
+
+            var rows = image.Length;
+            var cols = image[0].Length;
+
+            var queue = new Queue<(int, int)>();
+            queue.Enqueue((sr, sc));
+
+            var dirR = new int[] { -1, 1, 0, 0};
+            var dirC = new int[] { 0, 0, -1, 1};
+
+            var visited = new bool[rows, cols];
+            var startingColor = image[sr][sc];
+
+            while(queue.Count > 0)
+            {
+                var levelCount = queue.Count;
+
+                for(int i = 0; i < levelCount; i++)
+                {
+                    var (r, c) = queue.Dequeue();
+                    visited[r, c] = true;
+                    image[r][c] = color;
+
+                    // 4 directions
+                    for(int k = 0; k < 4; k++)
+                    {
+                        var kr = dirR[k] + r;
+                        var kc = dirC[k] + c;
+
+                        if(kr < 0 || kc < 0 || kr >= rows || kc >= cols)
+                            continue;
+
+                        if(visited[kr, kc])
+                            continue;
+
+                        if(image[kr][kc] != startingColor)
+                            continue;
+                        
+                        image[kr][kc] = color;
+                        queue.Enqueue((kr, kc));
+                    }
+                }
+            }
+
+            return image;
+
+        }
         /// <summary>
         /// 1380. Lucky Numbers in a Matrix
         /// https://leetcode.com/problems/lucky-numbers-in-a-matrix

@@ -8,67 +8,122 @@ namespace AlgoMonster.Trie
 {
     using System;
     using System.Collections.Generic;
+    using System.Globalization;
+    using Microsoft.VisualBasic;
 
-    public class TrieNodeBasic
+    public class TrieNodeBase
     {
-        public readonly Dictionary<char, TrieNodeBasic> Children = new Dictionary<char, TrieNodeBasic>();
-        public bool IsEnd;
+        public Dictionary<char, TrieNodeBase> children = new Dictionary<char, TrieNodeBase>();
+        public bool isEndWord = false;
     }
 
     public class Tries
     {
-        private readonly TrieNodeBasic _root = new TrieNodeBasic();
-
-        public void Insert(string word)
+        TrieNodeBase root;
+        public void createTrie(string[] words)
         {
-            if (word == null) throw new ArgumentNullException(nameof(word));
-            // Normalize if you want case-insensitive: word = word.ToLowerInvariant();
-            var node = _root;
-            foreach (var ch in word)
+            root = new TrieNodeBase();
+            foreach(var word in words)
             {
-                if (!node.Children.TryGetValue(ch, out var next))
+                insert(word);
+            }
+        }
+
+        public void insert(string word)
+        {
+            var node = root;
+            foreach(var ch in word)
+            {
+                if(!node.children.ContainsKey(ch))
                 {
-                    next = new TrieNodeBasic();
-                    node.Children[ch] = next;
+                    node.children[ch] = new TrieNodeBase();
                 }
-                node = next;
+                node = node.children[ch];
             }
-            node.IsEnd = true;
+            node.isEndWord = true;
         }
 
-        public bool Search(string word)
+       public bool search(string word)
         {
-            var node = FindNode(word);
-            return node != null && node.IsEnd;
-        }
+            var node = root;
 
-        public bool StartsWith(string prefix) => FindNode(prefix) != null;
-
-        private TrieNodeBasic FindNode(string s)
-        {
-            if (s == null) return null;
-            var node = _root;
-            foreach (var ch in s)
+            foreach(var ch in word)
             {
-                if (!node.Children.TryGetValue(ch, out node))
-                    return null;
+                if(!node.children.ContainsKey(ch))
+                {
+                    return false;
+                }
+                node = node.children[ch];
             }
-            return node;
+            return node.isEndWord;
         }
 
-        // Optional: quick way to “see” content for debugging
-        public IEnumerable<string> WordsWithPrefix(string prefix)
+        public void delete(string word)
         {
-            var start = FindNode(prefix);
-            if (start == null) yield break;
-            var stack = new Stack<(TrieNodeBasic node, string path)>();
-            stack.Push((start, prefix));
-            while (stack.Count > 0)
+            deletehelper(root, word, 0);
+        }
+
+        private bool deletehelper(TrieNodeBase node, string word, int index)
+        {
+            if(index == word.Length)
             {
-                var (node, path) = stack.Pop();
-                if (node.IsEnd) yield return path;
-                foreach (var kv in node.Children)
-                    stack.Push((kv.Value, path + kv.Key));
+                // un-mark as end of word to be deleted 
+                node.isEndWord = false;
+
+                // return true if no children 
+                return node.children.Count == 0;
+            }
+
+            char c = word[index];
+
+            if(!node.children.ContainsKey(c))
+                return false; // word not found
+
+            var child = node.children[c];
+            bool shouldDeleteChild = deletehelper(child, word, index + 1);
+
+            if(shouldDeleteChild)
+                node.children.Remove(c);
+            
+            return !node.isEndWord && node.children.Count == 0;
+        }
+
+        private void deleteHelperItterative(string word)
+        {
+            var node = root;
+            var path = new List<TrieNodeBase> {root};
+
+            // un-mark word as end
+            for(int i = 0; i < word.Length; i++)
+            {
+                if(node.children.TryGetValue(word[i], out var child))
+                {
+                    // node doesn't exist
+                    return;
+                }
+
+                node = child;
+                path.Add(node);
+            }
+
+            if(!node.isEndWord)
+                return;
+
+            node.isEndWord = true;
+
+
+            for(int i = word.Length; i > 0; i--)
+            {
+                var current = path[i];
+                if(current.children.Count == 0 && !current.isEndWord)
+                {
+                    var parent = path[i - 1];
+                    parent.children.Remove(word[i - 1]);
+                }
+                else
+                {
+                    break;
+                }
             }
         }
     }

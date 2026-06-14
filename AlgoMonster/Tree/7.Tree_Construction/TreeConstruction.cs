@@ -139,7 +139,6 @@ namespace AlgoMonster.Tree._7.Tree_Construction
         /// </summary>
         public static void Flatten(TreeNode root)
         {
-
             while (root != null)
             {
                 if (root.left != null)

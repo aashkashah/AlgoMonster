@@ -4,13 +4,7 @@
     {
         /// <summary>
         ///  Longest Harmonious Subsequence
-        ///  This is a “frequency map + neighbor” pattern.
         ///  https://leetcode.com/problems/longest-harmonious-subsequence
-        ///  
-        /// A harmonious subsequence only cares about values and counts (order doesn’t matter for subsequence length). 
-        /// If max − min = 1, that means the subsequence uses exactly two numbers: x and x+1 (both must appear at least once).
-        /// So: count all numbers, 
-        /// then for each x, if x+1 exists, candidate length = count[x] + count[x + 1].Take max.
         /// </summary>
         public static int FindLHS(int[] nums)
         {
@@ -38,8 +32,6 @@
         /// <summary>
         /// Contains Duplicate II
         /// https://leetcode.com/problems/contains-duplicate-ii
-        /// 1,2,3,1,2,3, k = 2
-        /// false
         /// </summary>
         public static bool ContainsNearbyDuplicate(int[] nums, int k)
         {
@@ -87,11 +79,6 @@
     /// <summary>
     /// Logger rate limiter
     /// https://leetcode.com/problems/logger-rate-limiter
-    /// Input
-    /// ["Logger", "shouldPrintMessage", "shouldPrintMessage", "shouldPrintMessage", "shouldPrintMessage", "shouldPrintMessage", "shouldPrintMessage"]
-    /// [[], [1, "foo"], [2, "bar"], [3, "foo"], [8, "bar"], [10, "foo"], [11, "foo"]]
-    /// Output
-    /// [null, true, true, false, false, false, true]
     /// </summary>
     public class Logger
     {
@@ -157,8 +144,6 @@
         /// <summary>
         /// Majority Element
         /// https://leetcode.com/problems/majority-element/description
-        /// O(n) space (quesstion asked for O(1))
-        /// O(n) time 
         /// </summary>
         public int MajorityElement(int[] nums)
         {

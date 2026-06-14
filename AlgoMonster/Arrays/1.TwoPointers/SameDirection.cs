@@ -1,6 +1,4 @@
 ﻿using AlgoMonster.LinkedList;
-using System.Collections.Generic;
-using System.Xml.Linq;
 
 namespace AlgoMonster.Arrays.TwoPointers
 {

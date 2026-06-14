@@ -12,11 +12,6 @@
         /// </summary>
         public static ListNode MergeTwoSortedLists(ListNode list1, ListNode list2)
         {
-            // 1 2 4             
-            // ^             
-            // 1 3 5
-            // ^
-
             ListNode dummy = new ListNode(0);
             ListNode node = dummy;
 
@@ -50,21 +45,10 @@
 
         /// <summary>
         /// Two pointers -- same direction(slow/fast)
-        /// Given a linked list with potentially a loop, 
-        /// determine whether the linked list from the first node contains a cycle in it. 
-        /// For bonus points, do this with constant space.
         /// </summary>
         /// <returns></returns>
         public static bool HasCycle(ListNode node)
         {
-            // 0 1 2 3 4
-            //         ^
-            //         ^ 
-
-            // 0 1 2 3 4 5
-            //           ^
-            //           ^
-
             // breaking condition fast pointer points to null
             var fast = node;
             var slow = node;
@@ -80,15 +64,6 @@
 
             return false;
         }
-
-        /// <summary>
-        /// Given the beginning of a singly linked list head, 
-        /// reverse the list, and return the new beginning of the list.
-        /// Input: head = [0,1,2,3]
-        /// Output: [3, 2, 1, 0]
-        /// </summary>
-        /// <param name="node"></param>
-        /// <returns></returns>
         public static ListNode ReverseLinkedList(ListNode node)
         {
             ListNode prev = null;

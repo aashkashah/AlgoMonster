@@ -8,12 +8,6 @@
         /// </summary>>
         public static int[] ProductExceptSelf(int[] nums)
         {
-            // i = 0
-            // 1 2 3 4  nums
-            // 1 2 6 24 prefix
-            //    24  12  4  suffix  
-            // 24 12 8 6  result 
-
             int n = nums.Length;
             int[] ans = new int[n];
 
@@ -36,13 +30,44 @@
             return ans;
         }
 
+        public static int[] productexceptself2(int[] nums)
+        {
+            var n = nums.Length;
+
+            if(n == 1) return nums;
+
+            var prefix = new int[n];
+            var suffix = new int[n];
+            var result = new int[n];
+
+            prefix[0] = nums[0];
+            suffix[n-1] = nums[n-1];
+
+            for(int i = 1; i < n; i++)
+            {
+                prefix[i] = prefix[i-1]* nums[i];
+            }
+
+            for(int i = n - 2; i > 0; i--)
+            {
+                suffix[i] = suffix[i+1] * nums[i];
+            }
+
+            for(int i = 0; i < n; i++)
+            {
+                result[i] = prefix[i - 1] * suffix[i + 1];
+            }
+
+            return result;
+    
+        }
+
         /// <summary>
         /// 560. Subarray Sum Equals K
         /// https://leetcode.com/problems/subarray-sum-equals-k
         /// </summary>
         public static int SubarraySum(int[] nums, int k)
         {
-
             var sum = 0;
             var count = 0;
 

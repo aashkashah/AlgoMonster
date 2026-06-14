@@ -2,9 +2,6 @@
 
 namespace AlgoMonster.Arrays.ArrayWithStacks
 {
-    /// <summary>
-    /// 682. Baseball Game https://leetcode.com/problems/baseball-game/description
-    /// </summary>
     public static class ArrayWStack
     {
         /// <summary>
@@ -12,26 +9,15 @@ namespace AlgoMonster.Arrays.ArrayWithStacks
         /// https://leetcode.com/problems/make-the-string-great
         /// Input: s = "leEeetcode"
         /// Output: "leetcode"
-        /// Explanation: In the first step, either you choose i = 1 or i = 2, both will result "leEeetcode" to be reduced to "leetcode"
         /// </summary>
         public static string MakeGood(string s)
         {
-            // leEeetCode
-            //      ^
-            // leetCode
 
             var stack = new Stack<char>();
             foreach (char c in s)
-            {
-                // this can also be used 
-                // Math.Abs(stack.Peek() - c) == 32
-                // 'a' (97) and 'A' (65) → difference = 32
-                // so just 
-                // if (stack.Count > 0 && Math.Abs(stack.Peek() - c) == 32)
+            {  
                 var topChar = stack.Peek(); // missing stack.Count check
-                if (char.ToLower(topChar) == char.ToLower(c) &&
-                    (char.IsUpper(c) && char.IsLower(topChar) ||
-                    char.IsLower(c) && char.IsUpper(topChar)))
+                if (stack.Count > 0 && Math.Abs(c - stack.Peek()) == 32)
                 {
                     stack.Pop();
                 }
@@ -41,145 +27,68 @@ namespace AlgoMonster.Arrays.ArrayWithStacks
                 }
             }
 
-
             return new string(stack.Reverse().ToArray()); // thing i didn't know
         }
 
         /// <summary>
         /// Decode String
-        /// https://leetcode.com/problems/decode-string/description/
+        /// https://leetcode.com/problems/decode-string
         /// Input: s = "3[a2[c]]"
         /// Output: "accaccacc"
         /// Input: s = "2[abc]3[cd]ef"
         /// Output: "abcabccdcdcdef"
         /// </summary>
+
         public static string DecodeString(string s)
         {
-            // todo - needs fix
-            // 3 stacks not required, bracket stack is implied 
-            // missing multiple digit implementation
-            // look for correct solution in DecodeStringCorrected()
-
-            // 3[a2[c]]
-            //       ^
-            // stack 1: 3 
-            // stack 2: acc
-            // stack 3: [ ] 
-
-            // keep looking for end of char until ] or a number
             // 2[abc]3[cd]ef
-            //             ^
-            // stack 1: 
-            // stack 2: abcabccdcdcd ef
-            // stack 3:  
+           var stringStack = new Stack<string>();
+           var numberStack = new Stack<int>();
 
-            var stack1 = new Stack<int>();
-            var stack2 = new Stack<string>();
-            var stack3 = new Stack<char>();
+           var currentString = string.Empty;
+           var currentNumber = 0;
 
-            var ptr = 0;
-            while (ptr < s.Length)
+           foreach(char c in s)
             {
-                var currChar = s[ptr];
-                // bracket check
-                if (currChar == '[')
+                if(c == '[')
                 {
-                    stack3.Push(currChar);
+                    // reset for next 
+                    stringStack.Push(currentString);
+                    numberStack.Push(currentNumber);
+                    currentNumber = 0;
+                    currentString = "";
                 }
-                else if (currChar == ']')
+                else if(c == ']')
                 {
-                    // do 
-                    if(stack1.Count > 0 && stack2.Count > 0)
+                    int num = numberStack.Pop();
+                    var pervString = stringStack.Pop();
+
+                    var repeated = new StringBuilder();
+
+                    for(int i = 0; i < num; i++)
                     {
-                        var num = stack1.Pop();
-                        var chars = stack2.Pop();
-
-                        var strBldr = new StringBuilder();
-                        for(int i = 0; i < num; i++)
-                        {
-                            strBldr.Append(chars);
-                        }
-                        stack2.Push(strBldr.ToString());   
-
-                        stack3.Pop();
+                        repeated.Append(currentString);
                     }
+
+                    currentString = pervString + repeated;
                     
                 }
-                else if (char.IsDigit(currChar))
+                else if(char.IsDigit(c))
                 {
-                    // error -- number can be multiple digit
-                    // add to numbers stack
-                    stack1.Push(currChar);
+                    currentNumber += currentNumber * 10 + ( c- '0');
                 }
-                else if(char.IsLetter(currChar))
+                else
                 {
-                    var strbuilder = new StringBuilder();
-                    while (ptr < s.Length && s[ptr] != ']' && char.IsDigit(s[ptr]))
-                    {   
-                        strbuilder.Append(s[ptr]);
-                        ptr++;
-                    }
-                    stack2.Push(strbuilder.ToString());
-                }
-                ptr++;
-            }
-            var res = string.Empty;
-            while(stack2.Count > 0)
-            {
-                res = stack2.Pop() + res;
-            }
-
-            return res;
-        }
-
-        public static string DecodeStringCorrected(string s)
-        {
-            var countStack = new Stack<int>();
-            var stringStack = new Stack<StringBuilder>();
-
-            var current = new StringBuilder();
-            int k = 0;
-
-            for (int i = 0; i < s.Length; i++)
-            {
-                char c = s[i];
-
-                if (char.IsDigit(c))
-                {
-                    // build multi-digit number
-                    // c - '0' just converts char to int
-                    k = k * 10 + (c - '0');
-                }
-                else if (c == '[')
-                {
-                    // start a new nested frame
-                    countStack.Push(k);
-                    stringStack.Push(current);
-
-                    current = new StringBuilder();
-                    k = 0;
-                }
-                else if (c == ']')
-                {
-                    int repeat = countStack.Pop();
-                    var prev = stringStack.Pop();
-
-                    for (int r = 0; r < repeat; r++)
-                        prev.Append(current);
-
-                    current = prev;
-                }
-                else // letter
-                {
-                    current.Append(c);
+                    // string
+                    currentString += c;
                 }
             }
 
-            return current.ToString();
+            return currentString;
         }
 
         /// <summary>
-        /// 682. Baseball Game https://leetcode.com/problems/baseball-game/description
+        /// 682. Baseball Game https://leetcode.com/problems/baseball-game
         /// </summary>
         public static int CalPoints(string[] operations)
         {
