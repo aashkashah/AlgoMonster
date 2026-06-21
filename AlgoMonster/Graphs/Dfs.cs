@@ -15,7 +15,10 @@ namespace AlgoMonster.Grid
         /// Output: true
         /// Explanation: The two sentences have the same length and each word i of sentence1 is also similar to the corresponding word in sentence2.
         /// </summary>
-        public static bool AreSentencesSimilarTwo(string[] sentence1, string[] sentence2, IList<IList<string>> similarPairs)
+        public static bool AreSentencesSimilarTwo(
+            string[] sentence1, 
+            string[] sentence2, 
+            IList<IList<string>> similarPairs)
         {
             if(sentence1.Length != sentence2.Length) return false;
 

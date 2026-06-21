@@ -125,6 +125,67 @@
             else return false;
         }
 
+        /// <summary>
+        /// https://leetcode.com/problems/find-all-possible-recipes-from-given-supplies
+        /// </summary>
+        public static List<string> FinalAllRecipes(
+            string[] recipes, 
+            List<List<string>> ingredients, 
+            string[] supplies)
+        {
+            
+            var recipeIndex = new Dictionary<string, int>();
 
+            for(int i = 0; i < recipes.Length; i++)
+            {
+                recipeIndex[recipes[i]] = i;
+            }
+
+            // ingredients -> list of recipes that need it
+            var graph = new Dictionary<string, List<string>>();
+            var indegree = new int[recipes.Length];
+
+            for(int i = 0; i < recipes.Length; i++)
+            {
+                foreach(var ing in ingredients[i])
+                {
+                    if(!graph.ContainsKey(ing))
+                    {
+                        graph[ing] = new List<string>();
+                    }
+                    graph[ing].Add(recipes[i]);
+                    indegree[i]++; // recipe has more dependency
+                }
+            }
+
+            var queue = new Queue<string>();
+
+            foreach(var s in supplies)
+            {
+                queue.Enqueue(s);
+            }
+
+            var result = new List<string>();
+
+            while(queue.Count > 0)
+            {
+                string item = queue.Dequeue();
+
+                if(!graph.ContainsKey(item)) continue;
+
+                foreach(var recipe in graph[item])
+                {
+                    var idx = recipeIndex[recipe];
+                    indegree[idx]--;
+                    if(indegree[idx] == 0)
+                    {
+                        result.Add(recipe);
+                        queue.Enqueue(recipe);
+                    }
+                }
+            }
+
+            return result;
+        }
     }
 }
