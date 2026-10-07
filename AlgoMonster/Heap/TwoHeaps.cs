@@ -12,7 +12,6 @@
     /// </summary>
     public class Medianfinder
     {
-
         PriorityQueue<int, int> lower;
         PriorityQueue<int, int> upper;
 

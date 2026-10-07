@@ -253,7 +253,5 @@ namespace AlgoMonster.Arrays.TwoPointers
 
             return res.Length;
         }
-
-
     }
 }

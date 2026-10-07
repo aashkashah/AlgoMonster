@@ -17,7 +17,7 @@ namespace AlgoMonster.Tree._6.BST_Specific
             //           13     15
             //        11    14
 
-            // whule
+            // while
             // break until queue is empty
             // return right away if left > root or right < root
             return IsValidBstHelper(root, int.MinValue, int.MaxValue);
@@ -192,6 +192,25 @@ namespace AlgoMonster.Tree._6.BST_Specific
             while(cur.left != null) cur = cur.left;
             return cur.val;
         }
-            
+
+        public static TreeNode? InorderSuccessor(TreeNode root, TreeNode p)
+        {
+            TreeNode? successor = null;
+
+            while(root != null)
+            {
+                if(p.val >= root.val)
+                {
+                    root = root.right;
+                }
+                else
+                {
+                    successor = root;
+                    root = root.left;
+                }
+            }
+
+            return successor;
+        }   
     }
 }

@@ -19,18 +19,8 @@ namespace AlgoMonster.Tree._5.Level_Order_BFS
         ///                   7    4 
         ///  [[6], [1, 2], [5, 3, 0, 8], [7, 4]]
         /// </summary>
-        /// <param name="root"></param>
-        /// <returns></returns>
         public static List<List<int>> FindLevelOrderTraversal(TreeNode root)
         {
-            // queue
-            // level length
-            // while, queue != null
-            // deque current
-            // level order 
-            // enqueue children, inner loop count remains same
-            // append each child dequeued to list
-            // when inner loop ends, add that list to top result
 
             if (root == null)
                 return new List<List<int>>();

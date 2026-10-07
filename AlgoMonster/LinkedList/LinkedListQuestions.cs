@@ -1,9 +1,7 @@
-﻿namespace AlgoMonster.LinkedList
+namespace AlgoMonster.LinkedList;
+public class LinkedListQuestions
 {
-    public static class EasyLL
-    {
-
-        /// <summary>
+    /// <summary>
         /// Two pointers - separate lists
         /// You are given the heads of two sorted linked lists list1 and list2.
         /// Merge the two lists into one sorted linked list and return the head of the new sorted linked list.
@@ -76,8 +74,6 @@
                 prev = curr;
                 curr = temp;
            }
-
             return prev;
         }
-    }
 }

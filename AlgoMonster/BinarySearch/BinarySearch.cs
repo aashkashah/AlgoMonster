@@ -3,31 +3,10 @@
     public static class BinarySearch
     {
         /// <summary>
-        /// There is an integer array nums sorted in ascending order (with distinct values).
-        /// Prior to being passed to your function, nums is possibly left rotated at an 
-        /// unknown index k(1 <= k<nums.length) such that the resulting 
-        /// array is [nums[k], nums[k + 1], ..., nums[n - 1], nums[0], nums[1], ..., nums[k - 1]] (0-indexed). 
-        /// For example, [0, 1, 2, 4, 5, 6, 7] might be left rotated by 3 indices and become [4, 5, 6, 7, 0, 1, 2].
-        /// Given the array nums after the possible rotation and an integer target, 
-        /// return the index of target if it is in nums, or -1 if it is not in nums.
-        /// You must write an algorithm with O(log n) runtime complexity.
-        /// 
-        /// Input: nums = [4,5,6,7,0,1,2], target = 0
-        /// Output: 4
-        /// Input: nums = [4,5,6,7,0,1,2], target = 3
-        /// Output: -1
+        /// https://leetcode.com/problems/search-in-rotated-sorted-array/description/
         /// </summary>
         public static int SiftedSearchArray(int[] nums, int target)
         {
-            // 4 5 6 7 8 9 0 1 2 target = 9
-            //         ^
-            //         ^  
-            //             ^
-
-            // mid, check if target < left then move left to mid+1
-            //      if target > left 
-            //            if target < mid, right mid - 1
-            //            if target > mid, left mid +1
 
             var left = 0;
             var right = nums.Length - 1;   
@@ -35,19 +14,32 @@
             while (left < right)
             {
                 var mid = (left + right) / 2;
-                if(target < left)
+                if(nums[mid] == target)
                 {
-                    left = mid + 1;
+                    return mid;
                 }
-                else if (target > mid) 
+                else if(nums[left] <= nums[mid])
                 {
-                    if (target < mid)
+                    // if left is sorted
+                    if(nums[left] <= target && target <= nums[mid])
                     {
                         right = mid - 1;
                     }
-                    else if (target > mid)
+                    else
                     {
                         left = mid + 1;
+                    }
+                }
+                else
+                {
+                    // right is sorted
+                    if(nums[mid] < target && target <= nums[right])
+                    {
+                        left = mid + 1;
+                    }
+                    else
+                    {
+                        right = mid - 1;
                     }
                 }
             }
@@ -56,12 +48,6 @@
         }
 
         /// <summary>
-        /// Given a sorted array of distinct integers and a target value, 
-        /// return the index if the target is found. If not, 
-        /// return the index where it would be if it were inserted in order.
-        /// You must write an algorithm with O(log n) runtime c
-        /// Input: nums = [1,3,5,6], target = 5
-        /// Output: 2
         /// https://leetcode.com/problems/search-insert-position
         /// </summary>
         public static int SearchInsert(int[] nums, int target)

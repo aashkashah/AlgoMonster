@@ -11,7 +11,6 @@
             var n = nums.Length;
 
             Array.Sort(nums);
-            var res = 0;
             var diff = int.MaxValue;
 
             for(int i = 0; i < n - 2; i++)
@@ -65,7 +64,7 @@
 
                 while (l < r)
                 {
-                    var sum = (nums[l] + nums[r] + nums[i]);
+                    var sum = nums[l] + nums[r] + nums[i];
 
                     if(sum < target)
                     {

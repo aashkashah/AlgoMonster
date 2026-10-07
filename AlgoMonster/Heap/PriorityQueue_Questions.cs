@@ -53,8 +53,7 @@
         {
             var heap = new PriorityQueue<int, int>();
             var hash = new HashSet<int>();
-
-
+            
             foreach (var elem in nums)
             {
                 heap.Enqueue(elem, -elem);

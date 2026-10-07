@@ -61,7 +61,6 @@ public class HogwartsOrgChart
 
     
     public static List<Employee> _Employees = new();
-
     public static Dictionary<int, List<int>> _OrgChartMap = new();
 
     public static int CEO;

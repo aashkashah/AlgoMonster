@@ -128,12 +128,8 @@
         /// <summary>
         /// https://leetcode.com/problems/find-all-possible-recipes-from-given-supplies
         /// </summary>
-        public static List<string> FinalAllRecipes(
-            string[] recipes, 
-            List<List<string>> ingredients, 
-            string[] supplies)
-        {
-            
+        public static List<string> FindAllRecipes(string[] recipes, List<List<string>> ingredients, string[] supplies)
+        {   
             var recipeIndex = new Dictionary<string, int>();
 
             for(int i = 0; i < recipes.Length; i++)

@@ -56,7 +56,6 @@
 
             var n = isConnected.Length;
             var parent = new int[n];
-            var components = n;
 
             for (int i = 0; i < n; i++) parent[i] = i;
 
@@ -73,10 +72,15 @@
                         {
                             // as they get merged, we decrease components
                             parent[rootA] = rootB;
-                            components--;
                         }
                     }
                 }
+            }
+
+            var components = 0;
+            for(int i = 0; i < n; i++)
+            {
+                if(parent[i] == i) components++;
             }
 
             return components;

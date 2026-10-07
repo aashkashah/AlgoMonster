@@ -49,7 +49,6 @@ namespace AlgoMonster.Search
             int usedDays = 1;
             int load = 0;
 
-
             foreach (var w in weights)
             {
                 if (load + w <= capacity)

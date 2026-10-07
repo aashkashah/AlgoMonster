@@ -80,7 +80,7 @@ namespace AlgoMonster.Tree._4.LCA_Or_Tree_As_Graph
             if (node == null) return -1;
 
             int left = DistanceBetweenNodesHelper(node.left, target);
-            if (left!= -1) return left + 1;
+            if (left != -1) return left + 1;
 
             int right = DistanceBetweenNodesHelper(node.right, target);
             if(right != -1) return right + 1;
@@ -154,7 +154,7 @@ namespace AlgoMonster.Tree._4.LCA_Or_Tree_As_Graph
 
         /// <summary>
         /// 1123. Lowest Common Ancestor of Deepest Leaves
-        /// https://leetcode.com/problems/lowest-common-ancestor-of-deepest-leaves/description/
+        /// https://leetcode.com/problems/lowest-common-ancestor-of-deepest-leaves
         /// </summary>
         public static TreeNode LcaDeepestLeaves(TreeNode root)
         {
@@ -177,7 +177,5 @@ namespace AlgoMonster.Tree._4.LCA_Or_Tree_As_Graph
                 return (left.depth, node);
             }
         }
-
-
     }
 }

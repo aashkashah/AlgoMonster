@@ -1,16 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
+﻿
 namespace AlgoMonster.Trie
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Globalization;
-    using Microsoft.VisualBasic;
-
     public class TrieNodeBase
     {
         public Dictionary<char, TrieNodeBase> children = new Dictionary<char, TrieNodeBase>();

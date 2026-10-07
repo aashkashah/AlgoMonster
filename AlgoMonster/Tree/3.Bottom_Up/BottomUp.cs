@@ -76,14 +76,9 @@ namespace AlgoMonster.Tree._3.Bottom_Up
             return 1 + Math.Max(left, right);
         }
 
-        /// </summary>
-        /// Given the root of a binary tree, return the length of the diameter of the tree.
-        /// The diameter of a binary tree is the length of the longest path between any two nodes in a tree.
-        /// This path may or may not pass through the root.
-        /// The length of a path between two nodes is represented by the number of edges between them.
+        /// <summary>
         /// 543. Diameter of Binary Tree https://leetcode.com/problems/diameter-of-binary-tree/
-        /// <param name="node"></param>
-        /// <returns></returns>
+        /// </summary>
         public static int DiameterOfBinaryTree(TreeNode node)
         {
             int best = 0;
